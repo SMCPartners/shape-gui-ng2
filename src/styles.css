@@ -1,0 +1,246 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* =================================
+  Base Element Styles
+==================================== */
+
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Varela Round', sans-serif;
+  line-height: 1.6;
+  color: #3a3a3a;
+  margin: 0;
+}
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+li {
+  cursor: hand;
+}
+p {
+  font-size: .95em;
+  margin: 0 0 1em 0;
+}
+h2,
+h3,
+a {
+  color: #093a58;
+}
+h2,
+h3 {
+  margin: 0 0 .8em 0;
+}
+a {
+  text-decoration: none;
+  cursor:pointer;
+}
+img {
+  max-width: 100%;
+}
+
+/* =================================
+  Base Layout Styles
+==================================== */
+
+/* ---- Navigation ---- */
+
+.name {
+  font-size: 1.35em;
+  margin: 0;
+}
+.main-nav {
+  margin-top: 5px;
+}
+
+.name a,
+.main-nav a {
+  text-align: center;
+  display: block;
+  padding: 10px 15px;
+  text-decoration: none;
+}
+.main-nav a {
+  font-size: .95em;
+  color: darkgray;
+  text-transform: uppercase;
+}
+.main-nav a:hover {
+  color: #093a58;
+}
+
+/* ---- Layout Containers ---- */
+
+.main-header {
+  padding-top: .5em;
+  padding-bottom: .5em;
+}
+.banner,
+.main-footer {
+  text-align: center;
+}
+.banner {
+  color: white;
+  background: #3F51B5;
+  padding: 3.2em 0;
+  margin-bottom: 20px;
+}
+.sh-col {
+  padding: 1em;
+  background: #edf4f7;
+  border-radius: .35em;
+  margin: 0 .5em .8em;
+}
+.main-footer {
+  background: #d9e4ea;
+  padding: 2em 0;
+  margin-top: 30px;
+}
+
+/* ---- Page Elements ---- */
+
+.logo {
+  width: 150px;
+  height: 150px;
+}
+
+.header-logo {
+  width: 75px;
+  height: 75px;
+}
+
+.headline {
+  margin-bottom: 0;
+}
+.feat-img {
+  border-radius: 5px;
+}
+.button {
+  color: #fff;
+  text-align: center;
+  padding: .625em 1.25em;
+  background: #3acec2;
+  border-radius: .35em;
+}
+
+.messages {
+  height: 60vh;
+}
+
+/* =================================
+  Drag and Drop CSS
+==================================== */
+
+.dnd-drag-start {
+  -moz-transform:scale(0.8);
+  -webkit-transform:scale(0.8);
+  transform:scale(0.8);
+  opacity:0.7;
+  border: 2px dashed #000;
+}
+
+.dnd-drag-enter {
+  opacity:0.7;
+  border: 2px dashed #000;
+}
+
+.dnd-drag-over {
+  border: 2px dashed #000;
+}
+
+.dnd-sortable-drag {
+  -moz-transform:scale(0.9);
+  -webkit-transform:scale(0.9);
+  transform:scale(0.9);
+  opacity:0.7;
+  border: 1px dashed #000;
+}
+
+/* =================================
+  Media Queries
+==================================== */
+
+@media (min-width: 769px) {
+  .main-header,
+  .sh-row,
+  .sh-row-login {
+    width: 90%;
+    margin: 0 auto;
+  }
+  .tagline {
+    font-size: 1.4em;
+  }
+}
+@media (min-width: 1025px) {
+  .main-header,
+  .sh-row,
+  .sh-row-login {
+    width: 80%;
+    max-width: 1150px;
+  }
+}
+
+
+/* =================================
+  Flex
+==================================== */
+
+@media (min-width: 769px) {
+
+  .main-header,
+  .main-nav,
+  .sh-row,
+  .sh-row-login,
+  .main-logo,
+  .sh-col {
+    display: flex;
+  }
+
+  .main-header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .sh-row-login {
+    align-items: center;
+    width: 250px;
+  }
+
+  .button {
+    margin-top: auto;
+    align-self: center;
+  }
+
+  .sh-col {
+    flex: 1;
+    flex-direction: column;
+  }
+
+}
+
+@media (min-width: 1025px) {
+
+  .main-header {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .button {
+    margin-top: auto;
+    align-self: center;
+  }
+
+  .sh-row {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .login-form {
+    width: 250px;
+  }
+
+}
