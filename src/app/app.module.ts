@@ -10,7 +10,8 @@ import { LoginComponent } from './login/login.component';
 import { LoginService } from './login/login.service';
 import { HomeComponent } from './home/home.component';
 import { RouteProtect } from './route-protect/route-protect';
-
+import { HeaderComponent } from './shared/header.component';
+import {HomeService} from "./home/home.service";
 
 const appRoutes: Routes = [
 
@@ -27,7 +28,8 @@ const appRoutes: Routes = [
     AppComponent,
     NotfoundComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +39,8 @@ const appRoutes: Routes = [
   ],
   providers: [
     LoginService,
-    RouteProtect
+    RouteProtect,
+    HomeService
   ],
   bootstrap: [AppComponent]
 })

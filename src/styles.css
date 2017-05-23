@@ -63,7 +63,9 @@ img {
   display: block;
   padding: 10px 15px;
   text-decoration: none;
+  color: white;
 }
+
 .main-nav a {
   font-size: .95em;
   color: darkgray;
@@ -73,11 +75,16 @@ img {
   color: #093a58;
 }
 
+
 /* ---- Layout Containers ---- */
 
 .main-header {
   padding-top: .5em;
   padding-bottom: .5em;
+  background-color: #3F51B5;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
 }
 .banner,
 .main-footer {
@@ -91,7 +98,6 @@ img {
 }
 .sh-col {
   padding: 1em;
-  background: #edf4f7;
   border-radius: .35em;
   margin: 0 .5em .8em;
 }
@@ -99,6 +105,10 @@ img {
   background: #d9e4ea;
   padding: 2em 0;
   margin-top: 30px;
+}
+
+.login-form {
+  margin: 0 400px;
 }
 
 /* ---- Page Elements ---- */
@@ -132,115 +142,172 @@ img {
 }
 
 /* =================================
-  Drag and Drop CSS
+  Tab Styles
 ==================================== */
 
-.dnd-drag-start {
-  -moz-transform:scale(0.8);
-  -webkit-transform:scale(0.8);
-  transform:scale(0.8);
-  opacity:0.7;
-  border: 2px dashed #000;
+/* Tabs panel */
+.tabbable-panel {
+  border:1px solid #eee;
+  padding: 10px;
 }
 
-.dnd-drag-enter {
-  opacity:0.7;
-  border: 2px dashed #000;
+/* Default mode */
+.tabbable-line > .nav-tabs {
+  border: none;
+  margin: 0px;
+}
+.tabbable-line > .nav-tabs > li {
+  margin-right: 2px;
+}
+.tabbable-line > .nav-tabs > li > a {
+  border: 0;
+  margin-right: 0;
+  color: #737373;
+}
+.tabbable-line > .nav-tabs > li > a > i {
+  color: #a6a6a6;
+}
+.tabbable-line > .nav-tabs > li.open, .tabbable-line > .nav-tabs > li:hover {
+  border-bottom: 4px solid #90addd;
+}
+.tabbable-line > .nav-tabs > li.open > a, .tabbable-line > .nav-tabs > li:hover > a {
+  border: 0;
+  background: none !important;
+  color: #333333;
+}
+.tabbable-line > .nav-tabs > li.open > a > i, .tabbable-line > .nav-tabs > li:hover > a > i {
+  color: #a6a6a6;
+}
+.tabbable-line > .nav-tabs > li.open .dropdown-menu, .tabbable-line > .nav-tabs > li:hover .dropdown-menu {
+  margin-top: 0px;
+}
+.tabbable-line > .nav-tabs > li.active {
+  border-bottom: 4px solid #3F51B5;
+  position: relative;
+}
+.tabbable-line > .nav-tabs > li.active > a {
+  border: 0;
+  color: #333333;
+}
+.tabbable-line > .nav-tabs > li.active > a > i {
+  color: #404040;
+}
+.tabbable-line > .tab-content {
+  margin-top: -3px;
+  background-color: #fff;
+  border: 0;
+  border-top: 1px solid #eee;
+  padding: 15px 0;
+}
+.portlet .tabbable-line > .tab-content {
+  padding-bottom: 0;
 }
 
-.dnd-drag-over {
-  border: 2px dashed #000;
+/* Below tabs mode */
+
+.tabbable-line.tabs-below > .nav-tabs > li {
+  border-top: 4px solid transparent;
+}
+.tabbable-line.tabs-below > .nav-tabs > li > a {
+  margin-top: 0;
+}
+.tabbable-line.tabs-below > .nav-tabs > li:hover {
+  border-bottom: 0;
+  border-top: 4px solid #90addd;
+}
+.tabbable-line.tabs-below > .nav-tabs > li.active {
+  margin-bottom: -2px;
+  border-bottom: 0;
+  border-top: 4px solid #3F51B5;
+}
+.tabbable-line.tabs-below > .tab-content {
+  margin-top: -10px;
+  border-top: 0;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+}
+.nav-tabs > li, .nav-pills > li {
+  float:none;
+  display:inline-block;
+  *display:inline;
+  zoom:1;
 }
 
-.dnd-sortable-drag {
-  -moz-transform:scale(0.9);
-  -webkit-transform:scale(0.9);
-  transform:scale(0.9);
-  opacity:0.7;
-  border: 1px dashed #000;
+.nav-tabs, .nav-pills {
+  text-align:center;
 }
+
 
 /* =================================
-  Media Queries
+  Navbar Styles
 ==================================== */
 
-@media (min-width: 769px) {
-  .main-header,
-  .sh-row,
-  .sh-row-login {
-    width: 90%;
-    margin: 0 auto;
-  }
-  .tagline {
-    font-size: 1.4em;
-  }
+.navbar-default {
+  background-color: #3f51b5;
+  border-color: #ffffff;
 }
-@media (min-width: 1025px) {
-  .main-header,
-  .sh-row,
-  .sh-row-login {
-    width: 80%;
-    max-width: 1150px;
-  }
+.navbar-default .navbar-brand {
+  color: #ecf0f1;
 }
-
-
-/* =================================
-  Flex
-==================================== */
-
-@media (min-width: 769px) {
-
-  .main-header,
-  .main-nav,
-  .sh-row,
-  .sh-row-login,
-  .main-logo,
-  .sh-col {
-    display: flex;
-  }
-
-  .main-header {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .sh-row-login {
-    align-items: center;
-    width: 250px;
-  }
-
-  .button {
-    margin-top: auto;
-    align-self: center;
-  }
-
-  .sh-col {
-    flex: 1;
-    flex-direction: column;
-  }
-
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+  color: #ffffff;
+}
+.navbar-default .navbar-text {
+  color: #ecf0f1;
+}
+.navbar-default .navbar-nav > li > a {
+  color: #ecf0f1;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  color: #ffffff;
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+  color: #ffffff;
+  background-color: #ffffff;
+}
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+  color: #ffffff;
+  background-color: #ffffff;
+}
+.navbar-default .navbar-toggle {
+  border-color: #ffffff;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+  background-color: #ffffff;
+}
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #ecf0f1;
+}
+.navbar-default .navbar-collapse,
+.navbar-default .navbar-form {
+  border-color: #ecf0f1;
+}
+.navbar-default .navbar-link {
+  color: #ecf0f1;
+}
+.navbar-default .navbar-link:hover {
+  color: #ffffff;
 }
 
-@media (min-width: 1025px) {
-
-  .main-header {
-    flex-direction: row;
-    justify-content: space-between;
+@media (max-width: 767px) {
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+    color: #ecf0f1;
   }
-
-  .button {
-    margin-top: auto;
-    align-self: center;
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: #ffffff;
   }
-
-  .sh-row {
-    flex-direction: row;
-    align-items: flex-start;
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #ffffff;
+    background-color: #ffffff;
   }
-
-  .login-form {
-    width: 250px;
-  }
-
 }
