@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HomeService } from './home.service';
 import { Organization } from '../shared/organization';
 import {MeasureInfo} from "../shared/measure-info";
+import {OrgMeasureInfo} from "../shared/org-measure-info";
+import {OrgMeasureDetail} from "../shared/org-measure-detail";
 
 @Component({
   selector: 'sh-home',
@@ -12,6 +14,8 @@ export class HomeComponent implements OnInit {
 
   organizations: Organization[] = [];
   measures: MeasureInfo[] = [];
+  orgMeasureDetail: OrgMeasureDetail[] = [];
+  organizationSelected: boolean = false;
 
   constructor(private homeService: HomeService) { }
 
@@ -20,14 +24,22 @@ export class HomeComponent implements OnInit {
       .subscribe(organization => {
         this.organizations = organization
       });
-  }
 
-  onChange() {
     this.homeService.findMeasuresByID()
       .subscribe(measure => {
-        console.log(measure);
-        //this.measures = measure;
+        this.measures = measure;
       });
+  }
+
+  onChange(orgId) {
+
+    this.homeService.findAllMeasuresByOrganization(orgId)
+      .subscribe(orgMeasureDetail => {
+        this.orgMeasureDetail = orgMeasureDetail;
+        console.log(this.orgMeasureDetail);
+        this.organizationSelected = true;
+      });
+
   }
 
 }

@@ -9,7 +9,7 @@
   </form>
 </div>
 
-<div class="container">
+<div *ngIf="organizationSelected" class="container">
   <div class="row">
     <div class="col-md-12">
       <div class="tabbable-panel">
@@ -30,22 +30,7 @@
           </ul>
           <div class="tab-content">
             <div class="tab-pane active" id="tab_default_1">
-              <div class="panel panel-default">
-                <div class="panel-heading" style="text-align: center">
-                  <h4><span class="pull-left">NQF ID: 0018</span>Controlling High Blood Pressure<span class="pull-right">RP Year: 2014</span></h4>
-                </div>
-                <div class="panel-body">
-                  Percentage of patients 18-85 years of age who had a diagnosis of hypertension and whose blood pressure was adequately controlled (<140/90 mmHg) during the measurement period
-                </div>
-              </div>
-              <div class="panel panel-default">
-                <div class="panel-heading" style="text-align: center">
-                  <h4><span class="pull-left">NQF ID: 0018</span>Controlling High Blood Pressure<span class="pull-right">RP Year: 2014</span></h4>
-                </div>
-                <div class="panel-body">
-                  Percentage of patients 18-85 years of age who had a diagnosis of hypertension and whose blood pressure was adequately controlled (<140/90 mmHg) during the measurement period
-                </div>
-              </div>
+              <sh-measure [orgMeasureDetail]="orgMeasureDetail"></sh-measure>
             </div>
             <div class="tab-pane" id="tab_default_2">
               <p>

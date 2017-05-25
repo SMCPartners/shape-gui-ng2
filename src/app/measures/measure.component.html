@@ -1,0 +1,12 @@
+<div *ngFor="let omd of orgMeasureDetail" class="panel panel-default">
+  <div class="panel-heading" style="text-align: center">
+    <h4><span class="pull-left">NQF ID: {{omd.measureInfo.nqfId}}</span>{{omd.measureInfo.name}}<span class="pull-right">RP Year: {{omd.orgData.reportPeriodYear}}</span></h4>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-6">
+        {{omd.measureInfo.description}}
+      </div>
+    </div>
+  </div>
+</div>

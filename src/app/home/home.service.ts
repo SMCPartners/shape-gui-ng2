@@ -5,6 +5,8 @@ import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { Organization } from '../shared/organization';
 import {MeasureInfo} from "../shared/measure-info";
+import {OrgMeasureInfo} from "../shared/org-measure-info";
+import {OrgMeasureDetail} from "../shared/org-measure-detail";
 
 @Injectable()
 export class HomeService {
@@ -27,6 +29,17 @@ export class HomeService {
     const headers = new Headers({ 'Authorization': 'Bearer ' + this.loginService.token });
     let options = new RequestOptions({ headers: headers });
     const url = 'http://localhost:8080/shape-service/shape/common/measure/findAll';
+
+    return this.http.get(url, options)
+      .map((response: Response) => response.json());
+
+  }
+
+  findAllMeasuresByOrganization(organizationId: number): Observable<OrgMeasureDetail[]> {
+
+    const headers = new Headers({ 'Authorization': 'Bearer ' + this.loginService.token });
+    let options = new RequestOptions({ headers: headers });
+    const url = 'http://localhost:8080/shape-service/shape/common/organization_measure_detail/findAllByOrg/' + organizationId;
 
     return this.http.get(url, options)
       .map((response: Response) => response.json());

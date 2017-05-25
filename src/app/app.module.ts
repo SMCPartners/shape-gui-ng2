@@ -12,6 +12,7 @@ import { HomeComponent } from './home/home.component';
 import { RouteProtect } from './route-protect/route-protect';
 import { HeaderComponent } from './shared/header.component';
 import {HomeService} from "./home/home.service";
+import { MeasureComponent } from './measures/measure.component';
 
 const appRoutes: Routes = [
 
@@ -29,7 +30,8 @@ const appRoutes: Routes = [
     NotfoundComponent,
     LoginComponent,
     HomeComponent,
-    HeaderComponent
+    HeaderComponent,
+    MeasureComponent
   ],
   imports: [
     BrowserModule,
