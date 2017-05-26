@@ -4,8 +4,18 @@
   </div>
   <div class="panel-body">
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-4">
         {{omd.measureInfo.description}}
+      </div>
+      <div class="col-md-4">
+        <sh-measure-chart [orgMeasureDetail]="omd"></sh-measure-chart>
+      </div>
+      <div class="col-md-4">
+        <div style="margin-left: 90px">
+          <span style="float: left; clear: left; margin-left: 10px">Numerator: {{omd.orgData.numeratorValue}}</span>
+          <span style="float: left; clear: left">Denominator: {{omd.orgData.denominatorValue}}</span>
+        </div>
+        <span style="float: left; margin-top: 40px; font-size: 1.2em"><div class="well"><strong>Your Measure Results: </strong>{{omd.orgData.numeratorValue / omd.orgData.denominatorValue | percent }}</div></span>
       </div>
     </div>
   </div>

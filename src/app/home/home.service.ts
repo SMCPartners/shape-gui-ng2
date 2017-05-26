@@ -5,7 +5,6 @@ import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { Organization } from '../shared/organization';
 import {MeasureInfo} from "../shared/measure-info";
-import {OrgMeasureInfo} from "../shared/org-measure-info";
 import {OrgMeasureDetail} from "../shared/org-measure-detail";
 
 @Injectable()

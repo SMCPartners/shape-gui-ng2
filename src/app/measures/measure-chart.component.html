@@ -1,0 +1,9 @@
+<div style="display: block;">
+  <canvas baseChart
+          [data]="chartData"
+          [labels]="chartLabels"
+          [chartType]="chartType"
+          [colors]="chartColors"
+          (chartHover)="chartHovered($event)">
+  </canvas>
+</div>

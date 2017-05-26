@@ -36,7 +36,6 @@ export class HomeComponent implements OnInit {
     this.homeService.findAllMeasuresByOrganization(orgId)
       .subscribe(orgMeasureDetail => {
         this.orgMeasureDetail = orgMeasureDetail;
-        console.log(this.orgMeasureDetail);
         this.organizationSelected = true;
       });
 

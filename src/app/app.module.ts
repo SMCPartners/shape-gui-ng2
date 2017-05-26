@@ -11,8 +11,10 @@ import { LoginService } from './login/login.service';
 import { HomeComponent } from './home/home.component';
 import { RouteProtect } from './route-protect/route-protect';
 import { HeaderComponent } from './shared/header.component';
-import {HomeService} from "./home/home.service";
+import {HomeService} from './home/home.service';
 import { MeasureComponent } from './measures/measure.component';
+import {ChartsModule} from 'ng2-charts';
+import { MeasureChartComponent } from './measures/measure-chart.component';
 
 const appRoutes: Routes = [
 
@@ -31,13 +33,15 @@ const appRoutes: Routes = [
     LoginComponent,
     HomeComponent,
     HeaderComponent,
-    MeasureComponent
+    MeasureComponent,
+    MeasureChartComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    ChartsModule
   ],
   providers: [
     LoginService,

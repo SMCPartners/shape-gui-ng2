@@ -13,7 +13,7 @@ export class MeasureComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.orgMeasureDetail[0].measureInfo.nqfId);
+
   }
 
 }
