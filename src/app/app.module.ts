@@ -12,9 +12,9 @@ import { HomeComponent } from './home/home.component';
 import { RouteProtect } from './route-protect/route-protect';
 import { HeaderComponent } from './shared/header.component';
 import {HomeService} from './home/home.service';
-import { MeasureComponent } from './measures/measure.component';
+import { MeasureComponent } from './measure-input/measure.component';
 import {ChartsModule} from 'ng2-charts';
-import { MeasureChartComponent } from './measures/measure-chart.component';
+import { MeasureChartComponent } from './measure-input/measure-chart.component';
 
 const appRoutes: Routes = [
 

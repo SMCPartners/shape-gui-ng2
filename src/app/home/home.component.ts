@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { HomeService } from './home.service';
 import { Organization } from '../shared/organization';
 import {MeasureInfo} from "../shared/measure-info";
-import {OrgMeasureInfo} from "../shared/org-measure-info";
 import {OrgMeasureDetail} from "../shared/org-measure-detail";
 
 @Component({
