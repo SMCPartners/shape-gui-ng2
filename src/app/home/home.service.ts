@@ -10,7 +10,17 @@ import {OrgMeasureDetail} from "../shared/org-measure-detail";
 @Injectable()
 export class HomeService {
 
+  public organizationId: number;
+
   constructor(private http: Http, private loginService: LoginService) { }
+
+  setOrgId(orgId: number) {
+    this.organizationId = orgId;
+  }
+
+  getOrgId(): number {
+    return this.organizationId;
+  }
 
   getAllOrganizations(): Observable<Organization[]> {
     // add authorization header with jwt token
@@ -42,7 +52,16 @@ export class HomeService {
 
     return this.http.get(url, options)
       .map((response: Response) => response.json());
+  }
 
+  getMeasureYears(organizationId: number, measureId: number): Observable<number[]> {
+
+    const headers = new Headers({ 'Authorization': 'Bearer ' + this.loginService.token });
+    let options = new RequestOptions({ headers: headers });
+    const url = 'http://localhost:8080/shape-service/shape/common/get/measure_years/' + organizationId + '/' + measureId;
+
+    return this.http.get(url, options)
+      .map((response: Response) => response.json());
   }
 
 }

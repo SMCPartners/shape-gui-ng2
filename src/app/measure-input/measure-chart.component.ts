@@ -8,7 +8,8 @@ import {OrgMeasureDetail} from "../shared/org-measure-detail";
 })
 export class MeasureChartComponent implements OnInit {
 
-  @Input() orgMeasureDetail: OrgMeasureDetail;
+  @Input() numerator: number;
+  @Input() denominator: number;
 
   public chartLabels:string[] = ['Patients in numerator', 'Remainder of patients'];
   public chartData:any[2] = [];
@@ -19,8 +20,8 @@ export class MeasureChartComponent implements OnInit {
 
   ngOnInit() {
 
-    this.chartData[0] = this.orgMeasureDetail.orgData.numeratorValue;
-    this.chartData[1] = this.orgMeasureDetail.orgData.denominatorValue;
+    this.chartData[0] = this.numerator;
+    this.chartData[1] = this.denominator;
   }
 
   public chartHovered(e:any):void {

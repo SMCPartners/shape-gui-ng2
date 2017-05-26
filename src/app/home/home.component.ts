@@ -15,6 +15,8 @@ export class HomeComponent implements OnInit {
   measures: MeasureInfo[] = [];
   orgMeasureDetail: OrgMeasureDetail[] = [];
   organizationSelected: boolean = false;
+  years: number[];
+  orgSelectedId: number;
 
   constructor(private homeService: HomeService) { }
 
@@ -32,12 +34,15 @@ export class HomeComponent implements OnInit {
 
   onChange(orgId) {
 
+    this.homeService.setOrgId(orgId);
+
+    this.orgSelectedId = orgId;
+
     this.homeService.findAllMeasuresByOrganization(orgId)
       .subscribe(orgMeasureDetail => {
         this.orgMeasureDetail = orgMeasureDetail;
         this.organizationSelected = true;
       });
-
   }
 
 }

@@ -1,0 +1,23 @@
+<div *ngFor="let lv of listViews" class="panel panel-default">
+  <div class="panel-heading" style="text-align: center">
+    <h4><span class="pull-left">NQF ID: {{lv.nqfId}}</span>{{lv.name}}<span class="pull-right">RP Year: {{year}}</span></h4>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-4">
+        {{lv.desciption}}
+      </div>
+      <div class="col-md-4">
+        <sh-measure-chart [numerator]="lv.numeratorValue" [denominator]="lv.denominatorValue"></sh-measure-chart>
+      </div>
+      <div class="col-md-4">
+        <div style="margin-left: 90px">
+          <span class="pull-right glyphicon glyphicon-info-sign" style="font-size:1.4em"></span>
+          <span style="float: left; clear: left; margin-left: 10px">Numerator: {{lv.numeratorValue}}</span>
+          <span style="float: left; clear: left">Denominator: {{lv.denominatorValue}}</span>
+        </div>
+        <span style="float: left; margin-top: 40px; font-size: 1.2em"><div class="well"><strong>Your Measure Results: </strong>{{lv.numeratorValue / lv.denominatorValue | percent }}</div></span>
+      </div>
+    </div>
+  </div>
+</div>

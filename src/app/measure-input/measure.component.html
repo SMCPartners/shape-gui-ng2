@@ -8,7 +8,7 @@
         {{omd.measureInfo.description}}
       </div>
       <div class="col-md-4">
-        <sh-measure-chart [orgMeasureDetail]="omd"></sh-measure-chart>
+        <sh-measure-chart [numerator]="omd.orgData.numeratorValue" [denominator]="omd.orgData.denominatorValue"></sh-measure-chart>
       </div>
       <div class="col-md-4">
         <div style="margin-left: 90px">

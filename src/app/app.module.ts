@@ -15,6 +15,11 @@ import {HomeService} from './home/home.service';
 import { MeasureComponent } from './measure-input/measure.component';
 import {ChartsModule} from 'ng2-charts';
 import { MeasureChartComponent } from './measure-input/measure-chart.component';
+import { PastMeasureReportsComponent } from './past-measure-reports/past-measure-reports.component';
+import { ListViewComponent } from './past-measure-reports/list-view/list-view.component';
+import { MeasureDemographicsComponent } from './past-measure-reports/measure-dem/measure-demographics.component';
+import { AggComparisonComponent } from './past-measure-reports/agg-comparison/agg-comparison.component';
+import {PastMeasureService} from "./past-measure-reports/past-measure.service";
 
 const appRoutes: Routes = [
 
@@ -34,7 +39,11 @@ const appRoutes: Routes = [
     HomeComponent,
     HeaderComponent,
     MeasureComponent,
-    MeasureChartComponent
+    MeasureChartComponent,
+    PastMeasureReportsComponent,
+    ListViewComponent,
+    MeasureDemographicsComponent,
+    AggComparisonComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +55,8 @@ const appRoutes: Routes = [
   providers: [
     LoginService,
     RouteProtect,
-    HomeService
+    HomeService,
+    PastMeasureService
   ],
   bootstrap: [AppComponent]
 })
