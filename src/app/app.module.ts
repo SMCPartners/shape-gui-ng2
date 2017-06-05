@@ -20,6 +20,7 @@ import { ListViewComponent } from './past-measure-reports/list-view/list-view.co
 import { MeasureDemographicsComponent } from './past-measure-reports/measure-dem/measure-demographics.component';
 import { AggComparisonComponent } from './past-measure-reports/agg-comparison/agg-comparison.component';
 import {PastMeasureService} from "./past-measure-reports/past-measure.service";
+import { MeasureDemChartComponent } from './past-measure-reports/measure-dem/measure-dem-chart.component';
 
 const appRoutes: Routes = [
 
@@ -43,7 +44,8 @@ const appRoutes: Routes = [
     PastMeasureReportsComponent,
     ListViewComponent,
     MeasureDemographicsComponent,
-    AggComparisonComponent
+    AggComparisonComponent,
+    MeasureDemChartComponent
   ],
   imports: [
     BrowserModule,

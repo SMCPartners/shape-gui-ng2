@@ -1,3 +1,44 @@
-<p>
-  measure-demographics works!
-</p>
+<div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h5 align="center">Race Data</h5>
+      </div>
+      <div class="panel-body">
+        <sh-measure-dem-chart [dataArray]="raceData"></sh-measure-dem-chart>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h5 align="center">Age Data</h5>
+      </div>
+      <div class="panel-body">
+        <sh-measure-dem-chart [dataArray]="ageData"></sh-measure-dem-chart>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h5 align="center">Ethnicity Data</h5>
+      </div>
+      <div class="panel-body">
+        <sh-measure-dem-chart [dataArray]="ethnicityData"></sh-measure-dem-chart>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h5 align="center">Gender Data</h5>
+      </div>
+      <div class="panel-body">
+        <sh-measure-dem-chart [dataArray]="genderData"></sh-measure-dem-chart>
+      </div>
+    </div>
+  </div>
+</div>

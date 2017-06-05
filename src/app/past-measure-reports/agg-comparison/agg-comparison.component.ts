@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {AggData} from "./agg-data";
+import {Color} from "ng2-charts";
 
 @Component({
   selector: 'sh-agg-comparison',
@@ -18,13 +19,23 @@ export class AggComparisonComponent implements OnInit {
     responsive: true,
     maintainAspectRatio: false,
     beginAtZero: true,
+    scales: {
+      xAxes: [{
+        ticks: {
+          beginAtZero:true,
+          max: 100
+        }
+      }]
+    }
   };
 
   public barChartLabels:string[] = [];
   public barChartType:string = 'horizontalBar';
-  public barChartLegend:boolean = true;
 
-  public barChartData:any[] = [];
+  public barChartData: any[] = [];
+
+  public chartColors: any[] = [{ backgroundColor: '#3F51B5' }];
+
 
   constructor() { }
 
@@ -43,7 +54,7 @@ export class AggComparisonComponent implements OnInit {
     });
 
     this.barChartLabels = this.namesOfOrganizations;
-    this.barChartData = this.dataForOrganizations;
+    this.barChartData.push({ data : this.dataForOrganizations, label: '%' })
 
   }
 
