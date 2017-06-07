@@ -1,0 +1,35 @@
+<div align="center" style="margin-top: 20px">
+  <h2>Admin Panel</h2>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="tabbable-panel">
+        <div class="tabbable-line">
+          <ul class="nav nav-tabs ">
+            <li class="active">
+              <a href="#tab_default_1" (click)="loadUsers()" data-toggle="tab">
+                User </a>
+            </li>
+            <li>
+              <a href="#tab_default_2" (click)="loadProviders()" data-toggle="tab">
+                Provider </a>
+            </li>
+            <li>
+              <a href="#tab_default_3" (click)="loadOrganizations()" data-toggle="tab">
+                Organization </a>
+            </li>
+            <li>
+              <a href="#tab_default_4" (click)="loadMeasures()" data-toggle="tab">
+                Measure </a>
+            </li>
+          </ul>
+          <div class="tab-content">
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

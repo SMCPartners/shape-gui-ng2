@@ -1,0 +1,67 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="well">
+      <h3 align="center">{{organizationDetail.name}}</h3>
+      <div class="row" style="margin-top: -20px;">
+        <div class="col-md-6" align="center">
+          <div class="row">
+            <h5>Address:</h5>
+          </div>
+          <div class="row">
+            {{organizationDetail.addressStreet}}
+          </div>
+          <div class="row">
+            {{organizationDetail.addressCity}} {{organizationDetail.addressState}} {{organizationDetail.addressZip}}
+          </div>
+          <div class="row">
+            {{organizationDetail.primaryContactPhone}}
+          </div>
+        </div>
+        <div class="col-md-6" align="center">
+          <div class="row">
+            <h5>Primary Contact:</h5>
+          </div>
+          <div class="row">
+            {{organizationDetail.primaryContactName}}
+          </div>
+          <div class="row">
+            {{organizationDetail.primaryContactRole}}
+          </div>
+          <div class="row">
+            {{organizationDetail.primaryContactEmail}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--<div class="col-md-6">-->
+    <!--&lt;!&ndash;<accordion [showArrows]="true" [closeOthers]="true" [expandAll]="false">&ndash;&gt;-->
+      <!--&lt;!&ndash;<accordion-group heading="Operational Information">&ndash;&gt;-->
+      <!--&lt;!&ndash;</accordion-group>&ndash;&gt;-->
+      <!--&lt;!&ndash;<accordion-group heading="Patient Population">&ndash;&gt;-->
+      <!--&lt;!&ndash;</accordion-group>&ndash;&gt;-->
+    <!--&lt;!&ndash;</accordion>&ndash;&gt;-->
+  <!--</div>-->
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="org-profile-headings">Operational Information</h4>
+      </div>
+      <div class="panel-body">
+      
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="org-profile-headings">Patient Population</h4>
+      </div>
+      <div class="panel-body">
+      
+      </div>
+    </div>
+  </div>
+</div>

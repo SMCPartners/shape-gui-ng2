@@ -11,23 +11,44 @@ import { LoginService } from './login/login.service';
 import { HomeComponent } from './home/home.component';
 import { RouteProtect } from './route-protect/route-protect';
 import { HeaderComponent } from './shared/header.component';
-import {HomeService} from './home/home.service';
+import { HomeService } from './home/home.service';
 import { MeasureComponent } from './measure-input/measure.component';
-import {ChartsModule} from 'ng2-charts';
+import { ChartsModule } from 'ng2-charts';
 import { MeasureChartComponent } from './measure-input/measure-chart.component';
 import { PastMeasureReportsComponent } from './past-measure-reports/past-measure-reports.component';
 import { ListViewComponent } from './past-measure-reports/list-view/list-view.component';
 import { MeasureDemographicsComponent } from './past-measure-reports/measure-dem/measure-demographics.component';
 import { AggComparisonComponent } from './past-measure-reports/agg-comparison/agg-comparison.component';
-import {PastMeasureService} from "./past-measure-reports/past-measure.service";
+import { PastMeasureService } from "./past-measure-reports/past-measure.service";
 import { MeasureDemChartComponent } from './past-measure-reports/measure-dem/measure-dem-chart.component';
+import { OrgProfileComponent } from './org-profile/org-profile.component';
+import { AccordionModule } from "ng2-accordion";
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import { HelpComponent } from './help/help.component';
+import { MyAccountComponent } from './my-account/my-account.component';
+import { UserComponent } from './admin-panel/user/user.component';
+import { ProvidersComponent } from './admin-panel/provider/providers.component';
+import { OrganizationsComponent } from './admin-panel/organization/organizations.component';
+import { MeasuresComponent } from './admin-panel/measure/measures.component';
+import { AdminPanelService } from "./admin-panel/admin-panel.service";
+import { Ng2SmartTableModule } from "ng2-smart-table";
 
 const appRoutes: Routes = [
 
-  { path: 'home', component: HomeComponent, canActivate: [ RouteProtect ] },
-  { path: '404', component: NotfoundComponent },
   { path: '', component: LoginComponent },
+  { path: 'home', component: HomeComponent, canActivate: [ RouteProtect ] },
+  { path: 'help', component: HelpComponent, canActivate: [ RouteProtect ] },
+  { path: 'myAccount', component: MyAccountComponent, canActivate: [ RouteProtect ] },
+  { path: 'admin', component: AdminPanelComponent, canActivate: [ RouteProtect ], children: [
+      {path: '', redirectTo: 'users', pathMatch: 'full'},
+      {path: 'users', component: UserComponent},
+      {path: 'providers', component: ProvidersComponent},
+      {path: 'organizations', component: OrganizationsComponent},
+      {path: 'measures', component: MeasuresComponent},
+  ]
+  },
 
+  { path: '404', component: NotfoundComponent },
   { path: '**', redirectTo: '404'}
 
 ];
@@ -45,20 +66,31 @@ const appRoutes: Routes = [
     ListViewComponent,
     MeasureDemographicsComponent,
     AggComparisonComponent,
-    MeasureDemChartComponent
+    MeasureDemChartComponent,
+    OrgProfileComponent,
+    AdminPanelComponent,
+    HelpComponent,
+    MyAccountComponent,
+    UserComponent,
+    ProvidersComponent,
+    OrganizationsComponent,
+    MeasuresComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot(appRoutes),
-    ChartsModule
+    ChartsModule,
+    AccordionModule,
+    Ng2SmartTableModule
   ],
   providers: [
     LoginService,
     RouteProtect,
     HomeService,
-    PastMeasureService
+    PastMeasureService,
+    AdminPanelService
   ],
   bootstrap: [AppComponent]
 })

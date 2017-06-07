@@ -4,7 +4,6 @@ import {HomeService} from "../home/home.service";
 import {PastMeasureService} from "./past-measure.service";
 import {ListViewMeasure} from "./list-view/list-view-measure";
 import {AggData} from "./agg-comparison/agg-data";
-import {MeasureDem} from "../shared/measure-dem";
 
 @Component({
   selector: 'sh-past-measure-reports',
@@ -17,7 +16,7 @@ export class PastMeasureReportsComponent implements OnInit {
   @Input() orgId: number;
   public listViews: ListViewMeasure[] = [];
   public aggDatas: AggData[] = [];
-  public measureDem: any[] = [];
+  public measureDem: any;
   private measureId: number;
   private year: number;
   private years: number[];
@@ -82,9 +81,10 @@ export class PastMeasureReportsComponent implements OnInit {
         this.pastMeasureService.getMeasureDemographics(this.orgId, this.measureId, this.year)
           .subscribe(measureDem => {
 
-            console.log(measureDem);
+            this.measureDem = measureDem[0];
 
-            this.measureDem = measureDem;
+            console.log(this.measureDem);
+
             this.listViewSelected = false;
             this.aggComSelected = false;
             this.measureDemSelected = true;

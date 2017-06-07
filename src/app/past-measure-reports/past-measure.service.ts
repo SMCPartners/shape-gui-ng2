@@ -5,7 +5,6 @@ import {ListViewMeasure} from "./list-view/list-view-measure";
 import {Observable} from "rxjs/Observable";
 import {LoginService} from "../login/login.service";
 import {AggData} from "./agg-comparison/agg-data";
-import {MeasureDem} from "../shared/measure-dem";
 
 @Injectable()
 export class PastMeasureService {
@@ -32,16 +31,16 @@ export class PastMeasureService {
     return this.http.get(url, options)
       .map((response: Response) => response.json());
 
+
   }
 
 
-  getMeasureDemographics(orgId: number, measureId: number, year: number): Observable<MeasureDem[]>{
-    const headers = new Headers({ 'Authorization': 'Bearer ' + this.loginService.token });
-    let options = new RequestOptions({ headers: headers });
+  getMeasureDemographics(orgId: number, measureId: number, year: number): any {
+    const headers = new Headers({'Authorization': 'Bearer ' + this.loginService.token});
+    let options = new RequestOptions({headers: headers});
     const url = `http://localhost:8080/shape-service/shape/common/show/appHistDemographic/${orgId}/${measureId}/${year}`;
 
     return this.http.get(url, options)
-      .map((response: Response) => response.json());
+      .map(response => response.json())
   }
-
 }
