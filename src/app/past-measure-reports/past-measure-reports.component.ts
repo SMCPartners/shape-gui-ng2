@@ -36,7 +36,51 @@ export class PastMeasureReportsComponent implements OnInit {
     this.homeService.getMeasureYears(this.orgId, measureId)
       .subscribe(years => {
         this.years = years;
+
+        if (this.listViewSelected) {
+
+          this.pastMeasureService.getListViewMeasures(this.orgId, this.measureId, this.years[0])
+            .subscribe(listView => {
+              this.listViews = listView;
+              this.listViewSelected = true;
+              this.aggComSelected = false;
+              this.measureDemSelected = false;
+
+              this.year = this.years[0]
+
+            });
+
+        } else if (this.aggComSelected) {
+
+          this.pastMeasureService.getAggregateComparison(this.measureId, this.years[0])
+            .subscribe(aggData => {
+              this.aggDatas = aggData;
+              this.listViewSelected = false;
+              this.aggComSelected = true;
+              this.measureDemSelected = false;
+
+              this.year = this.years[0]
+
+            });
+
+        } else if (this.measureDemSelected) {
+
+          this.pastMeasureService.getMeasureDemographics(this.orgId, this.measureId, this.years[0])
+            .subscribe(measureDem => {
+
+              this.measureDem = measureDem[0];
+
+              this.listViewSelected = false;
+              this.aggComSelected = false;
+              this.measureDemSelected = true;
+
+              this.year = this.years[0]
+
+            });
+        }
+
       });
+
   }
 
   onYearChange(year) {
@@ -82,8 +126,6 @@ export class PastMeasureReportsComponent implements OnInit {
           .subscribe(measureDem => {
 
             this.measureDem = measureDem[0];
-
-            console.log(this.measureDem);
 
             this.listViewSelected = false;
             this.aggComSelected = false;
