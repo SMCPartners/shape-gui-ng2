@@ -32,10 +32,12 @@ import { OrganizationsComponent } from './admin-panel/organization/organizations
 import { MeasuresComponent } from './admin-panel/measure/measures.component';
 import { AdminPanelService } from "./admin-panel/admin-panel.service";
 import { Ng2SmartTableModule } from "ng2-smart-table";
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 const appRoutes: Routes = [
 
   { path: '', component: LoginComponent },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'home', component: HomeComponent, canActivate: [ RouteProtect ] },
   { path: 'help', component: HelpComponent, canActivate: [ RouteProtect ] },
   { path: 'myAccount', component: MyAccountComponent, canActivate: [ RouteProtect ] },
@@ -74,7 +76,8 @@ const appRoutes: Routes = [
     UserComponent,
     ProvidersComponent,
     OrganizationsComponent,
-    MeasuresComponent
+    MeasuresComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,

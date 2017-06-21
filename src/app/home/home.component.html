@@ -2,7 +2,6 @@
   <form>
     <div class="form-group">
       <select (change)="onChange($event.target.value)" name="orgSelect" >
-        <option [selected] [disabled]="true">Choose an organization</option>
         <option *ngFor="let o of organizations" [value]="o.id"> {{o.name}} </option>
       </select>
     </div>

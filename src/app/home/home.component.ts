@@ -23,13 +23,26 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.homeService.getAllOrganizations()
       .subscribe(organization => {
-        this.organizations = organization
+        this.organizations = organization;
+
+        this.homeService.findMeasuresByID()
+          .subscribe(measure => {
+            this.measures = measure;
+
+            this.homeService.setOrgId(this.organizations[0].id);
+            this.orgSelectedId = this.organizations[0].id;
+
+            this.homeService.findAllMeasuresByOrganization(this.orgSelectedId)
+              .subscribe(orgMeasureDetail => {
+                this.orgMeasureDetail = orgMeasureDetail;
+                this.organizationSelected = true;
+              });
+
+          });
+
       });
 
-    this.homeService.findMeasuresByID()
-      .subscribe(measure => {
-        this.measures = measure;
-      });
+
   }
 
   onChange(orgId) {

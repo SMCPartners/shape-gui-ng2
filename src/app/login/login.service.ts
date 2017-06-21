@@ -25,13 +25,14 @@ export class LoginService {
           const data = response.json();
 
         const token = response.json() && response.json().token;
-        if (token) {
+        const resetRequired = response.json() && response.json().resetRequired;
+        if (token && !resetRequired) {
           // set token property
           this.token = token;
           this.username = username;
           // store username and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem('currentUser', JSON.stringify({username: username, token: token}));
-          }
+        }
           return data;
       });
   }
@@ -42,4 +43,29 @@ export class LoginService {
     localStorage.removeItem('currentUser');
     this.router.navigate(['']);
   }
+
+  getSecurityQuestion(username: string, email: string): Observable<any> {
+    const url = 'http://localhost:8080/shape-service/shape/common/forgotpassword';
+    const headers = new Headers({ 'Content-Type' : 'application/json'  });
+
+    return this.http.post(url, JSON.stringify({ userId: username, userEmail: email }), { headers: headers })
+      .map((response: Response) => {
+        const data = response.json();
+
+        return data;
+      });
+  }
+
+  resetPassword(username: string, question: string, answer: string): Observable<any> {
+    const url = 'http://localhost:8080/shape-service/shape/common/user/reset_password';
+    const headers = new Headers({ 'Content-Type' : 'application/json'  });
+
+    return this.http.post(url, JSON.stringify({ userId: username, question: question, answer: answer }), { headers: headers })
+      .map((response: Response) => {
+        const data = response.json();
+
+        return data;
+      });
+  }
+
 }

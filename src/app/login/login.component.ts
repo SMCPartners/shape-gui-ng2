@@ -23,9 +23,20 @@ export class LoginComponent implements OnInit {
   login() {
     this.loginService.login(this.model.username, this.model.password)
       .subscribe(
-        (data: any[]) => this.router.navigate(['home']),
+        (data) => {
+
+          if (data.resetRequired) {
+            this.router.navigate(['forgot-password']);
+          } else {
+            this.router.navigate(['home']);
+          }
+        },
         (error) => this.error = error.json().errMsg
       );
+  }
+
+  forgotPassword() {
+    this.router.navigate(['forgot-password']);
   }
 
 }
