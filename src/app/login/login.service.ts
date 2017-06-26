@@ -15,6 +15,10 @@ export class LoginService {
     this.username = currentUser && currentUser.userName;
   }
 
+  getUserID() : string {
+    return this.username;
+  }
+
   login(username: string, password: string): Observable<any> {
 
     const url = 'http://localhost:8080/shape-service/shape/common/login';
@@ -24,12 +28,12 @@ export class LoginService {
       .map((response: Response) => {
           const data = response.json();
 
+        this.username = username;
         const token = response.json() && response.json().token;
         const resetRequired = response.json() && response.json().resetRequired;
         if (token && !resetRequired) {
           // set token property
           this.token = token;
-          this.username = username;
           // store username and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem('currentUser', JSON.stringify({username: username, token: token}));
         }
@@ -50,9 +54,8 @@ export class LoginService {
 
     return this.http.post(url, JSON.stringify({ userId: username, userEmail: email }), { headers: headers })
       .map((response: Response) => {
-        const data = response.json();
 
-        return data;
+        return response.json();
       });
   }
 
@@ -62,9 +65,19 @@ export class LoginService {
 
     return this.http.post(url, JSON.stringify({ userId: username, question: question, answer: answer }), { headers: headers })
       .map((response: Response) => {
-        const data = response.json();
 
-        return data;
+        return response.json();
+      });
+  }
+
+  changePassword(username: string, currentPassword: string, newPassword: string): Observable<any> {
+    const url = 'http://localhost:8080/shape-service/shape/common/changepassword';
+    const headers = new Headers({ 'Content-Type' : 'application/json'  });
+
+    return this.http.post(url, JSON.stringify({ id: username, password: currentPassword, newPassword: newPassword }), { headers: headers })
+      .map((response: Response) => {
+
+        return response.json();
       });
   }
 

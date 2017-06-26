@@ -12,6 +12,7 @@ export class ForgotPasswordComponent implements OnInit {
   error = '';
   questionModel: any = {};
   questionRecieved: boolean = false;
+  loading: boolean = false;
   data: any = {};
 
   constructor(private loginService: LoginService) { }

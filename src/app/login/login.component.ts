@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
         (data) => {
 
           if (data.resetRequired) {
-            this.router.navigate(['forgot-password']);
+            this.router.navigate(['change-password']);
           } else {
             this.router.navigate(['home']);
           }
