@@ -34,6 +34,7 @@ import { AdminPanelService } from "./admin-panel/admin-panel.service";
 import { Ng2SmartTableModule } from "ng2-smart-table";
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import {NgProgressModule} from "ng2-progressbar";
 
 const appRoutes: Routes = [
 
@@ -89,7 +90,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     ChartsModule,
     AccordionModule,
-    Ng2SmartTableModule
+    Ng2SmartTableModule,
+    NgProgressModule
   ],
   providers: [
     LoginService,

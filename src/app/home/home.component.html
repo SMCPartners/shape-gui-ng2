@@ -1,11 +1,16 @@
-<div align="center" style="margin-top: 20px">
-  <form>
-    <div class="form-group">
-      <select (change)="onChange($event.target.value)" name="orgSelect" >
-        <option *ngFor="let o of organizations" [value]="o.id"> {{o.name}} </option>
-      </select>
-    </div>
-  </form>
+<div class="row" style="margin: 20px 0 15px 40px">
+  <div class="col-md-2 col-md-offset-5">
+    <form>
+      <div class="form-group">
+        <select (change)="onChange($event.target.value)" name="orgSelect" >
+          <option *ngFor="let o of organizations" [value]="o.id"> {{o.name}} </option>
+        </select>
+      </div>
+    </form>
+  </div>
+  <div class="col-md-2 col-md-offset-3">
+    <button class="btn" (click)="addOrgMeasureScreen()">Add Measure Data</button>
+  </div>
 </div>
 
 <div *ngIf="organizationSelected" class="container">
@@ -29,7 +34,11 @@
           </ul>
           <div class="tab-content">
             <div class="tab-pane active" id="tab_default_1">
-              <sh-measure [orgMeasureDetail]="orgMeasureDetail"></sh-measure>
+              <sh-measure [orgMeasureDetail]="orgMeasureDetail"
+                          [addOrgMeasureShow]="addOrgMeasureShow"
+                          [measures]="measures"
+                          (changeAddMeasureBoolean)="changeAddOrgMeasureBoolean($event)">
+              </sh-measure>
             </div>
             <div class="tab-pane" id="tab_default_2">
               <sh-past-measure-reports [measures]="measures" [orgId]="orgSelectedId"></sh-past-measure-reports>

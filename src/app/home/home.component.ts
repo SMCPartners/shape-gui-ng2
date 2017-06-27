@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   organizationSelected: boolean = false;
   years: number[];
   orgSelectedId: number;
+  addOrgMeasureShow: boolean = false;
 
   constructor(private homeService: HomeService) { }
 
@@ -56,6 +57,14 @@ export class HomeComponent implements OnInit {
         this.orgMeasureDetail = orgMeasureDetail;
         this.organizationSelected = true;
       });
+  }
+
+  addOrgMeasureScreen() {
+    this.addOrgMeasureShow = true;
+  }
+
+  changeAddOrgMeasureBoolean(event) {
+    this.addOrgMeasureShow = event;
   }
 
 }

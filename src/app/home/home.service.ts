@@ -64,4 +64,8 @@ export class HomeService {
       .map((response: Response) => response.json());
   }
 
+  addOrgMeasureData() {
+
+  }
+
 }
