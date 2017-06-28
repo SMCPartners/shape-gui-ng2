@@ -237,6 +237,23 @@ img {
   text-align:center;
 }
 
+.inputError {
+  background-color: #f2dede;
+}
+
+.orgMeasureErrorBox {
+  margin-top: 10px;
+  margin-bottom: -10px;
+  padding: 0;
+  text-align: center;
+}
+
+.org-panel {
+  padding-right: 30px !important;
+  padding-left: 30px !important;
+
+}
+
 
 /* =================================
   Navbar Styles

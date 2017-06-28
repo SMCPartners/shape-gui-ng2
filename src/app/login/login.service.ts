@@ -16,7 +16,8 @@ export class LoginService {
   }
 
   getUserID() : string {
-    return this.username;
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    return currentUser && currentUser.userName;
   }
 
   login(username: string, password: string): Observable<any> {

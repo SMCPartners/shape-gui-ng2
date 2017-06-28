@@ -25,21 +25,24 @@
 </div>
 
 <div *ngIf="addOrgMeasureShow">
-  <form class="form-horizontal" (ngSubmit)="addMeasureForm.form.valid && addOrgMeasure()" #addMeasureForm="ngForm" novalidate>
+  <form class="form-horizontal" [formGroup]="orgMeasureForm" (ngSubmit)="addOrgMeasure(orgMeasureForm)" novalidate>
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
         <div class="panel panel-default">
           <div class="panel-heading">
             <h5 align="center">Total</h5>
           </div>
-          <div class="panel-body">
-            <div class="form-group">
+          <div class="panel-body org-panel">
+            <div class="form-group" formGroupName="total">
               <label class="col-sm-2 control-label"></label>
               <div class="col-sm-4">
-                <input type="number" placeholder="Numerator" class="form-control" name="numeratorValue" [(ngModel)]="addOrgMeasureModel.numeratorValue" #numeratorValue="ngModel" required>
+                <input [ngClass]="{inputError: orgMeasureForm.controls['total'].hasError('denominatorHigher')}" type="number" placeholder="Numerator" class="form-control" formControlName="numeratorValue">
               </div>
               <div class="col-sm-4">
-                <input type="number" placeholder="Denominator" class="form-control" name="denominatorValue" [(ngModel)]="addOrgMeasureModel.denominatorValue" #denominatorValue="ngModel" required>
+                <input [ngClass]="{inputError: orgMeasureForm.controls['total'].hasError('denominatorHigher')}" type="number" placeholder="Denominator" class="form-control" formControlName="denominatorValue">
+              </div>
+              <div class="col-sm-12 alert alert-danger orgMeasureErrorBox" *ngIf="orgMeasureForm.controls['total'].hasError('denominatorHigher')">
+                Numerator cannot be higher than denominator
               </div>
             </div>
           </div>
@@ -47,12 +50,14 @@
       </div>
       <div class="col-md-3">
         <div class="form-group">
-          <select (change)="onChange($event.target.value)" name="orgSelect" >
+          <select name="orgSelect" formControlName="measureId">
+            <option [selected] [disabled]="true">Choose a measure</option>
             <option *ngFor="let m of measures" [value]="m.id"> {{m.name}} </option>
           </select>
         </div>
         <div class="form-group">
-          <select (change)="onChange($event.target.value)" name="yearSelect" >
+          <select name="yearSelect" formControlName="reportPeriodYear" >
+            <option [selected] [disabled]="true">Choose a year</option>
             <option [value]="2014">2014</option>
             <option [value]="2015">2015</option>
             <option [value]="2016">2016</option>
@@ -69,23 +74,29 @@
           <div class="panel-heading">
             <h5 align="center">Gender</h5>
           </div>
-          <div class="panel-body">
-            <div class="form-group">
+          <div class="panel-body org-panel">
+            <div class="form-group" formGroupName="genderMale">
               <label class="col-sm-2 control-label">Male</label>
               <div class="col-sm-4">
-                <input type="number" placeholder="Numerator" class="form-control" name="genderMaleNum" [(ngModel)]="addOrgMeasureModel.genderMaleNum" #genderMaleNum="ngModel" required>
+                <input [ngClass]="{inputError: orgMeasureForm.controls['genderMale'].hasError('denominatorHigher')}" type="number" placeholder="Numerator" class="form-control" formControlName="genderMaleNum">
               </div>
               <div class="col-sm-4">
-                <input type="number" placeholder="Denominator" class="form-control" name="genderMaleDen" [(ngModel)]="addOrgMeasureModel.genderMaleDen" #genderMaleDen="ngModel" required>
+                <input [ngClass]="{inputError: orgMeasureForm.controls['genderMale'].hasError('denominatorHigher')}" type="number" placeholder="Denominator" class="form-control" formControlName="genderMaleDen">
+              </div>
+              <div class="col-sm-12 alert alert-danger orgMeasureErrorBox" *ngIf="orgMeasureForm.controls['genderMale'].hasError('denominatorHigher')">
+                Numerator cannot be higher than denominator
               </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" formGroupName="genderFemale">
               <label class="col-sm-2 control-label">Female</label>
               <div class="col-sm-4">
-                <input type="number" placeholder="Numerator" class="form-control" name="genderFemaleNum" [(ngModel)]="addOrgMeasureModel.genderFemaleNum" #genderFemaleNum="ngModel" required>
+                <input [ngClass]="{inputError: orgMeasureForm.controls['genderFemale'].hasError('denominatorHigher')}" type="number" placeholder="Numerator" class="form-control" formControlName="genderFemaleNum">
               </div>
               <div class="col-sm-4">
-                <input type="number" placeholder="Denominator" class="form-control" name="genderFemaleDen" [(ngModel)]="addOrgMeasureModel.genderFemaleDen" #genderFemaleDen="ngModel" required>
+                <input [ngClass]="{inputError: orgMeasureForm.controls['genderFemale'].hasError('denominatorHigher')}" type="number" placeholder="Denominator" class="form-control" formControlName="genderFemaleDen">
+              </div>
+              <div class="col-sm-12 alert alert-danger orgMeasureErrorBox" *ngIf="orgMeasureForm.controls['genderFemale'].hasError('denominatorHigher')">
+                Numerator cannot be higher than denominator
               </div>
             </div>
           </div>
@@ -96,32 +107,41 @@
           <div class="panel-heading">
             <h5 align="center">Age</h5>
           </div>
-          <div class="panel-body">
-            <div class="form-group">
+          <div class="panel-body org-panel">
+            <div class="form-group" formGroupName="age1844">
               <label class="col-sm-3 control-label">18-44 Years</label>
               <div class="col-sm-4">
-                <input type="number" placeholder="Numerator" class="form-control" name="age1844Num" [(ngModel)]="addOrgMeasureModel.age1844Num" #age1844Num="ngModel" required>
+                <input [ngClass]="{inputError: orgMeasureForm.controls['age1844'].hasError('denominatorHigher')}" type="number" placeholder="Numerator" class="form-control" formControlName="age1844Num">
               </div>
               <div class="col-sm-4">
-                <input type="number" placeholder="Denominator" class="form-control" name="age1844Den" [(ngModel)]="addOrgMeasureModel.age1844Den" #age1844Den="ngModel" required>
+                <input [ngClass]="{inputError: orgMeasureForm.controls['age1844'].hasError('denominatorHigher')}" type="number" placeholder="Denominator" class="form-control" formControlName="age1844Den">
+              </div>
+              <div class="col-sm-12 alert alert-danger orgMeasureErrorBox" *ngIf="orgMeasureForm.controls['age1844'].hasError('denominatorHigher')">
+                Numerator cannot be higher than denominator
               </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" formGroupName="age4564">
               <label class="col-sm-3 control-label">45-64 Years</label>
               <div class="col-sm-4">
-                <input type="number" placeholder="Numerator" class="form-control" name="age4564Num" [(ngModel)]="addOrgMeasureModel.age4564Num" #age4564Num="ngModel" required>
+                <input [ngClass]="{inputError: orgMeasureForm.controls['age4564'].hasError('denominatorHigher')}" type="number" placeholder="Numerator" class="form-control" formControlName="age4564Num">
               </div>
               <div class="col-sm-4">
-                <input type="number" placeholder="Denominator" class="form-control" name="age4564Den" [(ngModel)]="addOrgMeasureModel.age4564Den" #age4564Den="ngModel" required>
+                <input [ngClass]="{inputError: orgMeasureForm.controls['age4564'].hasError('denominatorHigher')}" type="number" placeholder="Denominator" class="form-control" formControlName="age4564Den">
+              </div>
+              <div class="col-sm-12 alert alert-danger orgMeasureErrorBox" *ngIf="orgMeasureForm.controls['age4564'].hasError('denominatorHigher')">
+                Numerator cannot be higher than denominator
               </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" formGroupName="ageOver65">
               <label class="col-sm-3 control-label">65-85 Years</label>
               <div class="col-sm-4">
-                <input type="number" placeholder="Numerator" class="form-control" name="ageOver65Num" [(ngModel)]="addOrgMeasureModel.ageOver65Num" #ageOver65Num="ngModel" required>
+                <input [ngClass]="{inputError: orgMeasureForm.controls['ageOver65'].hasError('denominatorHigher')}" type="number" placeholder="Numerator" class="form-control" formControlName="ageOver65Num">
               </div>
               <div class="col-sm-4">
-                <input type="number" placeholder="Denominator" class="form-control" name="ageOver65Den" [(ngModel)]="addOrgMeasureModel.ageOver65Den" #ageOver65Den="ngModel" required>
+                <input [ngClass]="{inputError: orgMeasureForm.controls['ageOver65'].hasError('denominatorHigher')}" type="number" placeholder="Denominator" class="form-control" formControlName="ageOver65Den">
+              </div>
+              <div class="col-sm-12 alert alert-danger orgMeasureErrorBox" *ngIf="orgMeasureForm.controls['ageOver65'].hasError('denominatorHigher')">
+                Numerator cannot be higher than denominator
               </div>
             </div>
           </div>
@@ -134,23 +154,29 @@
           <div class="panel-heading">
             <h5 align="center">Ethnicity</h5>
           </div>
-          <div class="panel-body">
-            <div class="form-group">
+          <div class="panel-body org-panel">
+            <div class="form-group" formGroupName="ethnicityHispanicLatino">
               <label class="col-sm-4 control-label">Hispanic/Latino</label>
               <div class="col-sm-4">
-                <input type="number" placeholder="Numerator" class="form-control" name="ethnicityHispanicLatinoNum" [(ngModel)]="addOrgMeasureModel.ethnicityHispanicLatinoNum" #ethnicityHispanicLatinoNum="ngModel" required>
+                <input [ngClass]="{inputError: orgMeasureForm.controls['ethnicityHispanicLatino'].hasError('denominatorHigher')}" type="number" placeholder="Numerator" class="form-control" formControlName="ethnicityHispanicLatinoNum">
               </div>
               <div class="col-sm-4">
-                <input type="number" placeholder="Denominator" class="form-control" name="ethnicityHispanicLatinoDen" [(ngModel)]="addOrgMeasureModel.ethnicityHispanicLatinoDen" #ethnicityHispanicLatinoDen="ngModel" required>
+                <input [ngClass]="{inputError: orgMeasureForm.controls['ethnicityHispanicLatino'].hasError('denominatorHigher')}" type="number" placeholder="Denominator" class="form-control" formControlName="ethnicityHispanicLatinoDen">
+              </div>
+              <div class="col-sm-12 alert alert-danger orgMeasureErrorBox" *ngIf="orgMeasureForm.controls['ethnicityHispanicLatino'].hasError('denominatorHigher')">
+                Numerator cannot be higher than denominator
               </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" formGroupName="ethnicityNotHispanicLatino">
               <label class="col-sm-4 control-label">Not Hispanic/Latino</label>
               <div class="col-sm-4">
-                <input type="number" placeholder="Numerator" class="form-control" name="ethnicityNotHispanicLatinoNum" [(ngModel)]="addOrgMeasureModel.ethnicityNotHispanicLatinoNum" #ethnicityNotHispanicLatinoNum="ngModel" required>
+                <input [ngClass]="{inputError: orgMeasureForm.controls['ethnicityNotHispanicLatino'].hasError('denominatorHigher')}" type="number" placeholder="Numerator" class="form-control" formControlName="ethnicityNotHispanicLatinoNum">
               </div>
               <div class="col-sm-4">
-                <input type="number" placeholder="Denominator" class="form-control" name="ethnicityNotHispanicLatinoDen" [(ngModel)]="addOrgMeasureModel.ethnicityNotHispanicLatinoDen" #ethnicityNotHispanicLatinoDen="ngModel" required>
+                <input [ngClass]="{inputError: orgMeasureForm.controls['ethnicityNotHispanicLatino'].hasError('denominatorHigher')}" type="number" placeholder="Denominator" class="form-control" formControlName="ethnicityNotHispanicLatinoDen">
+              </div>
+              <div class="col-sm-12 alert alert-danger orgMeasureErrorBox" *ngIf="orgMeasureForm.controls['ethnicityNotHispanicLatino'].hasError('denominatorHigher')">
+                Numerator cannot be higher than denominator
               </div>
             </div>
           </div>
@@ -161,59 +187,77 @@
           <div class="panel-heading">
             <h5 align="center">Race</h5>
           </div>
-          <div class="panel-body">
-            <div class="form-group">
+          <div class="panel-body org-panel">
+            <div class="form-group" formGroupName="raceAfricanAmerican">
               <label class="col-sm-4 control-label">African American/Black</label>
               <div class="col-sm-4">
-                <input type="number" placeholder="Numerator" class="form-control" name="raceAfricanAmericanNum" [(ngModel)]="addOrgMeasureModel.raceAfricanAmericanNum" #raceAfricanAmericanNum="ngModel" required>
+                <input [ngClass]="{inputError: orgMeasureForm.controls['raceAfricanAmerican'].hasError('denominatorHigher')}" type="number" placeholder="Numerator" class="form-control" formControlName="raceAfricanAmericanNum">
               </div>
               <div class="col-sm-4">
-                <input type="number" placeholder="Denominator" class="form-control" name="raceAfricanAmericanDen" [(ngModel)]="addOrgMeasureModel.raceAfricanAmericanDen" #raceAfricanAmericanDen="ngModel" required>
+                <input [ngClass]="{inputError: orgMeasureForm.controls['raceAfricanAmerican'].hasError('denominatorHigher')}" type="number" placeholder="Denominator" class="form-control" formControlName="raceAfricanAmericanDen">
+              </div>
+              <div class="col-sm-12 alert alert-danger orgMeasureErrorBox" *ngIf="orgMeasureForm.controls['raceAfricanAmerican'].hasError('denominatorHigher')">
+                Numerator cannot be higher than denominator
               </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" formGroupName="raceAmericanIndian">
               <label class="col-sm-4 control-label">American Indian or Alaska Native</label>
               <div class="col-sm-4">
-                <input type="number" placeholder="Numerator" class="form-control" name="raceAmericanIndianNum" [(ngModel)]="addOrgMeasureModel.raceAmericanIndianNum" #raceAmericanIndianNum="ngModel" required>
+                <input [ngClass]="{inputError: orgMeasureForm.controls['raceAmericanIndian'].hasError('denominatorHigher')}" type="number" placeholder="Numerator" class="form-control" formControlName="raceAmericanIndianNum">
               </div>
               <div class="col-sm-4">
-                <input type="number" placeholder="Denominator" class="form-control" name="raceAmericanIndianDen" [(ngModel)]="addOrgMeasureModel.raceAmericanIndianDen" #raceAmericanIndianDen="ngModel" required>
+                <input [ngClass]="{inputError: orgMeasureForm.controls['raceAmericanIndian'].hasError('denominatorHigher')}" type="number" placeholder="Denominator" class="form-control" formControlName="raceAmericanIndianDen">
+              </div>
+              <div class="col-sm-12 alert alert-danger orgMeasureErrorBox" *ngIf="orgMeasureForm.controls['raceAmericanIndian'].hasError('denominatorHigher')">
+                Numerator cannot be higher than denominator
               </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" formGroupName="raceAsian">
               <label class="col-sm-4 control-label">Asian</label>
               <div class="col-sm-4">
-                <input type="number" placeholder="Numerator" class="form-control" name="raceAsianNum" [(ngModel)]="addOrgMeasureModel.raceAsianNum" #raceAsianNum="ngModel" required>
+                <input [ngClass]="{inputError: orgMeasureForm.controls['raceAsian'].hasError('denominatorHigher')}" type="number" placeholder="Numerator" class="form-control" formControlName="raceAsianNum">
               </div>
               <div class="col-sm-4">
-                <input type="number" placeholder="Denominator" class="form-control" name="raceAsianNum" [(ngModel)]="addOrgMeasureModel.raceAsianNum" #raceAsianNum="ngModel" required>
+                <input [ngClass]="{inputError: orgMeasureForm.controls['raceAsian'].hasError('denominatorHigher')}" type="number" placeholder="Denominator" class="form-control" formControlName="raceAsianDen">
+              </div>
+              <div class="col-sm-12 alert alert-danger orgMeasureErrorBox" *ngIf="orgMeasureForm.controls['raceAsian'].hasError('denominatorHigher')">
+                Numerator cannot be higher than denominator
               </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" formGroupName="raceNativeHawaiian">
               <label class="col-sm-4 control-label">Native Hawaiian or Pacific Islander</label>
               <div class="col-sm-4">
-                <input type="number" placeholder="Numerator" class="form-control" name="raceNativeHawaiianNum" [(ngModel)]="addOrgMeasureModel.raceNativeHawaiianNum" #raceNativeHawaiianNum="ngModel" required>
+                <input [ngClass]="{inputError: orgMeasureForm.controls['raceNativeHawaiian'].hasError('denominatorHigher')}" type="number" placeholder="Numerator" class="form-control" formControlName="raceNativeHawaiianNum">
               </div>
               <div class="col-sm-4">
-                <input type="number" placeholder="Denominator" class="form-control" name="raceNativeHawaiianDen" [(ngModel)]="addOrgMeasureModel.raceNativeHawaiianDen" #raceNativeHawaiianDen="ngModel" required>
+                <input [ngClass]="{inputError: orgMeasureForm.controls['raceNativeHawaiian'].hasError('denominatorHigher')}" type="number" placeholder="Denominator" class="form-control" formControlName="raceNativeHawaiianDen">
+              </div>
+              <div class="col-sm-12 alert alert-danger orgMeasureErrorBox" *ngIf="orgMeasureForm.controls['raceNativeHawaiian'].hasError('denominatorHigher')">
+                Numerator cannot be higher than denominator
               </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" formGroupName="raceWhite">
               <label class="col-sm-4 control-label">White</label>
               <div class="col-sm-4">
-                <input type="number" placeholder="Numerator" class="form-control" name="raceWhiteNum" [(ngModel)]="addOrgMeasureModel.raceWhiteNum" #raceWhiteNum="ngModel" required>
+                <input [ngClass]="{inputError: orgMeasureForm.controls['raceWhite'].hasError('denominatorHigher')}" type="number" placeholder="Numerator" class="form-control" formControlName="raceWhiteNum">
               </div>
               <div class="col-sm-4">
-                <input type="number" placeholder="Denominator" class="form-control" name="raceWhiteDen" [(ngModel)]="addOrgMeasureModel.raceWhiteDen" #raceWhiteDen="ngModel" required>
+                <input [ngClass]="{inputError: orgMeasureForm.controls['raceWhite'].hasError('denominatorHigher')}" type="number" placeholder="Denominator" class="form-control" formControlName="raceWhiteDen">
+              </div>
+              <div class="col-sm-12 alert alert-danger orgMeasureErrorBox" *ngIf="orgMeasureForm.controls['raceWhite'].hasError('denominatorHigher')">
+                Numerator cannot be higher than denominator
               </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" formGroupName="raceOther">
               <label class="col-sm-4 control-label">Other</label>
               <div class="col-sm-4">
-                <input type="number" placeholder="Numerator" class="form-control" name="raceOtherNum" [(ngModel)]="addOrgMeasureModel.raceOtherNum" #raceOtherNum="ngModel" required>
+                <input [ngClass]="{inputError: orgMeasureForm.controls['raceOther'].hasError('denominatorHigher')}" type="number" placeholder="Numerator" class="form-control" formControlName="raceOtherNum">
               </div>
               <div class="col-sm-4">
-                <input type="number" placeholder="Denominator" class="form-control" name="raceOtherDen" [(ngModel)]="addOrgMeasureModel.raceOtherDen" #raceOtherDen="ngModel" required>
+                <input [ngClass]="{inputError: orgMeasureForm.controls['raceOther'].hasError('denominatorHigher')}" type="number" placeholder="Denominator" class="form-control" formControlName="raceOtherDen">
+              </div>
+              <div class="col-sm-12 alert alert-danger orgMeasureErrorBox" *ngIf="orgMeasureForm.controls['raceOther'].hasError('denominatorHigher')">
+                Numerator cannot be higher than denominator
               </div>
             </div>
           </div>
@@ -222,7 +266,7 @@
     </div>
     <div class="row">
       <div class="col-md-2 col-md-offset-5">
-        <button type="button" class="btn btn-primary" (click)="addOrgMeasure()">Add</button>
+        <button type="button" class="btn btn-primary" (click)="addOrgMeasure(orgMeasureForm)">Add</button>
         <button type="button" class="btn btn-danger" (click)="cancelOrgMeasure()">Cancel</button>
       </div>
     </div>
