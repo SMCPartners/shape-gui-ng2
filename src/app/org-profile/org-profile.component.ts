@@ -10,7 +10,7 @@ export class OrgProfileComponent implements OnChanges {
 
   @Input() orgSelectedId: number;
   @Input() organizations: Organization[];
-  private organizationDetail: Organization;
+  public organizationDetail: Organization;
 
   constructor() { }
 

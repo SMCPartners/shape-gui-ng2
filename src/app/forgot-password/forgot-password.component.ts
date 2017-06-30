@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {LoginService} from "../login/login.service";
 import {NgProgressService} from "ng2-progressbar";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'sh-forgot-password',
@@ -17,7 +18,7 @@ export class ForgotPasswordComponent implements OnInit {
   data: any = {};
   done: boolean = false;
 
-  constructor(private loginService: LoginService, private pService: NgProgressService) { }
+  constructor(private loginService: LoginService, private pService: NgProgressService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -36,6 +37,10 @@ export class ForgotPasswordComponent implements OnInit {
     this.pService.start();
     this.loginService.resetPassword(this.model.username, this.data.randomQuestion, this.questionModel.answer)
       .subscribe(data => {this.pService.done(), this.done = true;} )
+  }
+
+  backToLogin() {
+    this.router.navigate(['']);
   }
 
 }

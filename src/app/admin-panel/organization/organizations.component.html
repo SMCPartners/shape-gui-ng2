@@ -1,4 +1,49 @@
-<div class="tab-pane" id="tab_default_3">
-  Orgnizations WORKS
+<div *ngIf="!addOrganizationShown">
+  <div class="pull-right" style="margin-bottom: 10px;"><button class="btn btn-primary" (click)="addOrganizationShow()">Add Organization</button></div>
+  
+  <div class="tab-pane" id="tab_default_1">
+    <ng2-smart-table [settings]="settings" [source]="data"></ng2-smart-table>
+  </div>
 </div>
 
+<div class="container" *ngIf="addOrganizationShown">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="form-area">
+      <form [formGroup]="addOrganizationForm" (ngSubmit)="addOrganization(addOrganizationForm)">
+        <br style="clear:both">
+        <h2 style="margin-bottom: 25px; text-align: center;">Add an Organization</h2>
+        <div class="form-group">
+          <input type="text" class="form-control" formControlName="orgName" id="orgName" name="orgName" placeholder="Organization Name" required>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" formControlName="streetAddress" id="streetAddress" name="streetAddress" placeholder="Street Address" required>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" formControlName="city" id="city" name="city" placeholder="City" required>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" formControlName="state" id="state" name="state" placeholder="State" required>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" formControlName="zip" id="zip" name="zip" placeholder="Zip" required>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" formControlName="primaryName" id="primaryName" name="primaryName" placeholder="Primary Contact Name" required>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" formControlName="primaryEmail" id="primaryEmail" name="primaryEmail" placeholder="Primary Contact Email" required>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" formControlName="primaryPhone" id="primaryPhone" name="primaryPhone" placeholder="Primary Contact Phone" required>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" formControlName="primaryRole" id="primaryRole" name="primaryRole" placeholder="Primary Contact Role" required>
+        </div>
+        
+        <button type="button" id="submit" name="submit" class="btn btn-primary pull-right" (click)="addOrganization(addOrganizationForm)">Add Organization</button>
+        <button type="button" class="btn btn-danger pull-right" style="margin-right: 10px;" (click)="cancelAddOrg()">Cancel</button>
+
+      </form>
+    </div>
+  </div>
+</div>

@@ -13,7 +13,7 @@ export class UserComponent implements OnInit {
   users: User[] = [];
   data: any[] = [];
 
-  private settings: {} = {
+  public settings: {} = {
     delete: {
       confirmDelete: true,
     },

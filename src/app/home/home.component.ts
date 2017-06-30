@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
   years: number[];
   orgSelectedId: number;
   addOrgMeasureShow: boolean = false;
+  addOrgMeasureSuccessMsg: string = '';
 
   constructor(private homeService: HomeService) { }
 
@@ -65,6 +66,10 @@ export class HomeComponent implements OnInit {
 
   changeAddOrgMeasureBoolean(event) {
     this.addOrgMeasureShow = event;
+  }
+
+  addOrgMeasureSuccess(successMsg) {
+    this.addOrgMeasureSuccessMsg = successMsg;
   }
 
 }

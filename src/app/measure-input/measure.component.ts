@@ -5,6 +5,8 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { numDenValidator } from "../shared/num-den-validator";
 import {OrgMeasureInfo} from "../shared/org-measure-info";
 import {LoginService} from "../login/login.service";
+import {HomeService} from "../home/home.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'sh-measure',
@@ -16,12 +18,13 @@ export class MeasureComponent implements OnInit {
   @Input() orgMeasureDetail: OrgMeasureDetail[] = [];
   @Input() addOrgMeasureShow: boolean;
   @Output() changeAddMeasureBoolean: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() addOrgMeasureSuccess: EventEmitter<string> = new EventEmitter<string>();
   @Input() measures: MeasureInfo[];
   @Input() organizationId: number;
 
   orgMeasureForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private loginService: LoginService) {
+  constructor(private fb: FormBuilder, private loginService: LoginService, private homeService: HomeService) {
   }
 
 
@@ -31,6 +34,7 @@ export class MeasureComponent implements OnInit {
 
 
   addOrgMeasure(form) {
+
     if (form.valid) {
       const formData = form.value;
       const addOrgMeasureForm = new OrgMeasureInfo('', formData.total.numeratorValue, formData.total.denominatorValue,
@@ -46,7 +50,13 @@ export class MeasureComponent implements OnInit {
         formData.raceOther.raceOtherDen, formData.reportPeriodYear, this.organizationId, formData.measureId, this.loginService.getUserID()
       );
 
-      console.log(addOrgMeasureForm);
+      this.homeService.addOrgMeasureData(addOrgMeasureForm)
+        .subscribe(response => {
+          this.changeAddMeasureBoolean.emit(false);
+          this.orgMeasureForm.reset();
+          this.addOrgMeasureSuccess.emit('The organization measure has been successfully added');
+          window.scrollTo(0,0);
+        })
 
     }
 

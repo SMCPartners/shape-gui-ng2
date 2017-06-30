@@ -12,16 +12,15 @@ export class ChangePasswordComponent implements OnInit {
 
   model: any = {};
   username: string = '';
+  error: string = '';
 
   constructor(private loginService: LoginService, private router: Router) { }
 
   ngOnInit() {
-    this.username = this.loginService.getUserID();
+    this.username = this.loginService.getUserIDBeforeLogin();
   }
 
   changePassword() {
-
-    console.log(this.username);
 
     this.loginService.changePassword(this.username, this.model.currentPassword, this.model.newPassword)
       .subscribe(data => this.router.navigate(['']))

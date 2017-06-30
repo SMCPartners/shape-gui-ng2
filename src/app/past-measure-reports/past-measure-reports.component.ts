@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import {MeasureInfo} from "../shared/measure-info";
 import {HomeService} from "../home/home.service";
 import {PastMeasureService} from "./past-measure.service";
@@ -10,24 +10,33 @@ import {AggData} from "./agg-comparison/agg-data";
   templateUrl: './past-measure-reports.component.html',
   styleUrls: ['./past-measure-reports.component.css']
 })
-export class PastMeasureReportsComponent implements OnInit {
+export class PastMeasureReportsComponent implements OnInit, OnChanges {
 
   @Input() measures: MeasureInfo[];
   @Input() orgId: number;
   public listViews: ListViewMeasure[] = [];
   public aggDatas: AggData[] = [];
   public measureDem: any;
-  private measureId: number;
-  private year: number;
-  private years: number[];
-  private listViewSelected = false;
-  private aggComSelected = false;
-  private measureDemSelected = false;
+  public measureId: number;
+  public year: number;
+  public years: number[];
+  public listViewSelected = false;
+  public aggComSelected = false;
+  public measureDemSelected = false;
 
   constructor(private homeService: HomeService, private pastMeasureService: PastMeasureService) { }
 
   ngOnInit() {
   }
+
+  ngOnChanges() {
+    this.listViewSelected = false;
+    this.aggComSelected = false;
+    this.measureDemSelected = false;
+    this.years = [];
+
+  }
+
 
   onMeasureChange(measureId) {
 
