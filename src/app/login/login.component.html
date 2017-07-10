@@ -12,8 +12,8 @@
         <input type="password" class="form-control"  placeholder="Password" name="password" [(ngModel)]="model.password" #password="ngModel" required>
       </div>
       <div align="center" style="margin-top: 20px">
-        <button class="btn">Login</button>
-        <button class="btn btn-primary" (click)="forgotPassword()">Forgot Password</button>
+        <button class="btn btn-primary">Login</button>
+        <button class="btn" (click)="forgotPassword()">Forgot Password</button>
       </div>
       <div *ngIf="error" align="center" class="alert alert-danger">{{error}}</div>
     </form>

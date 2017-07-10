@@ -11,13 +11,12 @@ export class Organization {
   primaryContactEmail: string;
   primaryContactRole: string;
   primaryContactPhone: string;
-  email: string;
   createdBy: string;
   modifiedDt: string;
   modifiedBy: string;
 
 
-  constructor(id: number, name: string, active: boolean, addressStreet: string, addressState: string, addressCity: string, addressZip: string, phone: string, primaryContactName: string, primaryContactEmail: string, primaryContactRole: string, primaryContactPhone: string, email: string, createdBy: string, modifiedDt: string, modifiedBy: string) {
+  constructor(id: number, name: string, active: boolean, addressStreet: string, addressState: string, addressCity: string, addressZip: string, phone: string, primaryContactName: string, primaryContactEmail: string, primaryContactRole: string, primaryContactPhone: string, createdBy: string, modifiedDt: string, modifiedBy: string) {
     this.id = id;
     this.name = name;
     this.active = active;
@@ -30,7 +29,6 @@ export class Organization {
     this.primaryContactEmail = primaryContactEmail;
     this.primaryContactRole = primaryContactRole;
     this.primaryContactPhone = primaryContactPhone;
-    this.email = email;
     this.createdBy = createdBy;
     this.modifiedDt = modifiedDt;
     this.modifiedBy = modifiedBy;

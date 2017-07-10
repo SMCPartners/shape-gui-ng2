@@ -29,7 +29,7 @@ export class LoginService {
 
   login(username: string, password: string): Observable<any> {
 
-    const url = `http://${BASEURL}/shape-service/shape/common/login`;
+    const url = `http://${BASEURL}/shape-service/shape/common/authentication`;
     const headers = new Headers({ 'Content-Type' : 'application/json'  });
 
     return this.http.post(url, JSON.stringify({ userId: username, password: password }), { headers: headers })

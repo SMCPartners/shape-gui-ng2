@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewContainerRef} from '@angular/core';
 import {Organization} from "../../shared/organization";
 import {AdminPanelService} from "../admin-panel.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {LoginService} from "../../login/login.service";
+import {ToastrService} from "toastr-ng2";
 
 @Component({
   selector: 'sh-organizations',
@@ -48,13 +49,14 @@ export class OrganizationsComponent implements OnInit {
         filter: false
       },
       status: {
-        title: 'Primary Contact Role',
+        title: 'Status',
         filter: false
       }
     }
   };
 
-  constructor(private adminPanelService: AdminPanelService, private fb: FormBuilder, private loginService: LoginService) { }
+  constructor(private adminPanelService: AdminPanelService, private fb: FormBuilder,
+              private loginService: LoginService, private toastrService: ToastrService) {}
 
   ngOnInit() {
 
@@ -69,16 +71,29 @@ export class OrganizationsComponent implements OnInit {
   }
 
   addOrganization(organization) {
+
+    console.log(this.addOrganizationForm);
+
+
     if (organization.valid) {
       const formData = organization.value;
       const addOrganizationForm = new Organization(null, formData.orgName, true, formData.streetAddress, formData.state,
-                                      formData.city, formData.zip, '', formData.primaryName, formData.primaryEmail,
-                                      formData.primaryRole, formData.primaryPhone, '', this.loginService.getUserID(),
-                                      '', '');
+                                      formData.city, formData.zip, '', formData.primaryName,
+                                      formData.primaryEmail, formData.primaryRole, formData.primaryPhone,
+                                      this.loginService.getUserID(), '', '');
 
       this.adminPanelService.addOrganization(addOrganizationForm)
         .subscribe(response => {
-          console.log(response)
+          this.addOrganizationShown = false;
+          this.addOrganizationForm.reset();
+          window.scrollTo(0,0);
+          this.toastrService.success('Organization added successfully!', 'Success!');
+
+          this.adminPanelService.getAllOrganizations()
+            .subscribe(orgs => {
+              this.organizations = orgs;
+              this.data = Organization.convertToTableObject(this.organizations);
+            });
         })
 
     }
@@ -93,6 +108,9 @@ export class OrganizationsComponent implements OnInit {
   }
 
   createForm() {
+
+    let emailRegex = '^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$';
+
     this.addOrganizationForm = this.fb.group({
       orgName: ['', Validators.required],
       streetAddress: ['', Validators.required],
@@ -100,10 +118,11 @@ export class OrganizationsComponent implements OnInit {
       state: ['', Validators.required],
       zip: ['', Validators.required],
       primaryName: ['', Validators.required],
-      primaryEmail: ['', Validators.required],
+      primaryEmail: ['', Validators.compose([Validators.required, Validators.pattern(emailRegex)])],
       primaryPhone: ['', Validators.required],
       primaryRole: ['', Validators.required],
     })
+
   }
 
 }

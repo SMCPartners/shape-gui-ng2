@@ -4,7 +4,7 @@
       <div class="form-group">
         <select (change)="onMeasureChange($event.target.value)" name="measureSelect" >
           <option [selected] [disabled]="true">Choose a measure</option>
-          <option *ngFor="let m of measures" [value]="m.id"> {{m.name}} </option>
+          <option *ngFor="let m of measures" [value]="m.id"> {{m.name}} ({{m.nqfId}}) </option>
         </select>
       </div>
     </div>

@@ -19,7 +19,8 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "sh",
       "styles": [
-        "styles.css"
+        "styles.css",
+        "../node_modules/toastr-ng2/toastr.css"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",

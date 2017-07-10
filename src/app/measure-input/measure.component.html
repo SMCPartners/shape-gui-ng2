@@ -1,7 +1,7 @@
 <div *ngIf="!addOrgMeasureShow">
   <div *ngFor="let omd of orgMeasureDetail" class="panel panel-default">
     <div class="panel-heading" style="text-align: center">
-      <h4><span class="pull-left">NQF ID: {{omd.measureInfo.nqfId}}</span>{{omd.measureInfo.name}}<span class="pull-right">RP Year: {{omd.orgData.reportPeriodYear}}</span></h4>
+      <h4><span class="pull-left">NQF ID: {{omd.measureInfo.nqfId}}</span>{{omd.measureInfo.name}}<span class="pull-right">Year: {{omd.orgData.reportPeriodYear}}</span></h4>
     </div>
     <div class="panel-body">
       <div class="row">
@@ -50,14 +50,14 @@
       </div>
       <div class="col-md-3">
         <div class="form-group">
-          <select name="orgSelect" formControlName="measureId">
-            <option [selected] [disabled]="true">Choose a measure</option>
+          <select name="measureId" formControlName="measureId">
+            <option [selected]="true" [disabled]="true" [value]="">Choose a measure</option>
             <option *ngFor="let m of measures" [value]="m.id"> {{m.name}} </option>
           </select>
         </div>
         <div class="form-group">
-          <select name="yearSelect" formControlName="reportPeriodYear" >
-            <option [selected] [disabled]="true">Choose a year</option>
+          <select name="reportPeriodYear" formControlName="reportPeriodYear" >
+            <option [selected]="true" [disabled]="true" [value]="0">Choose a year</option>
             <option [value]="2014">2014</option>
             <option [value]="2015">2015</option>
             <option [value]="2016">2016</option>

@@ -22,7 +22,6 @@ import { AggComparisonComponent } from './past-measure-reports/agg-comparison/ag
 import { PastMeasureService } from "./past-measure-reports/past-measure.service";
 import { MeasureDemChartComponent } from './past-measure-reports/measure-dem/measure-dem-chart.component';
 import { OrgProfileComponent } from './org-profile/org-profile.component';
-import { AccordionModule } from "ng2-accordion";
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { HelpComponent } from './help/help.component';
 import { MyAccountComponent } from './my-account/my-account.component';
@@ -34,7 +33,9 @@ import { AdminPanelService } from "./admin-panel/admin-panel.service";
 import { Ng2SmartTableModule } from "ng2-smart-table";
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
-import {NgProgressModule} from "ng2-progressbar";
+import { NgProgressModule } from "ng2-progressbar";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { ToastrModule } from "toastr-ng2";
 
 const appRoutes: Routes = [
 
@@ -89,10 +90,11 @@ const appRoutes: Routes = [
     HttpModule,
     RouterModule.forRoot(appRoutes),
     ChartsModule,
-    AccordionModule,
     Ng2SmartTableModule,
     NgProgressModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     LoginService,
