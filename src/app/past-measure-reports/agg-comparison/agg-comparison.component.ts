@@ -11,8 +11,9 @@ export class AggComparisonComponent implements OnInit, AfterViewChecked  {
 
   @Input() aggDatas: AggData[];
 
-  private dataForOrganizations: Array<number> = Array<number>();
-  private namesOfOrganizations: Array<string> = Array<string>();
+  // private dataForOrganizations: Array<number> = Array<number>();
+  // private namesOfOrganizations: Array<string> = Array<string>();
+  private dataForChart: Array<object> = Array<object>();
 
   public chart: any;
 
@@ -22,18 +23,25 @@ export class AggComparisonComponent implements OnInit, AfterViewChecked  {
 
   ngOnInit() {
 
-    // let firstTime = true;
-    //
-    // this.aggDatas.forEach(aggData => {
-    //
-    //   if (firstTime !== true) {
-    //     this.dataForOrganizations.push(+(aggData[2] / aggData[1]).toFixed(2) * 100);
-    //     this.namesOfOrganizations.push(aggData[0]);
-    //   }
-    //   firstTime = false;
-    //
-    // });
-    //
+    let firstTime = true;
+
+    this.aggDatas.forEach(aggData => {
+
+      if (firstTime !== true) {
+
+        this.dataForChart.push({
+          organization : aggData[0],
+          percent : +(aggData[2] / aggData[1]).toFixed(2) * 100,
+          color : '#3f51b5'
+        });
+
+        // this.dataForOrganizations.push(+(aggData[2] / aggData[1]).toFixed(2) * 100);
+        // this.namesOfOrganizations.push(aggData[0]);
+      }
+      firstTime = false;
+
+    });
+
     // this.barChartLabels = this.namesOfOrganizations;
     // this.barChartData.push({ data : this.dataForOrganizations, label: '%' })
 
@@ -45,47 +53,9 @@ export class AggComparisonComponent implements OnInit, AfterViewChecked  {
     this.chart = this.AmCharts.makeChart(this.randomId, {
       type : 'serial',
       theme : 'light',
-      dataProvider : [ {
-        country: 'USA',
-        visits: 2025
-      }, {
-        country: 'China',
-        visits: 1882
-      }, {
-        country: 'Japan',
-        visits: 1809
-      }, {
-        country: 'Germany',
-        visits: 1322
-      }, {
-        country: 'UK',
-        visits: 1122
-      }, {
-        country: 'France',
-        visits: 1114
-      }, {
-        country: 'India',
-        visits: 984
-      }, {
-        country: 'Spain',
-        visits: 711
-      }, {
-        country: 'Netherlands',
-        visits: 665
-      }, {
-        country: 'Russia',
-        visits: 580
-      }, {
-        country: 'South Korea',
-        visits: 443
-      }, {
-        country: 'Canada',
-        visits: 441
-      }, {
-        country: 'Brazil',
-        visits: 395
-      } ],
-      valueAxes: [ {
+      rotate: true,
+      dataProvider : this.dataForChart,
+    valueAxes: [ {
         gridColor: '#FFFFFF',
         gridAlpha: 0.2,
         dashLength: 0
@@ -97,14 +67,15 @@ export class AggComparisonComponent implements OnInit, AfterViewChecked  {
         fillAlphas: 0.8,
         lineAlpha: 0.2,
         type: 'column',
-        valueField: 'visits'
+        valueField: 'percent',
+        colorField : 'color'
       } ],
       chartCursor: {
         categoryBalloonEnabled: false,
         cursorAlpha: 0,
         zoomable: false
       },
-      categoryField: 'country',
+      categoryField: 'organization',
       categoryAxis: {
         gridPosition: 'start',
         gridAlpha: 0,

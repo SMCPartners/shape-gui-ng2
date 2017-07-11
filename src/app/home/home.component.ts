@@ -18,13 +18,13 @@ export class HomeComponent implements OnInit {
   years: number[];
   orgSelectedId: number;
   addOrgMeasureShow: boolean = false;
-  addOrgMeasureSuccessMsg: string = '';
 
   constructor(private homeService: HomeService) { }
 
   ngOnInit() {
     this.homeService.getAllOrganizations()
       .subscribe(organization => {
+
         this.organizations = organization;
 
         this.homeService.findMeasuresByID()
@@ -47,7 +47,7 @@ export class HomeComponent implements OnInit {
 
   }
 
-  onChange(orgId) {
+  onOrganizationChange(orgId) {
 
     this.homeService.setOrgId(orgId);
 
@@ -66,10 +66,6 @@ export class HomeComponent implements OnInit {
 
   changeAddOrgMeasureBoolean(event) {
     this.addOrgMeasureShow = event;
-  }
-
-  addOrgMeasureSuccess(successMsg) {
-    this.addOrgMeasureSuccessMsg = successMsg;
   }
 
 }

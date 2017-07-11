@@ -1,14 +1,8 @@
-<div class="row">
-  <div align="center" style="text-align: center; margin-top:5px;" class="col-md-6 col-md-3 alert alert-success" *ngIf="addOrgMeasureSuccessMsg !== ''">
-    {{addOrgMeasureSuccessMsg}}
-  </div>
-</div>
-
 <div class="row" style="margin: 20px 0 15px 40px">
   <div class="col-md-2 col-md-offset-5">
     <form>
       <div class="form-group">
-        <select (change)="onChange($event.target.value)" name="orgSelect" >
+        <select (change)="onOrganizationChange($event.target.value)" name="orgSelect" >
           <option *ngFor="let o of organizations" [value]="o.id"> {{o.name}} </option>
         </select>
       </div>
@@ -44,8 +38,7 @@
                           [addOrgMeasureShow]="addOrgMeasureShow"
                           [measures]="measures"
                           [organizationId]="orgSelectedId"
-                          (changeAddMeasureBoolean)="changeAddOrgMeasureBoolean($event)"
-                          (addOrgMeasureSuccess)="addOrgMeasureSuccess($event)">
+                          (changeAddMeasureBoolean)="changeAddOrgMeasureBoolean($event)">
               </sh-measure>
             </div>
             <div class="tab-pane" id="tab_default_2">

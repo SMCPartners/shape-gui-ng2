@@ -16,8 +16,11 @@ export class OrgProfileComponent implements OnChanges {
 
   ngOnChanges() {
 
-    this.organizationDetail = this.organizations[this.orgSelectedId - 1];
-
+    this.organizations.forEach(org => {
+      if (org.id === +(this.orgSelectedId)) {
+        this.organizationDetail = org
+      }
+    })
   }
 
 }

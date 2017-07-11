@@ -7,6 +7,7 @@ import {OrgMeasureInfo} from "../shared/org-measure-info";
 import {LoginService} from "../login/login.service";
 import {HomeService} from "../home/home.service";
 import {Router} from "@angular/router";
+import {ToastrService} from "toastr-ng2";
 
 @Component({
   selector: 'sh-measure',
@@ -24,7 +25,8 @@ export class MeasureComponent implements OnInit {
 
   orgMeasureForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private loginService: LoginService, private homeService: HomeService) {
+  constructor(private fb: FormBuilder, private loginService: LoginService, private homeService: HomeService,
+              private toastrService: ToastrService) {
   }
 
 
@@ -54,8 +56,13 @@ export class MeasureComponent implements OnInit {
         .subscribe(response => {
           this.changeAddMeasureBoolean.emit(false);
           this.orgMeasureForm.reset();
-          this.addOrgMeasureSuccess.emit('The organization measure has been successfully added');
+          this.toastrService.success('Organization added successfully!', 'Success!');
           window.scrollTo(0,0);
+
+          this.homeService.findAllMeasuresByOrganization(this.organizationId)
+            .subscribe(orgMeasureDetail => {
+              this.orgMeasureDetail = orgMeasureDetail;
+            });
         })
 
     }
@@ -64,6 +71,7 @@ export class MeasureComponent implements OnInit {
 
   cancelOrgMeasure() {
     this.changeAddMeasureBoolean.emit(false);
+    this.orgMeasureForm.reset();
   }
 
   createForm() {

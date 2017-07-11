@@ -1,26 +1,31 @@
 <div *ngIf="!addOrgMeasureShow">
-  <div *ngFor="let omd of orgMeasureDetail" class="panel panel-default">
-    <div class="panel-heading" style="text-align: center">
-      <h4><span class="pull-left">NQF ID: {{omd.measureInfo.nqfId}}</span>{{omd.measureInfo.name}}<span class="pull-right">Year: {{omd.orgData.reportPeriodYear}}</span></h4>
-    </div>
-    <div class="panel-body">
-      <div class="row">
-        <div class="col-md-4">
-          {{omd.measureInfo.description}}
-        </div>
-        <div class="col-md-4">
-          <sh-measure-chart [numerator]="omd.orgData.numeratorValue" [denominator]="omd.orgData.denominatorValue"></sh-measure-chart>
-        </div>
-        <div class="col-md-4">
-          <div style="margin-left: 90px">
-            <span class="pull-right glyphicon glyphicon-info-sign" style="font-size:1.4em"></span>
-            <span style="float: left; clear: left; margin-left: 10px">Numerator: {{omd.orgData.numeratorValue}}</span>
-            <span style="float: left; clear: left">Denominator: {{omd.orgData.denominatorValue}}</span>
+  <div *ngIf="orgMeasureDetail.length > 0">
+    <div *ngFor="let omd of orgMeasureDetail" class="panel panel-default">
+      <div class="panel-heading" style="text-align: center">
+        <h4><span class="pull-left">NQF ID: {{omd.measureInfo.nqfId}}</span>{{omd.measureInfo.name}}<span class="pull-right">Year: {{omd.orgData.reportPeriodYear}}</span></h4>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-4">
+            {{omd.measureInfo.description}}
           </div>
-          <span style="float: left; margin-top: 40px; font-size: 1.2em"><div class="well"><strong>Your Measure Results: </strong>{{omd.orgData.numeratorValue / omd.orgData.denominatorValue | percent }}</div></span>
+          <div class="col-md-4">
+            <sh-measure-chart [numerator]="omd.orgData.numeratorValue" [denominator]="omd.orgData.denominatorValue"></sh-measure-chart>
+          </div>
+          <div class="col-md-4">
+            <div style="margin-left: 90px">
+              <span class="pull-right glyphicon glyphicon-info-sign" style="font-size:1.4em"></span>
+              <span style="float: left; clear: left; margin-left: 10px">Numerator: {{omd.orgData.numeratorValue}}</span>
+              <span style="float: left; clear: left">Denominator: {{omd.orgData.denominatorValue}}</span>
+            </div>
+            <span style="float: left; margin-top: 40px; font-size: 1.2em"><div class="well"><strong>Your Measure Results: </strong>{{omd.orgData.numeratorValue / omd.orgData.denominatorValue | percent }}</div></span>
+          </div>
         </div>
       </div>
     </div>
+  </div>
+  <div *ngIf="orgMeasureDetail.length === 0" align="center" class="alert alert-danger">
+    There is no measure information for this organization, please add some!
   </div>
 </div>
 
