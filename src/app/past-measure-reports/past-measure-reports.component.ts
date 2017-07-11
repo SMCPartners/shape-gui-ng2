@@ -96,6 +96,23 @@ export class PastMeasureReportsComponent implements OnInit, OnChanges {
 
     this.year = year;
 
+    if (this.listViewSelected) {
+      this.pastMeasureService.getListViewMeasures(this.orgId, this.measureId, this.year)
+        .subscribe(listView => {
+          this.listViews = listView;
+        });
+    } else if (this.aggComSelected) {
+      this.pastMeasureService.getAggregateComparison(this.measureId, this.year)
+        .subscribe(aggData => {
+          this.aggDatas = aggData;
+        });
+    } else if (this.measureDemSelected) {
+      this.pastMeasureService.getMeasureDemographics(this.orgId, this.measureId, this.year)
+        .subscribe(measureDem => {
+          this.measureDem = measureDem[0];
+        });
+    }
+
   }
 
   onAnalyticChange(analyticId) {

@@ -13,7 +13,6 @@ import { RouteProtect } from './route-protect/route-protect';
 import { HeaderComponent } from './shared/header.component';
 import { HomeService } from './home/home.service';
 import { MeasureComponent } from './measure-input/measure.component';
-import { ChartsModule } from 'ng2-charts';
 import { MeasureChartComponent } from './measure-input/measure-chart.component';
 import { PastMeasureReportsComponent } from './past-measure-reports/past-measure-reports.component';
 import { ListViewComponent } from './past-measure-reports/list-view/list-view.component';
@@ -36,6 +35,8 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { NgProgressModule } from "ng2-progressbar";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ToastrModule } from "toastr-ng2";
+import { AmChartsModule } from "@amcharts/amcharts3-angular";
+
 
 const appRoutes: Routes = [
 
@@ -82,19 +83,19 @@ const appRoutes: Routes = [
     OrganizationsComponent,
     MeasuresComponent,
     ForgotPasswordComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot(appRoutes),
-    ChartsModule,
     Ng2SmartTableModule,
     NgProgressModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    AmChartsModule
   ],
   providers: [
     LoginService,
