@@ -1,5 +1,9 @@
 <div>
-  <div style="display: block;">
+  <div style="display: block;" *ngIf="!noYearlyDataForMeasure">
     <div [attr.id]="randomId" [style.width.%]="100" [style.height.px]="300"></div>
   </div>
+</div>
+
+<div *ngIf="noYearlyDataForMeasure" align="center" class="alert alert-danger">
+  No data for this year for this measure
 </div>

@@ -26,8 +26,8 @@
 </div>
 
 <div>
-  <sh-list-view *ngIf="listViewSelected" [listViews]="listViews" [year]="year"></sh-list-view>
-  <sh-agg-comparison *ngIf="aggComSelected" [aggDatas]="aggDatas"></sh-agg-comparison>
+  <sh-list-view *ngIf="listViewSelected" [noYearlyDataForMeasure]="noYearlyDataForMeasure" [listViews]="listViews" [year]="year"></sh-list-view>
+  <sh-agg-comparison *ngIf="aggComSelected" [noYearlyDataForMeasure]="noYearlyDataForMeasure" [aggDatas]="aggDatas"></sh-agg-comparison>
   <sh-measure-demographics *ngIf="measureDemSelected" [measureDem]="measureDem"></sh-measure-demographics>
 </div>
 

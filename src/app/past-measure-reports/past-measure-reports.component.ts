@@ -23,6 +23,7 @@ export class PastMeasureReportsComponent implements OnInit, OnChanges {
   public listViewSelected = false;
   public aggComSelected = false;
   public measureDemSelected = false;
+  public noYearlyDataForMeasure = true;
 
   constructor(private homeService: HomeService, private pastMeasureService: PastMeasureService) { }
 
@@ -46,46 +47,60 @@ export class PastMeasureReportsComponent implements OnInit, OnChanges {
       .subscribe(years => {
         this.years = years;
 
-        if (this.listViewSelected) {
+        console.log(this.years);
 
-          this.pastMeasureService.getListViewMeasures(this.orgId, this.measureId, this.years[0])
-            .subscribe(listView => {
-              this.listViews = listView;
-              this.listViewSelected = true;
-              this.aggComSelected = false;
-              this.measureDemSelected = false;
+        if (this.years.length > 0) {
 
-              this.year = this.years[0]
+          this.noYearlyDataForMeasure = false;
 
-            });
+          if (this.listViewSelected) {
 
-        } else if (this.aggComSelected) {
+            this.pastMeasureService.getListViewMeasures(this.orgId, this.measureId, this.years[0])
+              .subscribe(listView => {
+                this.listViews = listView;
+                this.listViewSelected = true;
+                this.aggComSelected = false;
+                this.measureDemSelected = false;
 
-          this.pastMeasureService.getAggregateComparison(this.measureId, this.years[0])
-            .subscribe(aggData => {
-              this.aggDatas = aggData;
-              this.listViewSelected = false;
-              this.aggComSelected = true;
-              this.measureDemSelected = false;
+                this.year = this.years[0]
 
-              this.year = this.years[0]
+              });
 
-            });
+          } else if (this.aggComSelected) {
 
-        } else if (this.measureDemSelected) {
+            this.pastMeasureService.getAggregateComparison(this.measureId, this.years[0])
+              .subscribe(aggData => {
+                this.aggDatas = aggData;
+                this.listViewSelected = false;
+                this.aggComSelected = true;
+                this.measureDemSelected = false;
 
-          this.pastMeasureService.getMeasureDemographics(this.orgId, this.measureId, this.years[0])
-            .subscribe(measureDem => {
+                this.year = this.years[0]
 
-              this.measureDem = measureDem[0];
+              });
 
-              this.listViewSelected = false;
-              this.aggComSelected = false;
-              this.measureDemSelected = true;
+          } else if (this.measureDemSelected) {
 
-              this.year = this.years[0]
+            this.pastMeasureService.getMeasureDemographics(this.orgId, this.measureId, this.years[0])
+              .subscribe(measureDem => {
 
-            });
+                this.measureDem = measureDem[0];
+
+                this.listViewSelected = false;
+                this.aggComSelected = false;
+                this.measureDemSelected = true;
+
+                this.year = this.years[0]
+
+              });
+          }
+        } else {
+
+          console.log('in here');
+
+          this.listViews = [];
+          this.aggDatas = [];
+          this.noYearlyDataForMeasure = true;
         }
 
       });
@@ -118,7 +133,7 @@ export class PastMeasureReportsComponent implements OnInit, OnChanges {
   onAnalyticChange(analyticId) {
 
     if (typeof this.years === 'undefined') {
-      console.log('nope, no measure selected');
+      this.noYearlyDataForMeasure = true;
       return;
     }
 

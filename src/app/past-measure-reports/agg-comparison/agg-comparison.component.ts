@@ -1,4 +1,4 @@
-import {AfterViewChecked, Component, Input, OnInit} from '@angular/core';
+import {AfterViewChecked, Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {AggData} from './agg-data';
 import {AmChartsService} from '@amcharts/amcharts3-angular';
 
@@ -7,9 +7,10 @@ import {AmChartsService} from '@amcharts/amcharts3-angular';
   templateUrl: './agg-comparison.component.html',
   styleUrls: ['./agg-comparison.component.css']
 })
-export class AggComparisonComponent implements OnInit, AfterViewChecked  {
+export class AggComparisonComponent implements OnInit, AfterViewChecked, OnDestroy  {
 
   @Input() aggDatas: AggData[];
+  @Input() noYearlyDataForMeasure: boolean;
 
   // private dataForOrganizations: Array<number> = Array<number>();
   // private namesOfOrganizations: Array<string> = Array<string>();
@@ -22,6 +23,8 @@ export class AggComparisonComponent implements OnInit, AfterViewChecked  {
   constructor(private AmCharts: AmChartsService) { }
 
   ngOnInit() {
+
+    console.log(this.aggDatas);
 
     let firstTime = true;
 
@@ -84,6 +87,12 @@ export class AggComparisonComponent implements OnInit, AfterViewChecked  {
       },
 
     });
+  }
+
+
+  ngOnDestroy(): void {
+
+    this.chart.destroy();
 
   }
 }

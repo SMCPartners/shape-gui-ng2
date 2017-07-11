@@ -10,6 +10,7 @@ export class ListViewComponent implements OnInit {
 
   @Input() listViews: ListViewMeasure[];
   @Input() year: number;
+  @Input() noYearlyDataForMeasure: boolean;
 
   constructor() { }
 
