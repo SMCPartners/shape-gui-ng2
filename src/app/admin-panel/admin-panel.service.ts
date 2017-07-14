@@ -6,6 +6,8 @@ import 'rxjs/add/operator/map';
 import {User} from "../shared/user";
 import {BASEURL} from "../shared/global-variables";
 import {Organization} from "../shared/organization";
+import {Provider} from "../shared/provider";
+import {MeasureInfo} from "../shared/measure-info";
 
 
 @Injectable()
@@ -29,6 +31,26 @@ export class AdminPanelService {
     const headers = new Headers({ 'Authorization': 'Bearer ' + this.loginService.token });
     let options = new RequestOptions({ headers: headers });
     const url = `http://${BASEURL}/shape-service/shape/admin/organization/findAll`;
+
+    // get user projects from api
+    return this.http.get(url, options)
+      .map((response: Response) => response.json());
+  }
+
+  getAllProviders(): Observable<Provider[]> {
+    const headers = new Headers({ 'Authorization': 'Bearer ' + this.loginService.token });
+    let options = new RequestOptions({ headers: headers });
+    const url = `http://${BASEURL}/shape-service/shape/common/provider/findAll`;
+
+    // get user projects from api
+    return this.http.get(url, options)
+      .map((response: Response) => response.json());
+  }
+
+  getAllMeasures(): Observable<MeasureInfo[]> {
+    const headers = new Headers({ 'Authorization': 'Bearer ' + this.loginService.token });
+    let options = new RequestOptions({ headers: headers });
+    const url = `http://${BASEURL}/shape-service/shape/common/measure/findAll`;
 
     // get user projects from api
     return this.http.get(url, options)

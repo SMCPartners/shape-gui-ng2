@@ -4,6 +4,9 @@ import { Organization } from '../shared/organization';
 import {MeasureInfo} from "../shared/measure-info";
 import {OrgMeasureDetail} from "../shared/org-measure-detail";
 
+declare var jQuery: any;
+
+
 @Component({
   selector: 'sh-home',
   templateUrl: './home.component.html',
@@ -62,6 +65,8 @@ export class HomeComponent implements OnInit {
 
   addOrgMeasureScreen() {
     this.addOrgMeasureShow = true;
+    jQuery('.nav-tabs a[href="#tab_default_1"]').tab('show');
+
   }
 
   changeAddOrgMeasureBoolean(event) {

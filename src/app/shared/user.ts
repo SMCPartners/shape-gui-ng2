@@ -57,7 +57,7 @@ export class User {
         lastName: user.lastName,
         role: user.role,
         organization: user.organizationId,
-        status: 'Status'
+        status: user.active ? 'Active' : 'Inactive'
       })
 
     });

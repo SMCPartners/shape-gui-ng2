@@ -36,12 +36,14 @@ import { NgProgressModule } from "ng2-progressbar";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ToastrModule } from "toastr-ng2";
 import { AmChartsModule } from "@amcharts/amcharts3-angular";
+import { ForgotUsernameComponent } from './forgot-username/forgot-username.component';
 
 
 const appRoutes: Routes = [
 
   { path: '', component: LoginComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'forgot-username', component: ForgotUsernameComponent },
   { path: 'change-password', component: ChangePasswordComponent },
   { path: 'home', component: HomeComponent, canActivate: [ RouteProtect ] },
   { path: 'help', component: HelpComponent, canActivate: [ RouteProtect ] },
@@ -84,6 +86,7 @@ const appRoutes: Routes = [
     MeasuresComponent,
     ForgotPasswordComponent,
     ChangePasswordComponent,
+    ForgotUsernameComponent,
   ],
   imports: [
     BrowserModule,

@@ -13,6 +13,7 @@
       </div>
       <div align="center" style="margin-top: 20px">
         <button class="btn btn-primary">Login</button>
+        <button class="btn" (click)="forgotUsername()">Forgot Username</button>
         <button class="btn" (click)="forgotPassword()">Forgot Password</button>
       </div>
       <div *ngIf="error" align="center" class="alert alert-danger">{{error}}</div>

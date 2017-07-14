@@ -1,0 +1,20 @@
+$table-font-color: #3F51B5;
+$table-border-color: #e9ebec;
+
+:host{
+  /deep/ {
+    *{
+      font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 13px;
+      text-align: center;
+    }
+    table{
+      color: $table-font-color;
+      tr {
+        td,th{
+          border: 1px solid $table-border-color;
+        }
+      }
+    }
+  }
+}

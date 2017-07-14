@@ -47,7 +47,7 @@ export class Organization {
         primaryName: org.primaryContactName,
         primaryEmail: org.primaryContactEmail,
         primaryRole: org.primaryContactRole,
-        status: 'Status'
+        status: org.active ? 'Active' : 'Inactive'
       })
 
     });

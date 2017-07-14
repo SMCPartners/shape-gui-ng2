@@ -78,6 +78,17 @@ export class LoginService {
       });
   }
 
+  forgotUsername(email: string): Observable<any> {
+    const url = `http://${BASEURL}/shape-service/shape/common/forgotusername`;
+    const headers = new Headers({ 'Content-Type' : 'application/json'  });
+
+    return this.http.post(url, JSON.stringify({ val: email }), { headers: headers })
+      .map((response: Response) => {
+
+        return response.json();
+      });
+  }
+
   changePassword(username: string, currentPassword: string, newPassword: string): Observable<any> {
     const url = `http://${BASEURL}/shape-service/shape/common/changepassword`;
     const headers = new Headers({ 'Content-Type' : 'application/json'  });

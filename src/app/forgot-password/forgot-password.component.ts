@@ -15,8 +15,8 @@ export class ForgotPasswordComponent implements OnInit {
   questionModel: any = {};
   questionRecieved: boolean = false;
   loading: boolean = false;
-  data: any = {};
   done: boolean = false;
+  data: any = {};
 
   constructor(private loginService: LoginService, private pService: NgProgressService, private router: Router) { }
 
@@ -36,7 +36,15 @@ export class ForgotPasswordComponent implements OnInit {
     this.loading = true;
     this.pService.start();
     this.loginService.resetPassword(this.model.username, this.data.randomQuestion, this.questionModel.answer)
-      .subscribe(data => {this.pService.done(), this.done = true;} )
+      .subscribe(data => {
+        this.pService.done();
+        this.done = true;
+        this.loading = false;
+      },(error) => {
+        this.error = error.json().errMsg;
+        this.loading = false;
+        this.pService.done();
+      })
   }
 
   backToLogin() {
