@@ -8,6 +8,7 @@ import {MeasureInfo} from "../shared/measure-info";
 import {OrgMeasureDetail} from "../shared/org-measure-detail";
 import {BASEURL} from "../shared/global-variables";
 import {OrgMeasureInfo} from "../shared/org-measure-info";
+import {OrganizationStratification} from "../shared/organization-stratification";
 
 @Injectable()
 export class HomeService {
@@ -76,6 +77,17 @@ export class HomeService {
       .map((response: Response) => {
         return response.json();
       });
+  }
+
+  getOrganizationStratificationByOrg(orgID: number): Observable<OrganizationStratification> {
+    const headers = new Headers({ 'Authorization': 'Bearer ' + this.loginService.token });
+    let options = new RequestOptions({ headers: headers });
+    const url = `http://${BASEURL}/shape-service/shape/common/organization_stratification/findAllByOrg/${orgID}`;
+
+    return this.http.get(url, options)
+      .map((response: Response) => {
+        return response.json();
+      })
   }
 
 }

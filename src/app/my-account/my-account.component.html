@@ -1,3 +1,39 @@
-<p>
-  my-account works!
-</p>
+<div align="center" style="margin-top: 20px">
+  <h2>My Account</h2>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="tabbable-panel">
+        <div class="tabbable-line">
+          <ul class="nav nav-tabs ">
+            <li class="active">
+              <a href="#tab_default_1" data-toggle="tab">
+                Reset Password </a>
+            </li>
+            <li>
+              <a href="#tab_default_2" data-toggle="tab">
+                Edit Email </a>
+            </li>
+            <li>
+              <a href="#tab_default_3" data-toggle="tab">
+                Change Security Questions </a>
+            </li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane active" id="tab_default_1">
+              <sh-reset-password></sh-reset-password>
+            </div>
+            <div class="tab-pane" id="tab_default_2">
+              <sh-edit-email></sh-edit-email>
+            </div>
+            <div class="tab-pane" id="tab_default_3">
+              Stuff here change security questions
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

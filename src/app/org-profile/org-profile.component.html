@@ -43,14 +43,57 @@
     <!--&lt;!&ndash;</accordion>&ndash;&gt;-->
   <!--</div>-->
 </div>
-<div class="row">
+
+<div class="row" *ngIf="!haveOrgStratData">
+  <div class="col-md-12 text-center">
+    <div class="alert alert-danger">No Org Strat Info for this org</div>
+  </div>
+</div>
+
+<div class="row" *ngIf="haveOrgStratData">
   <div class="col-md-6">
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="org-profile-headings">Operational Information</h4>
       </div>
       <div class="panel-body">
-      
+        <span><strong>Which best describes your organization: </strong>{{this.bestDescribeAttribute}}</span>
+        <br>
+        <hr>
+        <span><strong>Types of staff: </strong><span *ngFor="let t of typeOfStaffArray index as i; last as last">{{t}}<span *ngIf="!last">, </span></span></span>
+        <br>
+        <hr>
+        <span><strong>Payer Mix</strong></span>
+        <br>
+        <div style="margin-left: 20px">
+          <strong>Medicare: </strong>{{this.orgStrat.medicarePercent}}%
+          <br>
+          <strong>Medicaid: </strong>{{this.orgStrat.medicaidPercent}}%
+          <br>
+          <strong>HMO: </strong>{{this.orgStrat.hmoPercent}}%
+          <br>
+          <strong>PPO: </strong>{{this.orgStrat.ppoPercent}}%
+          <br>
+          <strong>Uninsured/Self-Pay: </strong>{{this.orgStrat.uninsuredSelfPercent}}%
+          <br>
+          <strong>Private Insurance: </strong>{{this.orgStrat.privatePercent}}%
+          <br>
+        </div>
+        <hr>
+        <span><strong>EHR Vendor: </strong></span> {{this.orgStrat.vendor}}
+        <br>
+        <span><strong>EHR Product: </strong></span> {{this.orgStrat.product}}
+        <br>
+        <span><strong>EHR Version: </strong></span> {{this.orgStrat.versionEHR}}
+        <br>
+        <div [ngSwitch]="this.orgStrat.completeCEHRT">
+          <span><strong>Completed 2014 CEHRT Upgrade? </strong></span> <span *ngSwitchCase="true">Yes</span><span *ngSwitchCase="false">No</span>
+          <br>
+        </div>
+        <div [ngSwitch]="this.orgStrat.patientPortal">
+          <span><strong>Do you have a patient portal? </strong></span> <span *ngSwitchCase="true">Yes</span><span *ngSwitchCase="false">No</span>
+          <br>
+        </div>
       </div>
     </div>
   </div>
@@ -60,7 +103,58 @@
         <h4 class="org-profile-headings">Patient Population</h4>
       </div>
       <div class="panel-body">
-      
+        <span><strong>Patient Volume</strong></span>
+        <br>
+        <div style="margin-left: 20px">
+          <strong>Patients: </strong>{{this.orgStrat.totalPatients}}
+          <br>
+          <strong>Visits Per Year: </strong>{{this.orgStrat.totalVisits}}
+          <br>
+        </div>
+        <hr>
+        <span><strong>Patient Counts</strong></span>
+        <br>
+        <div style="margin-left: 20px">
+          <strong>Patients with a Diagnosis of Hypertension: </strong>{{this.orgStrat.patientsHypertension}}
+          <br>
+          <strong>Patients with a Diagnosis of Diabetes: </strong>{{this.orgStrat.patientsDiabetes}}
+          <br>
+          <strong>Patients with Pre-Diabetes: </strong>{{this.orgStrat.patientsPreDiabetes}}
+          <br>
+          <strong>Patients with High BP but no Diagnosis of Hypertension: </strong>{{this.orgStrat.patientsHypertension}}
+          <br>
+        </div>
+        <hr>
+        <span><strong>Demographic Information</strong></span>
+        <br>
+        <div style="margin-left: 20px">
+          <strong>Male: </strong>{{this.orgStrat.genderMale}}
+          <br>
+          <strong>Female: </strong>{{this.orgStrat.genderFemale}}
+          <br>
+          <strong>17 and Under: </strong>{{this.orgStrat.age17under}}
+          <br>
+          <strong>18-44 Years: </strong>{{this.orgStrat.age1844}}
+          <br>
+          <strong>45-64 Years: </strong>{{this.orgStrat.age4564}}
+          <br>
+          <strong>65 and Older: </strong>{{this.orgStrat.ageOver65}}
+          <br>
+          <strong>Hispanic/Latino: </strong>{{this.orgStrat.ethnicityHispanicLatino}}
+          <br>
+          <strong>Not Hispanic/Latino: </strong>{{this.orgStrat.ethnicityNotHispanicLatino}}
+          <br>
+          <strong>African American/Black: </strong>{{this.orgStrat.raceAfricanAmerican}}
+          <br>
+          <strong>Asian: </strong>{{this.orgStrat.raceAsian}}
+          <br>
+          <strong>Native Hawaiian or Pacific Islander : </strong>{{this.orgStrat.raceNativeHawaiian}}
+          <br>
+          <strong>White: </strong>{{this.orgStrat.raceWhite}}
+          <br>
+          <strong>Other: </strong>{{this.orgStrat.raceOther}}
+          <br>
+        </div>
       </div>
     </div>
   </div>

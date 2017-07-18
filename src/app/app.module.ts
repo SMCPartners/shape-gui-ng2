@@ -37,6 +37,9 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ToastrModule } from "toastr-ng2";
 import { AmChartsModule } from "@amcharts/amcharts3-angular";
 import { ForgotUsernameComponent } from './forgot-username/forgot-username.component';
+import { ResetPasswordComponent } from './my-account/reset-password/reset-password.component';
+import {MyAccountService} from "./my-account/my-account.service";
+import { EditEmailComponent } from './my-account/edit-email/edit-email.component';
 
 
 const appRoutes: Routes = [
@@ -87,12 +90,14 @@ const appRoutes: Routes = [
     ForgotPasswordComponent,
     ChangePasswordComponent,
     ForgotUsernameComponent,
+    ResetPasswordComponent,
+    EditEmailComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(appRoutes, {useHash: true}),
     Ng2SmartTableModule,
     NgProgressModule,
     ReactiveFormsModule,
@@ -105,7 +110,8 @@ const appRoutes: Routes = [
     RouteProtect,
     HomeService,
     PastMeasureService,
-    AdminPanelService
+    AdminPanelService,
+    MyAccountService
   ],
   bootstrap: [AppComponent]
 })

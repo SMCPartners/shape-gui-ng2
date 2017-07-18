@@ -5,6 +5,7 @@ import 'rxjs/add/operator/map';
 import {Router} from '@angular/router';
 import {BASEURL} from "../shared/global-variables";
 import {current} from "codelyzer/util/syntaxKind";
+import {User} from "../shared/user";
 
 @Injectable()
 export class LoginService {
@@ -96,6 +97,17 @@ export class LoginService {
     return this.http.post(url, JSON.stringify({ id: username, password: currentPassword, newPassword: newPassword }), { headers: headers })
       .map((response: Response) => {
 
+        return response.json();
+      });
+  }
+
+  getUserByID(username: string): Observable<User> {
+    const headers = new Headers({ 'Authorization': 'Bearer ' + this.token });
+    let options = new RequestOptions({ headers: headers });
+    const url = `http://${BASEURL}/shape-service/shape/admin/user/find/${username}`;
+
+    return this.http.get(url, options)
+      .map((response: Response) => {
         return response.json();
       });
   }
