@@ -24,6 +24,9 @@ export class PastMeasureReportsComponent implements OnInit, OnChanges {
   public aggComSelected = false;
   public measureDemSelected = false;
   public noYearlyDataForMeasure = true;
+  public analyticId;
+  public selectedValue;
+  public selectedYearValue;
 
   constructor(private homeService: HomeService, private pastMeasureService: PastMeasureService) { }
 
@@ -36,6 +39,7 @@ export class PastMeasureReportsComponent implements OnInit, OnChanges {
     this.measureDemSelected = false;
     this.years = [];
 
+    this.selectedValue = '0';
   }
 
 
@@ -46,8 +50,6 @@ export class PastMeasureReportsComponent implements OnInit, OnChanges {
     this.homeService.getMeasureYears(this.orgId, measureId)
       .subscribe(years => {
         this.years = years;
-
-        console.log(this.years);
 
         if (this.years.length > 0) {
 
@@ -61,6 +63,7 @@ export class PastMeasureReportsComponent implements OnInit, OnChanges {
                 this.listViewSelected = true;
                 this.aggComSelected = false;
                 this.measureDemSelected = false;
+                this.analyticId = '1';
 
                 this.year = this.years[0]
 
@@ -74,6 +77,7 @@ export class PastMeasureReportsComponent implements OnInit, OnChanges {
                 this.listViewSelected = false;
                 this.aggComSelected = true;
                 this.measureDemSelected = false;
+                this.analyticId = '2';
 
                 this.year = this.years[0]
 
@@ -89,14 +93,13 @@ export class PastMeasureReportsComponent implements OnInit, OnChanges {
                 this.listViewSelected = false;
                 this.aggComSelected = false;
                 this.measureDemSelected = true;
+                this.analyticId = '3';
 
                 this.year = this.years[0]
 
               });
           }
         } else {
-
-          console.log('in here');
 
           this.listViews = [];
           this.aggDatas = [];
@@ -132,10 +135,14 @@ export class PastMeasureReportsComponent implements OnInit, OnChanges {
 
   onAnalyticChange(analyticId) {
 
-    if (typeof this.years === 'undefined') {
+    if (typeof this.years === 'undefined' || this.years.length < 1 || typeof this.year === 'undefined') {
       this.noYearlyDataForMeasure = true;
       return;
     }
+
+    console.log(this.selectedValue);
+
+    this.analyticId = analyticId;
 
     switch(analyticId) {
 

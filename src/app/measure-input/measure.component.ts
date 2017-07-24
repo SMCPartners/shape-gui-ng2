@@ -8,6 +8,9 @@ import {LoginService} from "../login/login.service";
 import {HomeService} from "../home/home.service";
 import {Router} from "@angular/router";
 import {ToastrService} from "toastr-ng2";
+import {BASEURL} from "../shared/global-variables";
+import {FileItem, FileUploader} from "ng2-file-upload";
+
 
 @Component({
   selector: 'sh-measure',
@@ -22,6 +25,14 @@ export class MeasureComponent implements OnInit {
   @Output() addOrgMeasureSuccess: EventEmitter<string> = new EventEmitter<string>();
   @Input() measures: MeasureInfo[];
   @Input() organizationId: number;
+  uploadShow: boolean = false;
+
+  public uploader:FileUploader = new FileUploader({
+    url: `http://${BASEURL}/shape-service/shape/admin/measure/add/upload`
+
+  });
+  public hasBaseDropZoneOver:boolean = false;
+  public hasAnotherDropZoneOver:boolean = false;
 
   orgMeasureForm: FormGroup;
 
@@ -32,6 +43,16 @@ export class MeasureComponent implements OnInit {
 
   ngOnInit() {
     this.createForm();
+
+    this.uploader.onBeforeUploadItem = (item: FileItem) => {
+      item.withCredentials = false;
+      this.uploader.authToken = `Bearer ${this.loginService.token}`;
+      this.uploader.options.additionalParameter = {
+        orgId: 1,
+        'measure_type_1.xlsx' : 'measure_type_1.xlsx'
+      };
+    };
+
   }
 
 
@@ -66,7 +87,18 @@ export class MeasureComponent implements OnInit {
         })
 
     }
+  }
 
+  public fileOverBase(e:any):void {
+    this.hasBaseDropZoneOver = e;
+  }
+
+  uploadViaExcel() {
+    this.uploadShow = true;
+  }
+
+  uploadManually() {
+    this.uploadShow = false;
   }
 
   cancelOrgMeasure() {

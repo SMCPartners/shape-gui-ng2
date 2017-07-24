@@ -17,8 +17,6 @@ export class MeasureDemographicsComponent implements OnInit {
 
   ngOnInit() {
 
-    console.log(this.measureDem);
-
     this.ageData = this.measureDem.ageData;
     this.raceData = this.measureDem.raceData;
     this.genderData = this.measureDem.genderData;

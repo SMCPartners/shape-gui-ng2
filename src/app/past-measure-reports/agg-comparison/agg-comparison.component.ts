@@ -24,8 +24,6 @@ export class AggComparisonComponent implements OnInit, AfterViewChecked, OnDestr
 
   ngOnInit() {
 
-    console.log(this.aggDatas);
-
     let firstTime = true;
 
     this.aggDatas.forEach(aggData => {

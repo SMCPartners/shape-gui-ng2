@@ -40,7 +40,7 @@ import { ForgotUsernameComponent } from './forgot-username/forgot-username.compo
 import { ResetPasswordComponent } from './my-account/reset-password/reset-password.component';
 import {MyAccountService} from "./my-account/my-account.service";
 import { EditEmailComponent } from './my-account/edit-email/edit-email.component';
-
+import {FileDropDirective, FileSelectDirective} from "ng2-file-upload";
 
 const appRoutes: Routes = [
 
@@ -92,6 +92,8 @@ const appRoutes: Routes = [
     ForgotUsernameComponent,
     ResetPasswordComponent,
     EditEmailComponent,
+    FileDropDirective,
+    FileSelectDirective
   ],
   imports: [
     BrowserModule,
@@ -103,7 +105,7 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    AmChartsModule
+    AmChartsModule,
   ],
   providers: [
     LoginService,
