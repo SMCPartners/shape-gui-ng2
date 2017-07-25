@@ -55,6 +55,7 @@ export class User {
         id : user.id,
         firstName: user.firstName,
         lastName: user.lastName,
+        email: user.email,
         role: user.role,
         organization: user.organizationId,
         status: user.active ? 'Active' : 'Inactive'

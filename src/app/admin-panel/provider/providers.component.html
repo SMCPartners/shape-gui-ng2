@@ -1,5 +1,42 @@
-<div>
+<div *ngIf="!addProviderShown">
+  
+  <div class="pull-right" style="margin-bottom: 10px;"><button class="btn btn-primary" (click)="addProviderShow()">Add Provider</button></div>
+  
   <div class="tab-pane" id="tab_default_2">
     <ng2-smart-table [settings]="settings" [source]="data"></ng2-smart-table>
+  </div>
+</div>
+
+<div class="container" *ngIf="addProviderShown">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="form-area">
+      <form [formGroup]="addProviderForm" (ngSubmit)="addProvider(addProviderForm)">
+        <br style="clear:both">
+        <h2 style="margin-bottom: 25px; text-align: center;">Add a Provider</h2>
+        <div class="form-group">
+          <input type="text" class="form-control" formControlName="name" id="name" name="name" placeholder="Name" required>
+        </div>
+        <div *ngIf="formErrors.name" class="alert alert-danger">
+          {{ formErrors.name }}
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" formControlName="npi" id="npi" name="npi" placeholder="NPI" required>
+        </div>
+        <div *ngIf="formErrors.npi" class="alert alert-danger">
+          {{ formErrors.npi }}
+        </div>
+        <div class="form-group text-center">
+          <select class="form-control" formControlName="organization" id="organization" name="organization" required>
+            <option *ngFor="let o of organizations" [value]="o.id">{{o.name}}</option>
+          </select>
+        </div>
+        <div *ngIf="formErrors.organization" class="alert alert-danger">
+          {{ formErrors.organization }}
+        </div>
+        <button type="button" id="submit" name="submit" class="btn btn-primary pull-right" [disabled]="addProviderForm.invalid" (click)="addProvider(addProviderForm)">Add Provider</button>
+        <button type="button" class="btn btn-danger pull-right" style="margin-right: 10px;" (click)="cancelProviderAdd()">Cancel</button>
+      
+      </form>
+    </div>
   </div>
 </div>

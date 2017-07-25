@@ -38,9 +38,10 @@ import { ToastrModule } from "toastr-ng2";
 import { AmChartsModule } from "@amcharts/amcharts3-angular";
 import { ForgotUsernameComponent } from './forgot-username/forgot-username.component';
 import { ResetPasswordComponent } from './my-account/reset-password/reset-password.component';
-import {MyAccountService} from "./my-account/my-account.service";
+import { MyAccountService } from "./my-account/my-account.service";
 import { EditEmailComponent } from './my-account/edit-email/edit-email.component';
-import {FileDropDirective, FileSelectDirective} from "ng2-file-upload";
+import { FileDropDirective, FileSelectDirective } from "ng2-file-upload";
+import { CustomFormsModule } from "ng2-validation";
 
 const appRoutes: Routes = [
 
@@ -106,6 +107,7 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     AmChartsModule,
+    CustomFormsModule
   ],
   providers: [
     LoginService,

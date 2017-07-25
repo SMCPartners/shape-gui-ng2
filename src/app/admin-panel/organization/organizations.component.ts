@@ -4,6 +4,7 @@ import {AdminPanelService} from "../admin-panel.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {LoginService} from "../../login/login.service";
 import {ToastrService} from "toastr-ng2";
+import {CustomValidators} from "ng2-validation";
 
 @Component({
   selector: 'sh-organizations',
@@ -72,9 +73,6 @@ export class OrganizationsComponent implements OnInit {
 
   addOrganization(organization) {
 
-    console.log(this.addOrganizationForm);
-
-
     if (organization.valid) {
       const formData = organization.value;
       const addOrganizationForm = new Organization(null, formData.orgName, true, formData.streetAddress, formData.state,
@@ -105,21 +103,25 @@ export class OrganizationsComponent implements OnInit {
 
   cancelAddOrg() {
     this.addOrganizationShown = false;
+    this.addOrganizationForm.reset();
+
+    console.log(this.addOrganizationForm);
   }
 
   createForm() {
 
-    let emailRegex = '^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$';
+    let phoneRegex = '^(\([0-9]{3}\)|[0-9]{3}-)[0-9]{3}-[0-9]{4}$';
+    let zipRegex = '^\\d{5}(-\\d{4})?$';
 
     this.addOrganizationForm = this.fb.group({
       orgName: ['', Validators.required],
       streetAddress: ['', Validators.required],
       city: ['', Validators.required],
       state: ['', Validators.required],
-      zip: ['', Validators.required],
+      zip: ['', Validators.compose([Validators.required, Validators.pattern(zipRegex)])],
       primaryName: ['', Validators.required],
-      primaryEmail: ['', Validators.compose([Validators.required, Validators.pattern(emailRegex)])],
-      primaryPhone: ['', Validators.required],
+      primaryEmail: ['', Validators.compose([Validators.required, CustomValidators.email])],
+      primaryPhone: ['', Validators.compose([Validators.required, Validators.pattern(phoneRegex)])],
       primaryRole: ['', Validators.required],
     })
 

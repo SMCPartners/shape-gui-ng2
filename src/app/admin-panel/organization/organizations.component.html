@@ -27,14 +27,23 @@
         <div class="form-group">
           <input type="text" class="form-control" formControlName="zip" id="zip" name="zip" placeholder="Zip" required>
         </div>
+        <div class="alert alert-danger" *ngIf="addOrganizationForm.controls.zip.valid === false && addOrganizationForm.controls.zip.touched">
+          Zip must be five digits (ex: 12345)
+        </div>
         <div class="form-group">
           <input type="text" class="form-control" formControlName="primaryName" id="primaryName" name="primaryName" placeholder="Primary Contact Name" required>
         </div>
         <div class="form-group">
           <input type="text" class="form-control" formControlName="primaryEmail" id="primaryEmail" name="primaryEmail" placeholder="Primary Contact Email" required>
         </div>
+        <div class="alert alert-danger" *ngIf="addOrganizationForm.controls.primaryEmail.errors?.email">
+          Email must be in correct format (ex: user@domain.com)
+        </div>
         <div class="form-group">
           <input type="text" class="form-control" formControlName="primaryPhone" id="primaryPhone" name="primaryPhone" placeholder="Primary Contact Phone" required>
+        </div>
+        <div class="alert alert-danger" *ngIf="addOrganizationForm.controls.primaryPhone.valid === false && addOrganizationForm.controls.primaryPhone.touched">
+          Phone must be 10 digits in the correct format (ex: 123-456-7890)
         </div>
         <div class="form-group">
           <input type="text" class="form-control" formControlName="primaryRole" id="primaryRole" name="primaryRole" placeholder="Primary Contact Role" required>
