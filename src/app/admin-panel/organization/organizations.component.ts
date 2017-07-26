@@ -17,6 +17,14 @@ export class OrganizationsComponent implements OnInit {
   data: any[] = [];
   addOrganizationShown: boolean = false;
 
+  stateAbbrv: string[] = [
+    "AL", "AK", "AS", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FM", "FL", "GA", "GU", "HI", "ID",
+    "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MH", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE",
+    "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "MP", "OH", "OK", "OR", "PW", "PA", "PR", "RI", "SC",
+    "SD", "TN", "TX", "UT", "VT", "VI", "VA", "WA", "WV", "WI", "WY"
+  ];
+
+
   addOrganizationForm: FormGroup;
 
   public settings: {} = {
@@ -112,14 +120,16 @@ export class OrganizationsComponent implements OnInit {
 
     let phoneRegex = '^(\([0-9]{3}\)|[0-9]{3}-)[0-9]{3}-[0-9]{4}$';
     let zipRegex = '^\\d{5}(-\\d{4})?$';
+    let streetRegex: RegExp = /^[A-Za-z0-9\.\-']+\s[A-Za-z0-9\.\-']+\s[A-Za-z0-9\.\-']/;
+    let onlyLetters: RegExp = /^[A-Za-z\s\-\.\'']*$/;
 
     this.addOrganizationForm = this.fb.group({
-      orgName: ['', Validators.required],
-      streetAddress: ['', Validators.required],
-      city: ['', Validators.required],
+      orgName: ['', Validators.compose([Validators.required, Validators.pattern(onlyLetters)])],
+      streetAddress: ['', Validators.compose([Validators.required, Validators.pattern(streetRegex)])],
+      city: ['', Validators.compose([Validators.required, Validators.pattern(onlyLetters)])],
       state: ['', Validators.required],
       zip: ['', Validators.compose([Validators.required, Validators.pattern(zipRegex)])],
-      primaryName: ['', Validators.required],
+      primaryName: ['', Validators.compose([Validators.required, Validators.pattern(onlyLetters)])],
       primaryEmail: ['', Validators.compose([Validators.required, CustomValidators.email])],
       primaryPhone: ['', Validators.compose([Validators.required, Validators.pattern(phoneRegex)])],
       primaryRole: ['', Validators.required],

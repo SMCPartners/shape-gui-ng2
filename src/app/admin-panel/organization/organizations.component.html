@@ -15,14 +15,25 @@
         <div class="form-group">
           <input type="text" class="form-control" formControlName="orgName" id="orgName" name="orgName" placeholder="Organization Name" required>
         </div>
+        <div class="alert alert-danger" *ngIf="addOrganizationForm.controls.orgName.valid === false && addOrganizationForm.controls.orgName.touched">
+          Name must be only in letters
+        </div>
         <div class="form-group">
           <input type="text" class="form-control" formControlName="streetAddress" id="streetAddress" name="streetAddress" placeholder="Street Address" required>
+        </div>
+        <div class="alert alert-danger" *ngIf="addOrganizationForm.controls.streetAddress.valid === false && addOrganizationForm.controls.streetAddress.touched">
+          Street must be in correct format (ex: 23 Main St)
         </div>
         <div class="form-group">
           <input type="text" class="form-control" formControlName="city" id="city" name="city" placeholder="City" required>
         </div>
+        <div class="alert alert-danger" *ngIf="addOrganizationForm.controls.city.valid === false && addOrganizationForm.controls.city.touched">
+          City must be only in letters
+        </div>
         <div class="form-group">
-          <input type="text" class="form-control" formControlName="state" id="state" name="state" placeholder="State" required>
+          <select class="form-control" formControlName="state" id="state" name="state" required>
+            <option *ngFor="let s of stateAbbrv" [value]="s">{{s}}</option>
+          </select>
         </div>
         <div class="form-group">
           <input type="text" class="form-control" formControlName="zip" id="zip" name="zip" placeholder="Zip" required>
@@ -32,6 +43,9 @@
         </div>
         <div class="form-group">
           <input type="text" class="form-control" formControlName="primaryName" id="primaryName" name="primaryName" placeholder="Primary Contact Name" required>
+        </div>
+        <div class="alert alert-danger" *ngIf="addOrganizationForm.controls.primaryName.valid === false && addOrganizationForm.controls.primaryName.touched">
+          Primary Name must be only in letters
         </div>
         <div class="form-group">
           <input type="text" class="form-control" formControlName="primaryEmail" id="primaryEmail" name="primaryEmail" placeholder="Primary Contact Email" required>
@@ -49,7 +63,7 @@
           <input type="text" class="form-control" formControlName="primaryRole" id="primaryRole" name="primaryRole" placeholder="Primary Contact Role" required>
         </div>
         
-        <button type="button" id="submit" name="submit" class="btn btn-primary pull-right" (click)="addOrganization(addOrganizationForm)">Add Organization</button>
+        <button [disabled]="addOrganizationForm.invalid" type="button" id="submit" name="submit" class="btn btn-primary pull-right" (click)="addOrganization(addOrganizationForm)">Add Organization</button>
         <button type="button" class="btn btn-danger pull-right" style="margin-right: 10px;" (click)="cancelAddOrg()">Cancel</button>
 
       </form>

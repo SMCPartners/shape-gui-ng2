@@ -6,7 +6,6 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Organization} from "../../shared/organization";
 import {ToastrService} from "toastr-ng2";
 import {CustomValidators} from "ng2-validation";
-import {Observable} from "rxjs/Observable";
 
 @Component({
   selector: 'sh-providers',
@@ -22,31 +21,13 @@ export class ProvidersComponent implements OnInit {
   addProviderShown: boolean = false;
   addProviderForm: FormGroup;
 
+  columns = [
+    {prop: 'name'},
+    {name: 'NPI'},
+    {name: 'Organization'},
+    {name: 'Status'}
+  ];
 
-  public settings: {} = {
-    delete: {
-      confirmDelete: true,
-    },
-    hideSubHeader: true,
-    columns: {
-      name: {
-        title: 'Name',
-        filter: false
-      },
-      npi: {
-        title: 'NPI',
-        filter: false
-      },
-      organization: {
-        title: 'Organization',
-        filter: false
-      },
-      status: {
-        title: 'Status',
-        filter: false
-      },
-    }
-  };
 
   constructor(private adminPanelService: AdminPanelService, private loginService: LoginService,
               private fb: FormBuilder, private toastrService: ToastrService) {}

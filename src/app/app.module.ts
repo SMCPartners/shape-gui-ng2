@@ -42,6 +42,7 @@ import { MyAccountService } from "./my-account/my-account.service";
 import { EditEmailComponent } from './my-account/edit-email/edit-email.component';
 import { FileDropDirective, FileSelectDirective } from "ng2-file-upload";
 import { CustomFormsModule } from "ng2-validation";
+import {NgxDatatableModule} from "@swimlane/ngx-datatable";
 
 const appRoutes: Routes = [
 
@@ -94,7 +95,7 @@ const appRoutes: Routes = [
     ResetPasswordComponent,
     EditEmailComponent,
     FileDropDirective,
-    FileSelectDirective
+    FileSelectDirective,
   ],
   imports: [
     BrowserModule,
@@ -107,7 +108,8 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     AmChartsModule,
-    CustomFormsModule
+    CustomFormsModule,
+    NgxDatatableModule
   ],
   providers: [
     LoginService,

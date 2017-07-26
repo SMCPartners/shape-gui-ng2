@@ -1,10 +1,32 @@
+<!--<div *ngIf="!addProviderShown">-->
+  <!---->
+  <!--<div class="pull-right" style="margin-bottom: 10px;"><button class="btn btn-primary" (click)="addProviderShow()">Add Provider</button></div>-->
+  <!---->
+  <!--<div class="tab-pane" id="tab_default_2">-->
+    <!--<ng2-smart-table [settings]="settings" [source]="data"></ng2-smart-table>-->
+  <!--</div>-->
+<!--</div>-->
+
 <div *ngIf="!addProviderShown">
   
-  <div class="pull-right" style="margin-bottom: 10px;"><button class="btn btn-primary" (click)="addProviderShow()">Add Provider</button></div>
-  
   <div class="tab-pane" id="tab_default_2">
-    <ng2-smart-table [settings]="settings" [source]="data"></ng2-smart-table>
+  
+    <div class="row">
+      <div class="col-md-2 col-md-offset-10" style="margin-bottom: 10px;">
+        <button class="btn btn-primary" (click)="addProviderShow()">Add Provider</button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <ngx-datatable class="material"
+          [rows]="data"
+          [columns]="columns">
+        </ngx-datatable>
+      </div>
+    </div>
   </div>
+  
 </div>
 
 <div class="container" *ngIf="addProviderShown">
