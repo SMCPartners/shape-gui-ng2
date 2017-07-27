@@ -41,6 +41,7 @@ export class Organization {
     orgArray.forEach(org => {
 
       returnArray.push({
+        id : org.id,
         name : org.name,
         address: `${org.addressStreet}, ${org.addressCity}, ${org.addressState}, ${org.addressZip}`,
         primaryPhone: org.primaryContactPhone,
@@ -53,6 +54,15 @@ export class Organization {
     });
 
     return returnArray;
+  }
+
+  static convertTableObjectToDTO(tableObject: any): any {
+    const active = tableObject.status === 'Active' ? true : false;
+    return { id: tableObject.id, name: tableObject.name, addressStreet: tableObject.addressStreet,
+             addressCity: tableObject.addressCity, addressState: tableObject.addressState,
+             addressZip: tableObject.addressZip, primaryContactPhone: tableObject.primaryPhone,
+             primaryContactName: tableObject.primaryName, primaryContactEmail: tableObject.primaryEmail,
+             primaryContactRole: tableObject.primaryRole, active: active }
   }
 
 }

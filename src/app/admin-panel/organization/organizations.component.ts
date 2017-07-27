@@ -28,8 +28,11 @@ export class OrganizationsComponent implements OnInit {
   addOrganizationForm: FormGroup;
 
   public settings: {} = {
-    delete: {
-      confirmDelete: true,
+    edit: {
+      confirmSave: true,
+    },
+    actions: {
+      delete: false,
     },
     hideSubHeader: true,
     columns: {
@@ -114,6 +117,23 @@ export class OrganizationsComponent implements OnInit {
     this.addOrganizationForm.reset();
 
     console.log(this.addOrganizationForm);
+  }
+
+  onEditConfirm(event) {
+
+    console.log('hello?');
+
+    const newData = Organization.convertTableObjectToDTO(event.newData);
+
+    this.adminPanelService.editOrganization(newData)
+      .subscribe(response => {
+          this.toastrService.success(`Organization ${newData.name} edited!`, 'Success!');
+          event.confirm.resolve();
+        },
+        error => {
+          this.toastrService.error('Oh no! There is something wrong with the data you entered', 'Uh oh!');
+        })
+
   }
 
   createForm() {

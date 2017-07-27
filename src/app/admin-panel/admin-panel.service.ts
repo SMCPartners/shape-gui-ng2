@@ -104,6 +104,16 @@ export class AdminPanelService {
       });
   }
 
+  editOrganization(newData): Observable<any> {
+
+    const url = `http://${BASEURL}/shape-service/shape/admin/organization/edit`;
+
+    return this.http.post(url, newData, this.options)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
 }
 
 

@@ -23,7 +23,10 @@ export class ProvidersComponent implements OnInit {
 
   public settings: {} = {
     edit: {
-      confirmSave: true
+      confirmSave: true,
+    },
+    actions: {
+      delete: false,
     },
     hideSubHeader: true,
     columns: {
@@ -146,7 +149,7 @@ export class ProvidersComponent implements OnInit {
         event.confirm.resolve();
       },
       error => {
-        this.toastrService.error('Oh no! There is something wrong with the data you enetered', 'Uh oh!');
+        this.toastrService.error('Oh no! There is something wrong with the data you entered', 'Uh oh!');
       })
 
   }

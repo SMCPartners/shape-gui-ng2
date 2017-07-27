@@ -13,25 +13,25 @@
         <br style="clear:both">
         <h2 style="margin-bottom: 25px; text-align: center;">Add a User</h2>
         <div class="form-group">
-          <input type="text" class="form-control" formControlName="username" id="username" name="username" placeholder="Username" required>
+          <input [disabled]="userCreated"  type="text" class="form-control" formControlName="username" id="username" name="username" placeholder="Username" required>
         </div>
         <div class="alert alert-danger" *ngIf="addUserForm.controls.username.errors?.rangeLength">
           Username must be at least 4 characters and not longer than 12
         </div>
         <div class="form-group">
-          <input type="text" class="form-control" formControlName="firstName" id="firstName" name="firstName" placeholder="First Name" required>
+          <input [disabled]="userCreated"  type="text" class="form-control" formControlName="firstName" id="firstName" name="firstName" placeholder="First Name" required>
         </div>
         <div class="form-group">
-          <input type="text" class="form-control" formControlName="lastName" id="lastName" name="lastName" placeholder="Last Name" required>
+          <input [disabled]="userCreated"  type="text" class="form-control" formControlName="lastName" id="lastName" name="lastName" placeholder="Last Name" required>
         </div>
         <div class="form-group">
-          <input type="text" class="form-control" formControlName="email" id="email" name="email" placeholder="Email" required>
+          <input [disabled]="userCreated"  type="text" class="form-control" formControlName="email" id="email" name="email" placeholder="Email" required>
         </div>
         <div class="alert alert-danger" *ngIf="addUserForm.controls.email.errors?.email">
           Email must be in correct format (ex: user@domain.com)
         </div>
         <div class="form-group text-center">
-          <select class="form-control" formControlName="role" id="role" name="role">
+          <select [disabled]="userCreated"  class="form-control" formControlName="role" id="role" name="role">
             <option value="ADMIN">Admin</option>
             <option value="ORG_ADMIN">Org Admin</option>
             <option value="DPH_USER">DPH User</option>
@@ -39,12 +39,12 @@
           </select>
         </div>
         <div class="form-group text-center">
-          <select class="form-control" formControlName="organization" id="organization" name="organization">
+          <select [disabled]="userCreated"  class="form-control" formControlName="organization" id="organization" name="organization">
             <option *ngFor="let o of organizations" [value]="o.id">{{o.name}}</option>
           </select>
         </div>
-        <button type="button" id="submit" name="submit" class="btn btn-primary pull-right" [disabled]="addUserForm.invalid" (click)="addUser(addUserForm)">Add User</button>
-        <button type="button" class="btn btn-danger pull-right" style="margin-right: 10px;" (click)="cancelAddUser()">Cancel</button>
+        <button type="button" id="submit" name="submit" class="btn btn-primary pull-right" [disabled]="addUserForm.invalid || userCreated" (click)="addUser(addUserForm)">Add User</button>
+        <button type="button" class="btn btn-danger pull-right" style="margin-right: 10px;" [disabled]="userCreated" (click)="cancelAddUser()">Cancel</button>
       
       </form>
     </div>

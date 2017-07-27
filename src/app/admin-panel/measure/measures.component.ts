@@ -14,9 +14,7 @@ export class MeasuresComponent implements OnInit {
   data: any[] = [];
 
   public settings: {} = {
-    delete: {
-      confirmDelete: true,
-    },
+    actions: false,
     hideSubHeader: true,
     columns: {
       nqfId: {

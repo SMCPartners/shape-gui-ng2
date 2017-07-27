@@ -21,12 +21,17 @@ export class UserComponent implements OnInit {
   data: any[] = [];
   addUserShown: boolean = false;
 
+  userCreated: boolean = false;
+
   addUserForm: FormGroup;
 
 
   public settings: {} = {
     edit: {
       confirmSave: true,
+    },
+    actions: {
+      delete: false,
     },
     hideSubHeader: true,
     columns: {
@@ -100,6 +105,7 @@ export class UserComponent implements OnInit {
         formData.firstName, formData.lastName, formData.email, null, null, null, null);
 
       this.pService.start();
+      this.userCreated = true;
 
       this.adminPanelService.addUser(addUserForm)
         .subscribe(response => {
@@ -107,6 +113,7 @@ export class UserComponent implements OnInit {
           this.addUserShown = false;
           this.addUserForm.reset();
           window.scrollTo(0,0);
+          this.userCreated = false;
           this.toastrService.success(`User ${formData.username} added successfully!`, 'Success!');
 
           this.adminPanelService.getAllUsers()
@@ -116,6 +123,7 @@ export class UserComponent implements OnInit {
             });
         }, error => {
           this.pService.done();
+          this.userCreated = false;
           this.toastrService.error(`${error.json().errMsg}`, 'Uh oh!')
         })
 

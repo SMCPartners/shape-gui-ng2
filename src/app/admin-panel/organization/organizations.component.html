@@ -2,7 +2,7 @@
   <div class="pull-right" style="margin-bottom: 10px;"><button class="btn btn-primary" (click)="addOrganizationShow()">Add Organization</button></div>
   
   <div class="tab-pane" id="tab_default_3">
-    <ng2-smart-table [settings]="settings" [source]="data"></ng2-smart-table>
+    <ng2-smart-table (editConfirm)="onEditConfirm($event)" [settings]="settings" [source]="data"></ng2-smart-table>
   </div>
 </div>
 
