@@ -21,12 +21,30 @@ export class ProvidersComponent implements OnInit {
   addProviderShown: boolean = false;
   addProviderForm: FormGroup;
 
-  columns = [
-    {prop: 'name'},
-    {name: 'NPI'},
-    {name: 'Organization'},
-    {name: 'Status'}
-  ];
+  public settings: {} = {
+    edit: {
+      confirmSave: true
+    },
+    hideSubHeader: true,
+    columns: {
+      name: {
+        title: 'name',
+        filter: false
+      },
+      npi: {
+        title: 'NPI',
+        filter: false,
+      },
+      organization: {
+        title: 'Organization',
+        filter: false
+      },
+      status: {
+        title: 'Status',
+        filter: false
+      },
+    }
+  };
 
 
   constructor(private adminPanelService: AdminPanelService, private loginService: LoginService,
@@ -63,7 +81,7 @@ export class ProvidersComponent implements OnInit {
     if (prov.valid) {
 
       const formData = prov.value;
-      const addProviderForm = new Provider(formData.name, null, formData.npi, null, formData.organization);
+      const addProviderForm = new Provider(null, formData.name, null, formData.npi, null, formData.organization);
 
       this.adminPanelService.addProvider(addProviderForm)
         .subscribe(response => {
@@ -116,6 +134,21 @@ export class ProvidersComponent implements OnInit {
         }
       }
     }
+  }
+
+  onEditConfirm(event) {
+
+    const newData = Provider.convertTableObjectToDTO(event.newData);
+
+    this.adminPanelService.editProvider(newData)
+      .subscribe(response => {
+        this.toastrService.success('Provider edited!', 'Success!');
+        event.confirm.resolve();
+      },
+      error => {
+        this.toastrService.error('Oh no! There is something wrong with the data you enetered', 'Uh oh!');
+      })
+
   }
 
   formErrors = {

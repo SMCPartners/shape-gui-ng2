@@ -84,6 +84,26 @@ export class AdminPanelService {
       });
   }
 
+  editProvider(newData): Observable<any> {
+
+    const url = `http://${BASEURL}/shape-service/shape/admin/provider/edit`;
+
+    return this.http.post(url, newData, this.options)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
+  editUser(newData): Observable<any> {
+
+    const url = `http://${BASEURL}/shape-service/shape/admin/user/edit`;
+
+    return this.http.post(url, newData, this.options)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
 }
 
 

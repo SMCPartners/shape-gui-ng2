@@ -66,4 +66,11 @@ export class User {
     return returnArray;
   }
 
+  static convertTableObjectToDTO(tableObject: any) {
+    const active = tableObject.status === 'Active' ? true : false;
+    return { id: tableObject.id, firstName: tableObject.firstName, lastName: tableObject.lastName,
+             email: tableObject.email, role: tableObject.role, organizationId: tableObject.organization,
+             active: active }
+  }
+
 }

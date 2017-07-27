@@ -1,12 +1,14 @@
 export class Provider {
 
+  id: number;
   name: string;
   active: boolean;
   npi: number;
   createdBy: string;
   organizationId: number;
 
-  constructor(name: string, active: boolean, npi: number, createdBy: string, organizationId: number) {
+  constructor(id: number, name: string, active: boolean, npi: number, createdBy: string, organizationId: number) {
+    this.id = id;
     this.name = name;
     this.active = active;
     this.npi = npi;
@@ -21,6 +23,7 @@ export class Provider {
     providerArray.forEach(prov => {
 
       returnArray.push({
+        id: prov.id,
         name: prov.name,
         npi: prov.npi,
         organization: prov.organizationId,
@@ -31,6 +34,12 @@ export class Provider {
 
     return returnArray;
   }
+
+  static convertTableObjectToDTO(tableObject: any) {
+    const active = tableObject.status === 'Active' ? true : false;
+    return new Provider(tableObject.id, tableObject.name, active, tableObject.npi, '', tableObject.organization);
+  }
+
 }
 
 
