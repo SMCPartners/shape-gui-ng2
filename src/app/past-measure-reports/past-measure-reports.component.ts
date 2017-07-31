@@ -5,6 +5,9 @@ import {PastMeasureService} from "./past-measure.service";
 import {ListViewMeasure} from "./list-view/list-view-measure";
 import {AggData} from "./agg-comparison/agg-data";
 
+declare var jQuery: any;
+
+
 @Component({
   selector: 'sh-past-measure-reports',
   templateUrl: './past-measure-reports.component.html',
@@ -25,12 +28,13 @@ export class PastMeasureReportsComponent implements OnInit, OnChanges {
   public measureDemSelected = false;
   public noYearlyDataForMeasure = true;
   public analyticId;
-  public selectedValue;
-  public selectedYearValue;
 
   constructor(private homeService: HomeService, private pastMeasureService: PastMeasureService) { }
 
   ngOnInit() {
+
+    //jQuery('#yearSelect').val(0).attr('selected', 'selected');
+
   }
 
   ngOnChanges() {
@@ -38,8 +42,6 @@ export class PastMeasureReportsComponent implements OnInit, OnChanges {
     this.aggComSelected = false;
     this.measureDemSelected = false;
     this.years = [];
-
-    this.selectedValue = '0';
   }
 
 
@@ -65,8 +67,6 @@ export class PastMeasureReportsComponent implements OnInit, OnChanges {
                 this.measureDemSelected = false;
                 this.analyticId = '1';
 
-                this.year = this.years[0]
-
               });
 
           } else if (this.aggComSelected) {
@@ -78,8 +78,6 @@ export class PastMeasureReportsComponent implements OnInit, OnChanges {
                 this.aggComSelected = true;
                 this.measureDemSelected = false;
                 this.analyticId = '2';
-
-                this.year = this.years[0]
 
               });
 
@@ -95,10 +93,13 @@ export class PastMeasureReportsComponent implements OnInit, OnChanges {
                 this.measureDemSelected = true;
                 this.analyticId = '3';
 
-                this.year = this.years[0]
-
               });
           }
+
+          this.year = this.years[0];
+          jQuery('#yearSelect').val(this.years[0]).attr('selected', 'selected');
+
+
         } else {
 
           this.listViews = [];
@@ -125,8 +126,10 @@ export class PastMeasureReportsComponent implements OnInit, OnChanges {
           this.aggDatas = aggData;
         });
     } else if (this.measureDemSelected) {
+
       this.pastMeasureService.getMeasureDemographics(this.orgId, this.measureId, this.year)
         .subscribe(measureDem => {
+
           this.measureDem = measureDem[0];
         });
     }
@@ -139,8 +142,6 @@ export class PastMeasureReportsComponent implements OnInit, OnChanges {
       this.noYearlyDataForMeasure = true;
       return;
     }
-
-    console.log(this.selectedValue);
 
     this.analyticId = analyticId;
 

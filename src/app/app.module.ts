@@ -35,7 +35,6 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { NgProgressModule } from "ng2-progressbar";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ToastrModule } from "toastr-ng2";
-import { AmChartsModule } from "@amcharts/amcharts3-angular";
 import { ForgotUsernameComponent } from './forgot-username/forgot-username.component';
 import { ResetPasswordComponent } from './my-account/reset-password/reset-password.component';
 import { MyAccountService } from "./my-account/my-account.service";
@@ -43,6 +42,7 @@ import { EditEmailComponent } from './my-account/edit-email/edit-email.component
 import { FileDropDirective, FileSelectDirective } from "ng2-file-upload";
 import { CustomFormsModule } from "ng2-validation";
 import {NgxDatatableModule} from "@swimlane/ngx-datatable";
+import {ChartsModule} from "ng2-charts";
 
 const appRoutes: Routes = [
 
@@ -107,7 +107,7 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    AmChartsModule,
+    ChartsModule,
     CustomFormsModule,
     NgxDatatableModule
   ],

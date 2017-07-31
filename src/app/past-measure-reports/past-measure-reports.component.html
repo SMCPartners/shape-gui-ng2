@@ -9,14 +9,14 @@
       </div>
     </div>
     <div class="col-md-4">
-      <select [(ngModel)]="selectedYearValue" (change)="onYearChange($event.target.value)" name="yearSelect" >
-        <option [attr.selected]="selectedYearValue === '0'" [disabled]="true">Choose a year</option>
+      <select (change)="onYearChange($event.target.value)" id="yearSelect" name="yearSelect" >
+        <option [selected] [value]="0" [disabled]="true">Choose a year</option>
         <option *ngFor="let y of years" [value]="y"> {{y}} </option>
       </select>
     </div>
     <div class="col-md-4">
-      <select [(ngModel)]="selectedValue" (change)="onAnalyticChange($event.target.value)" name="analyticSelect" >
-        <option [attr.selected]="selectedValue === '0'" [disabled]="true" [value]="0">Choose a type of analytic</option>
+      <select (change)="onAnalyticChange($event.target.value)" name="analyticSelect" >
+        <option [selected] [disabled]="true" [value]="0">Choose a type of analytic</option>
         <option [value]="1">List View</option>
         <option [value]="2">Aggregate Comparison</option>
         <option [value]="3">Measure Demographics</option>

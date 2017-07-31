@@ -48,7 +48,11 @@ export class Organization {
         primaryName: org.primaryContactName,
         primaryEmail: org.primaryContactEmail,
         primaryRole: org.primaryContactRole,
-        status: org.active ? 'Active' : 'Inactive'
+        status: org.active ? 'Active' : 'Inactive',
+        addressStreet: org.addressStreet,
+        addressCity: org.addressCity,
+        addressState: org.addressState,
+        addressZip: org.addressZip
       })
 
     });

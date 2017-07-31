@@ -115,13 +115,9 @@ export class OrganizationsComponent implements OnInit {
   cancelAddOrg() {
     this.addOrganizationShown = false;
     this.addOrganizationForm.reset();
-
-    console.log(this.addOrganizationForm);
   }
 
   onEditConfirm(event) {
-
-    console.log('hello?');
 
     const newData = Organization.convertTableObjectToDTO(event.newData);
 

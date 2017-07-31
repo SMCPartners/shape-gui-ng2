@@ -1,43 +1,29 @@
-import { AfterViewChecked, Component, Input } from '@angular/core';
-import {AmChartsService} from "@amcharts/amcharts3-angular";
+import { Component, Input, OnChanges} from '@angular/core';
 
 @Component({
   selector: 'sh-measure-chart',
   templateUrl: './measure-chart.component.html',
   styleUrls: ['./measure-chart.component.css']
 })
-export class MeasureChartComponent implements AfterViewChecked {
+export class MeasureChartComponent implements OnChanges {
 
   @Input() numerator: number;
   @Input() denominator: number;
-  public chart: any;
-  public randomId: string = Math.random().toString(36).substring(7);
 
+  public chartLabels:string[] = ['Patients in numerator', 'Remainder of patients'];
+  public chartData:any[2] = [];
+  public chartType:string = 'doughnut';
+  public chartColors: any[] = [{ backgroundColor: ['#3F51B5', '#90addd'] }];
 
-  constructor(private AmCharts: AmChartsService) { }
+  constructor() { }
 
-  ngAfterViewChecked(): void {
+  ngOnChanges() {
 
-    this.chart = this.AmCharts.makeChart(this.randomId, {
-      type: "pie",
-      theme : "light",
-      dataProvider: [ {
-        title : "Numerator",
-        value : this.numerator,
-        color : '#808080'
-      }, {
-        title : "Denominator",
-        value : this.denominator,
-        color : '#3f51b5'
-      } ],
-      titleField : "title",
-      valueField : "value",
-      labelRadius : 5,
-      colorField : "color",
-
-      radius : "42%",
-      innerRadius : "60%",
-      labelText : "[[title]]",
-    });
+    this.chartData[0] = this.numerator;
+    this.chartData[1] = this.denominator;
   }
+
+  public chartHovered(e:any):void {
+  }
+
 }

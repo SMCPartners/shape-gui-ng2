@@ -1,5 +1,11 @@
 <div>
   <div style="display: block; height:300px;">
-    <div [attr.id]="randomId" [style.width.%]="100" [style.height.px]="300"></div>
+    <canvas baseChart
+            [data]="barChartData"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"
+            [colors]="chartColors"
+            [chartType]="barChartType"
+            (chartHover)="chartHovered($event)"></canvas>
   </div>
 </div>

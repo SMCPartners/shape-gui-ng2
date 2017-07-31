@@ -1,71 +1,71 @@
-import {AfterViewChecked, Component, Input, OnInit} from '@angular/core';
-import {AmChartsService} from "@amcharts/amcharts3-angular";
+import {AfterViewChecked, Component, DoCheck, Input, OnChanges, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {BaseChartDirective} from "ng2-charts";
 
 @Component({
   selector: 'sh-measure-dem-chart',
   templateUrl: './measure-dem-chart.component.html',
   styleUrls: ['./measure-dem-chart.component.css']
 })
-export class MeasureDemChartComponent implements OnInit, AfterViewChecked {
+export class MeasureDemChartComponent implements OnInit, OnChanges, DoCheck {
 
   @Input() dataArray: any[] = [];
+  private dataForDemographics: string[] = [];
+  private namesOfDemographicTypes: string[] = [];
 
-  public chart: any;
-  private dataForChart: Array<object> = Array<object>();
-  public randomId: string = Math.random().toString(36).substring(7);
+  @ViewChild(BaseChartDirective) public chart: BaseChartDirective;
 
-  constructor(private AmCharts: AmChartsService) { }
+
+  public barChartOptions:any = {
+    scaleShowVerticalLines: false,
+    responsive: true,
+    maintainAspectRatio: false,
+    beginAtZero: true,
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero:true,
+          max: 100
+        }
+      }]
+    }
+  };
+
+  public barChartLabels:string[] = [];
+  public barChartType:string = 'bar';
+
+  public barChartData: any[] = [];
+
+  public chartColors: any[] = [{ backgroundColor: '#3F51B5' }];
+
+
+  constructor() { }
 
   ngOnInit() {
 
-    this.dataArray.forEach(demData => {
-
-      this.dataForChart.push({
-        demographic : demData[0],
-        percent : demData[1] * 100,
-        color : '#3f51b5'
-      });
-
-    });
 
   }
 
-  ngAfterViewChecked(): void {
 
-    this.chart = this.AmCharts.makeChart(this.randomId, {
-      type : 'serial',
-      theme : 'light',
-      dataProvider : this.dataForChart,
-      valueAxes: [ {
-        gridColor: '#FFFFFF',
-        gridAlpha: 0.2,
-        dashLength: 0
-      } ],
-      gridAboveGraphs: true,
-      startDuration: 1,
-      graphs: [ {
-        balloonText: '[[category]]: <b>[[value]]</b>',
-        fillAlphas: 0.8,
-        lineAlpha: 0.2,
-        type: 'column',
-        valueField: 'percent',
-        colorField : 'color'
-      } ],
-      chartCursor: {
-        categoryBalloonEnabled: false,
-        cursorAlpha: 0,
-        zoomable: false
-      },
-      categoryField: 'demographic',
-      categoryAxis: {
-        gridPosition: 'start',
-        gridAlpha: 0,
-        labelRotation: 10,
-        tickPosition: 'start',
-        tickLength: 20
-      },
+  ngOnChanges(): void {
 
+    this.barChartData.length = 0;
+    this.dataForDemographics.length = 0;
+    this.namesOfDemographicTypes.length = 0;
+
+    this.dataArray.forEach(demData => {
+      this.dataForDemographics.push(String(demData[1] * 100));
+      this.namesOfDemographicTypes.push(demData[0]);
     });
+
+    this.barChartLabels = this.namesOfDemographicTypes;
+    this.barChartData = this.dataForDemographics;
+
+    this.barChartData = this.barChartData.slice();
+
+  }
+
+  ngDoCheck() {
+
   }
 
 }
