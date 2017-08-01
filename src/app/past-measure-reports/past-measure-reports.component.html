@@ -2,21 +2,21 @@
   <div class="row" align="center" style="margin-bottom: -15px">
     <div class="col-md-4">
       <div class="form-group">
-        <select (change)="onMeasureChange($event.target.value)" name="measureSelect" >
-          <option [selected] [disabled]="true">Choose a measure</option>
+        <select (change)="onMeasureChange($event.target.value)" id="measureSelect" name="measureSelect" >
+          <option [value]="0" [disabled]="true">Choose a measure</option>
           <option *ngFor="let m of measures" [value]="m.id"> {{m.name}} ({{m.nqfId}}) </option>
         </select>
       </div>
     </div>
     <div class="col-md-4">
-      <select (change)="onYearChange($event.target.value)" id="yearSelect" name="yearSelect" >
-        <option [selected] [value]="0" [disabled]="true">Choose a year</option>
+      <select (change)="onYearChange($event.target.value)" #yearSelect id="yearSelect" name="yearSelect" >
+        <option [value]="0" [selected]="yearSelect.value == 0"  [disabled]="true">Choose a year</option>
         <option *ngFor="let y of years" [value]="y"> {{y}} </option>
       </select>
     </div>
     <div class="col-md-4">
-      <select (change)="onAnalyticChange($event.target.value)" name="analyticSelect" >
-        <option [selected] [disabled]="true" [value]="0">Choose a type of analytic</option>
+      <select (change)="onAnalyticChange($event.target.value)" #analyticSelect id="analyticSelect" name="analyticSelect" >
+        <option [disabled]="true" [selected]="analyticSelect.value == 0" [value]="0">Choose a type of analytic</option>
         <option [value]="1">List View</option>
         <option [value]="2">Aggregate Comparison</option>
         <option [value]="3">Measure Demographics</option>

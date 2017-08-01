@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit} from '@angular/core';
+import {AfterViewChecked, Component, Input, OnChanges, OnInit} from '@angular/core';
 import {MeasureInfo} from "../shared/measure-info";
 import {HomeService} from "../home/home.service";
 import {PastMeasureService} from "./past-measure.service";
@@ -29,11 +29,11 @@ export class PastMeasureReportsComponent implements OnInit, OnChanges {
   public noYearlyDataForMeasure = true;
   public analyticId;
 
-  constructor(private homeService: HomeService, private pastMeasureService: PastMeasureService) { }
+  constructor(private homeService: HomeService, private pastMeasureService: PastMeasureService) {
+  }
 
   ngOnInit() {
 
-    //jQuery('#yearSelect').val(0).attr('selected', 'selected');
 
   }
 
@@ -42,6 +42,11 @@ export class PastMeasureReportsComponent implements OnInit, OnChanges {
     this.aggComSelected = false;
     this.measureDemSelected = false;
     this.years = [];
+
+    jQuery('#yearSelect').val(0).attr('selected', 'selected');
+    jQuery('#analyticSelect').val(0).attr('selected', 'selected');
+    jQuery('#measureSelect').val(0).attr('selected', 'selected');
+
   }
 
 

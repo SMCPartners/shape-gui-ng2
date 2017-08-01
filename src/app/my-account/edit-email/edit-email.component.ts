@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {LoginService} from "../../login/login.service";
 import {MyAccountService} from "../my-account.service";
 import {ToastrService} from "toastr-ng2";

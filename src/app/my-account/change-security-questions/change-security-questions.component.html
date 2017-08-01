@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-md-4 col-md-offset-4">
+    <form (ngSubmit)="f.form.valid && changeSecurityQuestions()" #f="ngForm" novalidate>
+      <div class="form-group">
+        <select class="form-control" name="questionOne" [(ngModel)]="model.questionOne" #questionOne="ngModel" id="questionOne" required>
+          <option [disabled]="true" [value]="0">Select a question</option>
+          <option *ngFor="let s of securityQuestions" [value]="s">{{s}}</option>
+        </select>
+      </div>
+      <div class="form-group" style="margin-top: 10px">
+        <input type="text" class="form-control"  placeholder="Answer" name="answerOne" [(ngModel)]="model.answerOne" #answerOne="ngModel" required>
+      </div>
+      <div class="form-group">
+        <select class="form-control" name="questionTwo" [(ngModel)]="model.questionTwo" id="questionTwo" #questionTwo="ngModel" required>
+          <option [disabled]="true" [value]="0">Select a question</option>
+          <option *ngFor="let s of securityQuestions" [value]="s">{{s}}</option>
+        </select>
+      </div>
+      <div class="form-group" style="margin-top: 10px">
+        <input type="text" class="form-control"  placeholder="Answer" name="answerTwo" [(ngModel)]="model.answerTwo" #answerTwo="ngModel" required>
+      </div>
+      <div align="center" style="margin-top: 20px">
+        <button class="btn btn-primary">Change Security Questions</button>
+      </div>
+        <div *ngIf="error" align="center" class="alert alert-danger">{{error}}</div>
+    </form>
+  </div>
+</div>

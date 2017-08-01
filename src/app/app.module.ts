@@ -43,6 +43,7 @@ import { FileDropDirective, FileSelectDirective } from "ng2-file-upload";
 import { CustomFormsModule } from "ng2-validation";
 import {NgxDatatableModule} from "@swimlane/ngx-datatable";
 import {ChartsModule} from "ng2-charts";
+import { ChangeSecurityQuestionsComponent } from './my-account/change-security-questions/change-security-questions.component';
 
 const appRoutes: Routes = [
 
@@ -96,6 +97,7 @@ const appRoutes: Routes = [
     EditEmailComponent,
     FileDropDirective,
     FileSelectDirective,
+    ChangeSecurityQuestionsComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {LoginService} from "../../login/login.service";
 import {User} from "../../shared/user";
 import {MyAccountService} from "../my-account.service";
@@ -12,7 +12,7 @@ import {ToastrService} from "toastr-ng2";
 export class ResetPasswordComponent implements OnInit {
 
   constructor(private loginService: LoginService, private myAcctService: MyAccountService, private toastr: ToastrService) { }
-  currentUser: User;
+  user: User;
   securityQuestion: string;
   error: string = '';
 
@@ -22,16 +22,16 @@ export class ResetPasswordComponent implements OnInit {
 
     this.loginService.getUserByID(this.loginService.getUserID())
       .subscribe(user => {
-        this.currentUser = user;
+        this.user = user;
 
-        this.loginService.getSecurityQuestion(this.currentUser.id, this.currentUser.email)
+        this.loginService.getSecurityQuestion(this.user.id, this.user.email)
           .subscribe(question => this.securityQuestion = question.randomQuestion);
       });
   }
 
   resetPassword() {
 
-    this.myAcctService.resetPassword(this.currentUser.id, this.model.oldPassword, this.model.newPassword, this.model.answer)
+    this.myAcctService.resetPassword(this.user.id, this.model.oldPassword, this.model.newPassword, this.model.answer)
       .subscribe(response => {
         this.toastr.success('Your password was successfully reset!', 'Success!');
         this.model.oldPassword = '';
