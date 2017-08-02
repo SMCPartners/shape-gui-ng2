@@ -11,6 +11,7 @@ export class LoginComponent implements OnInit {
 
   model: any = {};
   error = '';
+  isLoginRoute:boolean = true;
 
   constructor(
     private router: Router,
@@ -26,7 +27,7 @@ export class LoginComponent implements OnInit {
         (data) => {
 
           if (data.resetRequired) {
-            this.router.navigate(['change-password']);
+            this.router.navigate(['login/change-password']);
           } else {
             this.router.navigate(['home']);
           }
@@ -36,11 +37,13 @@ export class LoginComponent implements OnInit {
   }
 
   forgotPassword() {
-    this.router.navigate(['forgot-password']);
+    this.router.navigate(['login/forgot-password']);
+    this.isLoginRoute = false;
   }
 
   forgotUsername() {
-    this.router.navigate(['forgot-username']);
+    this.router.navigate(['login/forgot-username']);
+    this.isLoginRoute = false;
   }
 
 }

@@ -1,0 +1,31 @@
+<div class="row" *ngIf="!done">
+  
+  <div class="col-md-6 col-md-offset-3 well well-sm shadow-well">
+    <h5 align="center">Please provide your email below to have your username sent to your email address</h5>
+  
+    <div>
+      <form (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
+        <div class="form-group">
+          <input type="email" [disabled]="loading" class="form-control"  placeholder="Email" name="email" [(ngModel)]="model.email" #email="ngModel" required>
+        </div>
+        <div align="center" style="margin-top: 20px">
+          <button class="btn" [disabled]="loading" (click)="getUsername()">Get Username</button>
+        </div>
+        <div *ngIf="error" align="center" class="alert alert-danger">{{error}}</div>
+      </form>
+    </div>
+  </div>
+  
+</div>
+
+<div class="row" *ngIf="done">
+  <div class="col-md-6 col-md-offset-3 well well-sm shadow-well">
+    <div align="center" style="margin: 0 50px" class="alert alert-success">
+      Your username was successfully sent. Please check your email and login with your username.
+    </div>
+    <div align="center" style="margin-top:10px;">
+      <button class="btn btn-primary" (click)="backToLogin()">Back To Login</button>
+    </div>
+  </div>
+</div>
+

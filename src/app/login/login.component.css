@@ -1,12 +1,3 @@
-.landing-page-background {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background-image: url("../../assets/shape-background-lighter.png");
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
   background-color: #4957a2 !important;
 }

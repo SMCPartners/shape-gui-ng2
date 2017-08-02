@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {LoginService} from "../login/login.service";
+import {LoginService} from "../login.service";
 import {NgProgressService} from "ng2-progressbar";
 import {Router} from "@angular/router";
 
@@ -31,6 +31,7 @@ export class ForgotUsernameComponent implements OnInit {
         this.pService.done();
         this.done = true;
       }, (error) => {
+        console.log(error);
         this.error = error.json().errMsg;
         this.loading = false;
         this.pService.done();

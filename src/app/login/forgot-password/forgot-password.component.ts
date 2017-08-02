@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {LoginService} from "../login/login.service";
+import {LoginService} from "../login.service";
 import {NgProgressService} from "ng2-progressbar";
 import {Router} from "@angular/router";
 

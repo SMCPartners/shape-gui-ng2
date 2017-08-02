@@ -30,12 +30,12 @@ import { OrganizationsComponent } from './admin-panel/organization/organizations
 import { MeasuresComponent } from './admin-panel/measure/measures.component';
 import { AdminPanelService } from "./admin-panel/admin-panel.service";
 import { Ng2SmartTableModule } from "ng2-smart-table";
-import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-import { ChangePasswordComponent } from './change-password/change-password.component';
+import { ForgotPasswordComponent } from './login/forgot-password/forgot-password.component';
+import { ChangePasswordComponent } from './login/change-password/change-password.component';
 import { NgProgressModule } from "ng2-progressbar";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ToastrModule } from "toastr-ng2";
-import { ForgotUsernameComponent } from './forgot-username/forgot-username.component';
+import { ForgotUsernameComponent } from './login/forgot-username/forgot-username.component';
 import { ResetPasswordComponent } from './my-account/reset-password/reset-password.component';
 import { MyAccountService } from "./my-account/my-account.service";
 import { EditEmailComponent } from './my-account/edit-email/edit-email.component';
@@ -43,13 +43,17 @@ import { CustomFormsModule } from "ng2-validation";
 import {NgxDatatableModule} from "@swimlane/ngx-datatable";
 import {ChartsModule} from "ng2-charts";
 import { ChangeSecurityQuestionsComponent } from './my-account/change-security-questions/change-security-questions.component';
+import {LoginRouteComponent} from "./login/login-route.component";
 
 const appRoutes: Routes = [
 
-  { path: '', component: LoginComponent },
-  { path: 'forgot-password', component: ForgotPasswordComponent },
-  { path: 'forgot-username', component: ForgotUsernameComponent },
-  { path: 'change-password', component: ChangePasswordComponent },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'login', component: LoginRouteComponent, children: [
+    { path: '', component: LoginComponent },
+    { path: 'forgot-password', component: ForgotPasswordComponent },
+    { path: 'forgot-username', component: ForgotUsernameComponent },
+    { path: 'change-password', component: ChangePasswordComponent },
+    ]},
   { path: 'home', component: HomeComponent, canActivate: [ RouteProtect ] },
   { path: 'help', component: HelpComponent, canActivate: [ RouteProtect ] },
   { path: 'myAccount', component: MyAccountComponent, canActivate: [ RouteProtect ] },
@@ -95,6 +99,7 @@ const appRoutes: Routes = [
     ResetPasswordComponent,
     EditEmailComponent,
     ChangeSecurityQuestionsComponent,
+    LoginRouteComponent
   ],
   imports: [
     BrowserModule,

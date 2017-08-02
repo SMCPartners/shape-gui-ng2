@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import {LoginService} from "../../login/login.service";
 import {User} from "../../shared/user";
 import {AdminPanelService} from "../../admin-panel/admin-panel.service";
@@ -17,6 +17,7 @@ export class ChangeSecurityQuestionsComponent implements OnInit, OnChanges {
   model: any = {};
   error: string = '';
   @Input() user: User;
+  @Output() securityQuestionChanged = new EventEmitter<boolean>();
 
   public securityQuestions: string[] = [
     'Where were you born?',
@@ -49,6 +50,7 @@ export class ChangeSecurityQuestionsComponent implements OnInit, OnChanges {
         jQuery('#questionTwo').val(0).attr('selected', 'selected');
         this.model.answerOne = '';
         this.model.answerTwo = '';
+        this.securityQuestionChanged.emit(true);
       }, error => {
         this.error = error.json().errMsg;
       })

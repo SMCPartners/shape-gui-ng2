@@ -23,13 +23,13 @@
           </ul>
           <div class="tab-content">
             <div class="tab-pane active" id="tab_default_1">
-              <sh-reset-password></sh-reset-password>
+              <sh-reset-password [user]="user"></sh-reset-password>
             </div>
             <div class="tab-pane" id="tab_default_2">
               <sh-edit-email></sh-edit-email>
             </div>
             <div class="tab-pane" id="tab_default_3">
-              <sh-change-security-questions [user]="user"></sh-change-security-questions>
+              <sh-change-security-questions (securityQuestionChanged)="securityQuestionChanged($event)" [user]="user"></sh-change-security-questions>
             </div>
           </div>
         </div>
