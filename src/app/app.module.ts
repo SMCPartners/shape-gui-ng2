@@ -39,7 +39,6 @@ import { ForgotUsernameComponent } from './forgot-username/forgot-username.compo
 import { ResetPasswordComponent } from './my-account/reset-password/reset-password.component';
 import { MyAccountService } from "./my-account/my-account.service";
 import { EditEmailComponent } from './my-account/edit-email/edit-email.component';
-import { FileDropDirective, FileSelectDirective } from "ng2-file-upload";
 import { CustomFormsModule } from "ng2-validation";
 import {NgxDatatableModule} from "@swimlane/ngx-datatable";
 import {ChartsModule} from "ng2-charts";
@@ -95,8 +94,6 @@ const appRoutes: Routes = [
     ForgotUsernameComponent,
     ResetPasswordComponent,
     EditEmailComponent,
-    FileDropDirective,
-    FileSelectDirective,
     ChangeSecurityQuestionsComponent,
   ],
   imports: [

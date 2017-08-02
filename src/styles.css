@@ -93,8 +93,10 @@ img {
 .banner {
   color: white;
   background: #3F51B5;
-  padding: 3.2em 0;
+  padding: 2em 0;
   margin-bottom: 20px;
+  box-shadow: 0 0 5px 10px #3F51B5;
+  opacity: 0.90
 }
 .sh-col {
   padding: 1em;
@@ -125,6 +127,7 @@ img {
 
 .headline {
   margin-bottom: 0;
+  /*text-shadow: 3px 3px 5px black;*/
 }
 .feat-img {
   border-radius: 5px;

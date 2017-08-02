@@ -1,22 +1,36 @@
-<div class="banner">
-  <h1 class="headline">Shape Dashboard</h1>
-</div>
-
-<div class="sh-row-login">
-  <div class="login-form">
-    <form (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
-      <div class="form-group">
-        <input type="text" class="form-control"  placeholder="Username" name="username" [(ngModel)]="model.username" #username="ngModel" required>
+<div class="landing-page-background">
+  <!--<img class="pull-right" width="175" height="125" src="../../assets/ehealth_no_white.png">-->
+  
+  <div class="row">
+    <div class="col-md-12">
+      <div class="banner">
+        <h1 class="headline" style="font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif; font-weight: bold">DPH SHAPE DASHBOARD</h1>
       </div>
-      <div class="form-group" style="margin-top: 10px">
-        <input type="password" class="form-control"  placeholder="Password" name="password" [(ngModel)]="model.password" #password="ngModel" required>
-      </div>
-      <div align="center" style="margin-top: 20px">
-        <button class="btn btn-primary">Login</button>
-        <button class="btn" (click)="forgotUsername()">Forgot Username</button>
-        <button class="btn" (click)="forgotPassword()">Forgot Password</button>
-      </div>
-      <div *ngIf="error" align="center" class="alert alert-danger">{{error}}</div>
-    </form>
+    </div>
+  </div>
+  
+  
+  <div class="row" style="margin-top: 20px">
+    <div class="col-md-4 col-md-offset-1 well well-sm">
+      
+      <h4 align="center">Login to the Shape Dashboard!</h4>
+      
+      <form (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
+        <div class="form-group">
+          <input type="text" class="form-control"  placeholder="Username" name="username" [(ngModel)]="model.username" #username="ngModel" required>
+        </div>
+        <div class="form-group" style="margin-top: 10px">
+          <input type="password" class="form-control"  placeholder="Password" name="password" [(ngModel)]="model.password" #password="ngModel" required>
+        </div>
+        <div align="center" style="margin-top: 20px">
+          <button class="btn btn-primary">Login</button>
+          <button class="btn" (click)="forgotUsername()">Forgot Username</button>
+          <button class="btn" (click)="forgotPassword()">Forgot Password</button>
+        </div>
+              <div *ngIf="error" align="center" class="alert alert-danger">{{error}}</div>
+      </form>
+    </div>
   </div>
 </div>
+
+

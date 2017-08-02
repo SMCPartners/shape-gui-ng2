@@ -20,6 +20,9 @@ export class MeasureDemChartComponent implements OnInit, OnChanges, DoCheck {
     responsive: true,
     maintainAspectRatio: false,
     beginAtZero: true,
+    legend: {
+      display: false
+    },
     scales: {
       yAxes: [{
         ticks: {
@@ -67,5 +70,7 @@ export class MeasureDemChartComponent implements OnInit, OnChanges, DoCheck {
   ngDoCheck() {
 
   }
+
+  chartHovered(event) {}
 
 }

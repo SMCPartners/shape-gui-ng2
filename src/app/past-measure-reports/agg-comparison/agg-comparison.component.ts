@@ -49,6 +49,10 @@ export class AggComparisonComponent implements OnInit, OnChanges  {
 
     let firstTime = true;
 
+    this.barChartData.length = 0;
+    this.dataForOrganizations.length = 0;
+    this.namesOfOrganizations.length = 0;
+
     this.aggDatas.forEach(aggData => {
 
       if (firstTime !== true) {
@@ -60,7 +64,9 @@ export class AggComparisonComponent implements OnInit, OnChanges  {
     });
 
     this.barChartLabels = this.namesOfOrganizations;
-    this.barChartData.push({ data : this.dataForOrganizations, label: '%' })
+    this.barChartData = [{ data: this.dataForOrganizations, label: '%'}];
+
+    this.barChartData.slice();
   }
 
   public chartHovered(e:any):void {
