@@ -13,7 +13,7 @@
   <div class="row" style="margin-top: 20px">
     <div class="col-md-4 col-md-offset-1 well well-sm">
       
-      <h4 align="center">Login to the Shape Dashboard!</h4>
+      <h3 align="center">Login to the Shape Dashboard!</h3>
       
       <form (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
         <div class="form-group">
@@ -29,6 +29,26 @@
         </div>
               <div *ngIf="error" align="center" class="alert alert-danger">{{error}}</div>
       </form>
+    </div>
+    
+    <div class="col-md-5 col-md-offset-1 well well-sm">
+      <div align="center">
+        <!--<h3 style="margin-bottom: -10px">The Dashboard</h3> <br/>-->
+  
+        The Shape Dashboard was developed by eHealthConnecticut in conjunction with the Connecticut Department of
+        Public Health as part of the SHAPE grant (State Public Health Actions to Prevent and Control Diabetes,
+        Heart Disease, Obesity and Associated Risk Factors and Promote School Health-1305), through funding from
+        the Centers for Disease Control and Prevention. <br/> <br/>
+  
+  
+        The goal of the SHAPE project is to leverage healthcare providers' health information technology to develop
+        processes to improve hypertension and diabetes awareness and management among their patient populations. <br/> <br/>
+  
+        Through this quality measure dashboard, healthcare providers can collect and report aggregate data for
+        NQF 0018: Controlling High Blood Pressure, and NQF 0059: Diabetes: Hemoglobin A1c Poor Control. <br/> <br/>
+        
+        <img height="85" width="130" src="../../assets/ehealth_no_white.png">
+      </div>
     </div>
   </div>
 </div>
