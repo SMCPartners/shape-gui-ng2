@@ -11,7 +11,7 @@
         <div align="center" style="margin-top: 20px">
           <button class="btn" [disabled]="loading" (click)="getUsername()">Get Username</button>
         </div>
-        <div *ngIf="error" align="center" class="alert alert-danger">{{error}}</div>
+        <div style="margin-top: 10px" *ngIf="error" align="center" class="alert alert-danger">{{error}}</div>
       </form>
     </div>
   </div>

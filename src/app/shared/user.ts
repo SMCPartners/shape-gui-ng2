@@ -51,14 +51,20 @@ export class User {
 
     userArray.forEach(user => {
 
+      const statusButton = user.active == false ?
+        `<button class="btn btn-danger" id="${user.id}" (click)="onClick[${user.id}]">Inactive</button>` :
+          `<button class="btn btn-success" id="${user.id}" (click)="onClick[${user.id}]">Active</button>`;
+
       returnArray.push({
         id : user.id,
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
         role: user.role,
-        organization: user.organizationId,
-        status: user.active ? 'Active' : 'Inactive'
+        organization: user.organizationName,
+        organizationId: user.organizationId,
+        status: statusButton
+        //status: user.active ? 'Active' : 'Inactive'
       })
 
     });
@@ -67,9 +73,9 @@ export class User {
   }
 
   static convertTableObjectToDTO(tableObject: any) {
-    const active = tableObject.status === 'Active' ? true : false;
+    const active = tableObject.status.includes('Active') ? true : false;
     return { id: tableObject.id, firstName: tableObject.firstName, lastName: tableObject.lastName,
-             email: tableObject.email, role: tableObject.role, organizationId: tableObject.organization,
+             email: tableObject.email, role: tableObject.role, organizationId: tableObject.organizationId,
              active: active }
   }
 

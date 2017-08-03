@@ -84,7 +84,7 @@ export class ProvidersComponent implements OnInit {
     if (prov.valid) {
 
       const formData = prov.value;
-      const addProviderForm = new Provider(null, formData.name, null, formData.npi, null, formData.organization);
+      const addProviderForm = new Provider(null, formData.name, null, formData.npi, null, formData.organizationId, formData.organization);
 
       this.adminPanelService.addProvider(addProviderForm)
         .subscribe(response => {

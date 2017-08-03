@@ -114,6 +114,26 @@ export class AdminPanelService {
       });
   }
 
+  activateUser(username) : Observable<any> {
+
+    const url = `http://${BASEURL}/shape-service/shape/admin/activate/${username}`;
+
+    return this.http.put(url, null, this.options)
+      .map((response: Response) => {
+        return response.json();
+    });
+  }
+
+  inactivateUser(username) : Observable<any> {
+
+    const url = `http://${BASEURL}/shape-service/shape/admin/inactivate/${username}`;
+
+    return this.http.put(url, null, this.options)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
 }
 
 

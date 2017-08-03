@@ -15,6 +15,10 @@ body {
   position:relative;
   background-color: #fafafa
 }
+
+.btn{
+  color: white !important;
+}
 ul {
   margin: 0;
   padding: 0;

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, Renderer2} from '@angular/core';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import {AdminPanelService} from "../admin-panel.service";
 import {User} from "../../shared/user";
@@ -8,23 +8,28 @@ import {CreateUser} from "../../shared/create-user";
 import {ToastrService} from "toastr-ng2";
 import {CustomValidators} from "ng2-validation";
 import {NgProgressService} from "ng2-progressbar";
+import {DomSanitizer} from "@angular/platform-browser";
+import {LoginService} from "../../login/login.service";
+
+declare var jQuery: any;
 
 @Component({
   selector: 'sh-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss']
 })
-export class UserComponent implements OnInit {
+export class UserComponent implements OnInit, OnDestroy {
 
   users: User[] = [];
   organizations: Organization[] = [];
   data: any[] = [];
   addUserShown: boolean = false;
 
+  listenFunc: Function;
+
   userCreated: boolean = false;
 
   addUserForm: FormGroup;
-
 
   public settings: {} = {
     edit: {
@@ -61,13 +66,56 @@ export class UserComponent implements OnInit {
       },
       status: {
         title: 'Status',
-        filter: false
+        type: 'html',
+        filter: false,
+        valuePrepareFunction: (value) => {
+          return this.sanitizer.bypassSecurityTrustHtml(value);
+        }
       }
     }
   };
 
   constructor(private adminPanelService: AdminPanelService, private fb: FormBuilder,
-              private toastrService: ToastrService, private pService: NgProgressService) { }
+              private toastrService: ToastrService, private pService: NgProgressService,
+              private sanitizer: DomSanitizer, private renderer: Renderer2, private elementRef: ElementRef,
+              private loginService: LoginService) {
+
+    this.listenFunc = renderer.listen(elementRef.nativeElement, 'click', (event) => {
+
+      const eventString = event.target.outerHTML;
+
+      if (event.target.outerHTML.includes('btn btn-success') || event.target.outerHTML.includes('btn btn-danger')) {
+        if (eventString.substr(0, 4) === '<but') {
+
+          const username = eventString.match(/\[(.*?)\]/)[1];
+
+          if (eventString.includes('Active')) {
+
+            if (username === this.loginService.getUserID()) {
+              toastrService.error("You can't deactivate yourself!", 'Uh oh!');
+              return;
+            }
+
+            this.adminPanelService.inactivateUser(username)
+              .subscribe(response => {
+                jQuery('#' + username).attr('class', 'btn btn-danger').html('Inactive');
+              }, error => {
+                toastrService.error('Something went wrong deactivating the user!', 'Uh oh!')
+              })
+          } else if (eventString.includes ('Inactive')) {
+            this.adminPanelService.activateUser(username)
+              .subscribe(response => {
+                jQuery('#' + username).attr('class', 'btn btn-success').html('Active');
+              }, error => {
+                toastrService.error('Something went wrong activating the user!', 'Uh oh!')
+              })
+          }
+        }
+      }
+
+    })
+
+  }
 
   ngOnInit() {
 
@@ -94,6 +142,10 @@ export class UserComponent implements OnInit {
   cancelAddUser() {
     this.addUserShown = false;
     this.addUserForm.reset();
+  }
+
+  thisClicked(value) {
+    console.log(value);
   }
 
   addUser(user) {
@@ -158,5 +210,8 @@ export class UserComponent implements OnInit {
 
   }
 
+  ngOnDestroy() {
+    this.listenFunc();
+  }
 
 }
