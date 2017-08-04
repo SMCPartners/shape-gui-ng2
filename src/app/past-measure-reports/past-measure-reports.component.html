@@ -20,6 +20,7 @@
         <option [value]="1">List View</option>
         <option [value]="2">Aggregate Comparison</option>
         <option [value]="3">Measure Demographics</option>
+        <option [value]="4">Measure Data Over Time</option>
       </select>
     </div>
   </div>
@@ -29,5 +30,6 @@
   <sh-list-view *ngIf="listViewSelected" [noYearlyDataForMeasure]="noYearlyDataForMeasure" [listViews]="listViews" [year]="year"></sh-list-view>
   <sh-agg-comparison *ngIf="aggComSelected" [noYearlyDataForMeasure]="noYearlyDataForMeasure" [aggDatas]="aggDatas"></sh-agg-comparison>
   <sh-measure-demographics *ngIf="measureDemSelected" [measureDem]="measureDem"></sh-measure-demographics>
+  <sh-measure-data-over-time *ngIf="dataOverTimeSelected" [dataOverTime]="dataOverTime"></sh-measure-data-over-time>
 </div>
 

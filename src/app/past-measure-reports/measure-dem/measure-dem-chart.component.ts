@@ -1,5 +1,4 @@
 import {AfterViewChecked, Component, DoCheck, Input, OnChanges, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {BaseChartDirective} from "ng2-charts";
 
 @Component({
   selector: 'sh-measure-dem-chart',
@@ -11,9 +10,6 @@ export class MeasureDemChartComponent implements OnInit, OnChanges, DoCheck {
   @Input() dataArray: any[] = [];
   private dataForDemographics: string[] = [];
   private namesOfDemographicTypes: string[] = [];
-
-  @ViewChild(BaseChartDirective) public chart: BaseChartDirective;
-
 
   public barChartOptions:any = {
     scaleShowVerticalLines: false,

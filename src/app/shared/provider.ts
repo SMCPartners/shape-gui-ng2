@@ -24,13 +24,17 @@ export class Provider {
 
     providerArray.forEach(prov => {
 
+      const statusButton = prov.active == false ?
+        `<button class="btn btn-danger" id="providerId${prov.id}" (click)="onClick[${prov.id}]">Inactive</button>` :
+        `<button class="btn btn-success" id="providerId${prov.id}" (click)="onClick[${prov.id}]">Active</button>`;
+
       returnArray.push({
         id: prov.id,
         name: prov.name,
         npi: prov.npi,
         organization: prov.organizationName,
         organizationId: prov.organizationId,
-        status: prov.active ? 'Active' : 'Inactive',
+        status: statusButton,
       })
 
     });
@@ -39,7 +43,7 @@ export class Provider {
   }
 
   static convertTableObjectToDTO(tableObject: any) {
-    const active = tableObject.status === 'Active' ? true : false;
+    const active = tableObject.status.includes('Active') ? true : false;
     return new Provider(tableObject.id, tableObject.name, active, tableObject.npi, '', tableObject.organizationId, tableObject.organizationName);
   }
 

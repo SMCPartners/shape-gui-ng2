@@ -8,6 +8,9 @@ $table-border-color: #e9ebec;
       font-size: 13px;
       text-align: center;
     }
+    button {
+      color: white !important;
+    }
     table{
       color: $table-font-color;
       tr {
@@ -18,3 +21,4 @@ $table-border-color: #e9ebec;
     }
   }
 }
+

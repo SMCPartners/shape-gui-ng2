@@ -134,6 +134,46 @@ export class AdminPanelService {
       });
   }
 
+  activateProvider(provId) : Observable<any> {
+
+    const url = `http://${BASEURL}/shape-service/shape/admin/provider/activate`;
+
+    return this.http.post(url, {entId: provId}, this.options)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
+  inactivateProvider(provId) : Observable<any> {
+
+    const url = `http://${BASEURL}/shape-service/shape/admin/provider/inactivate`;
+
+    return this.http.post(url, {entId: provId}, this.options)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
+  activateOrg(orgId) : Observable<any> {
+
+    const url = `http://${BASEURL}/shape-service/shape/admin/organization/activate`;
+
+    return this.http.post(url, {entId: orgId}, this.options)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
+  inactivateOrg(orgId) : Observable<any> {
+
+    const url = `http://${BASEURL}/shape-service/shape/admin/organization/inactivate`;
+
+    return this.http.post(url, {entId: orgId}, this.options)
+      .map((response: Response) => {
+        return response.json();
+      });
+  }
+
 }
 
 

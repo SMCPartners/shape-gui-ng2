@@ -33,9 +33,7 @@ export class MeasureInfo {
       returnArray.push({
         nqfId: measure.nqfId,
         name: measure.name,
-        description: measure.description,
-        status: measure.active ? 'Active' : 'Inactive',
-
+        description: measure.description
       })
     });
     return returnArray;

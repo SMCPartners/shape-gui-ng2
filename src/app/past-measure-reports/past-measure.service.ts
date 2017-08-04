@@ -44,4 +44,14 @@ export class PastMeasureService {
     return this.http.get(url, options)
       .map(response => response.json())
   }
+
+  getDataOverTime(measureId: number): any {
+
+    const headers = new Headers({'Authorization': 'Bearer ' + this.loginService.token});
+    let options = new RequestOptions({headers: headers});
+    const url = `http://${BASEURL}/shape-service/shape/common/show/aggregateAllComparison/${measureId}`;
+
+    return this.http.get(url, options)
+      .map(response => response.json())
+  }
 }

@@ -28,6 +28,8 @@ export class PastMeasureReportsComponent implements OnInit, OnChanges {
   public measureDemSelected = false;
   public noYearlyDataForMeasure = true;
   public analyticId;
+  public dataOverTime: any;
+  public dataOverTimeSelected: any;
 
   constructor(private homeService: HomeService, private pastMeasureService: PastMeasureService) {
   }
@@ -41,6 +43,7 @@ export class PastMeasureReportsComponent implements OnInit, OnChanges {
     this.listViewSelected = false;
     this.aggComSelected = false;
     this.measureDemSelected = false;
+    this.dataOverTimeSelected = false;
     this.years = [];
 
     jQuery('#yearSelect').val(0).attr('selected', 'selected');
@@ -70,6 +73,7 @@ export class PastMeasureReportsComponent implements OnInit, OnChanges {
                 this.listViewSelected = true;
                 this.aggComSelected = false;
                 this.measureDemSelected = false;
+                this.dataOverTimeSelected = false;
                 this.analyticId = '1';
 
               });
@@ -82,6 +86,7 @@ export class PastMeasureReportsComponent implements OnInit, OnChanges {
                 this.listViewSelected = false;
                 this.aggComSelected = true;
                 this.measureDemSelected = false;
+                this.dataOverTimeSelected = false;
                 this.analyticId = '2';
 
               });
@@ -96,9 +101,27 @@ export class PastMeasureReportsComponent implements OnInit, OnChanges {
                 this.listViewSelected = false;
                 this.aggComSelected = false;
                 this.measureDemSelected = true;
+                this.dataOverTimeSelected = false;
                 this.analyticId = '3';
 
               });
+          } else if (this.dataOverTimeSelected) {
+
+            this.pastMeasureService.getDataOverTime(this.measureId)
+              .subscribe(dataOverTime => {
+
+                this.dataOverTime.length = 0;
+
+                this.dataOverTime = dataOverTime;
+
+                this.listViewSelected = false;
+                this.aggComSelected = false;
+                this.measureDemSelected = false;
+                this.dataOverTimeSelected = true;
+                this.analyticId = '4';
+
+              });
+
           }
 
           this.year = this.years[0];
@@ -137,6 +160,13 @@ export class PastMeasureReportsComponent implements OnInit, OnChanges {
 
           this.measureDem = measureDem[0];
         });
+    } else if (this.measureDemSelected) {
+
+      this.pastMeasureService.getDataOverTime(this.measureId)
+        .subscribe(dataOverTime => {
+
+          this.dataOverTime = dataOverTime;
+        });
     }
 
   }
@@ -160,6 +190,8 @@ export class PastMeasureReportsComponent implements OnInit, OnChanges {
             this.listViewSelected = true;
             this.aggComSelected = false;
             this.measureDemSelected = false;
+            this.dataOverTimeSelected = false;
+
           });
         break;
 
@@ -171,6 +203,8 @@ export class PastMeasureReportsComponent implements OnInit, OnChanges {
             this.listViewSelected = false;
             this.aggComSelected = true;
             this.measureDemSelected = false;
+            this.dataOverTimeSelected = false;
+
           });
         break;
 
@@ -184,6 +218,23 @@ export class PastMeasureReportsComponent implements OnInit, OnChanges {
             this.listViewSelected = false;
             this.aggComSelected = false;
             this.measureDemSelected = true;
+            this.dataOverTimeSelected = false;
+
+          });
+
+        break;
+
+      case '4':
+
+        this.pastMeasureService.getDataOverTime(this.measureId)
+          .subscribe(dataOverTime => {
+
+            this.dataOverTime = dataOverTime;
+
+            this.listViewSelected = false;
+            this.aggComSelected = false;
+            this.measureDemSelected = false;
+            this.dataOverTimeSelected = true;
           });
 
         break;

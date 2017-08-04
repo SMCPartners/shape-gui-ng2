@@ -44,6 +44,7 @@ import {NgxDatatableModule} from "@swimlane/ngx-datatable";
 import {ChartsModule} from "ng2-charts";
 import { ChangeSecurityQuestionsComponent } from './my-account/change-security-questions/change-security-questions.component';
 import {LoginRouteComponent} from "./login/login-route.component";
+import { MeasureDataOverTimeComponent } from './past-measure-reports/measure-data-over-time/measure-data-over-time.component';
 
 const appRoutes: Routes = [
 
@@ -99,7 +100,8 @@ const appRoutes: Routes = [
     ResetPasswordComponent,
     EditEmailComponent,
     ChangeSecurityQuestionsComponent,
-    LoginRouteComponent
+    LoginRouteComponent,
+    MeasureDataOverTimeComponent
   ],
   imports: [
     BrowserModule,

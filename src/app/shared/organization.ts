@@ -40,6 +40,10 @@ export class Organization {
 
     orgArray.forEach(org => {
 
+      const statusButton = org.active == false ?
+        `<button class="btn btn-danger" id="orgId${org.id}" (click)="onClick[${org.id}]">Inactive</button>` :
+        `<button class="btn btn-success" id="orgId${org.id}" (click)="onClick[${org.id}]">Active</button>`;
+
       returnArray.push({
         id : org.id,
         name : org.name,
@@ -48,7 +52,7 @@ export class Organization {
         primaryName: org.primaryContactName,
         primaryEmail: org.primaryContactEmail,
         primaryRole: org.primaryContactRole,
-        status: org.active ? 'Active' : 'Inactive',
+        status: statusButton,
         addressStreet: org.addressStreet,
         addressCity: org.addressCity,
         addressState: org.addressState,
@@ -61,7 +65,7 @@ export class Organization {
   }
 
   static convertTableObjectToDTO(tableObject: any): any {
-    const active = tableObject.status === 'Active' ? true : false;
+    const active = tableObject.status.includes('Active') ? true : false;
     return { id: tableObject.id, name: tableObject.name, addressStreet: tableObject.addressStreet,
              addressCity: tableObject.addressCity, addressState: tableObject.addressState,
              addressZip: tableObject.addressZip, primaryContactPhone: tableObject.primaryPhone,

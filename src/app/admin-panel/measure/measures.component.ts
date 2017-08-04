@@ -29,10 +29,6 @@ export class MeasuresComponent implements OnInit {
         title: 'Description',
         filter: false
       },
-      status: {
-        title: 'Status',
-        filter: false
-      },
     }
   };
 

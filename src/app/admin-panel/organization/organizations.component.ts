@@ -1,10 +1,13 @@
-import {Component, OnInit, ViewContainerRef} from '@angular/core';
+import {Component, ElementRef, OnInit, Renderer2, ViewContainerRef} from '@angular/core';
 import {Organization} from "../../shared/organization";
 import {AdminPanelService} from "../admin-panel.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {LoginService} from "../../login/login.service";
 import {ToastrService} from "toastr-ng2";
 import {CustomValidators} from "ng2-validation";
+import {DomSanitizer} from "@angular/platform-browser";
+
+declare var jQuery: any;
 
 @Component({
   selector: 'sh-organizations',
@@ -16,6 +19,7 @@ export class OrganizationsComponent implements OnInit {
   organizations: Organization[] = [];
   data: any[] = [];
   addOrganizationShown: boolean = false;
+  listenFunc: Function;
 
   stateAbbrv: string[] = [
     "AL", "AK", "AS", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FM", "FL", "GA", "GU", "HI", "ID",
@@ -62,13 +66,52 @@ export class OrganizationsComponent implements OnInit {
       },
       status: {
         title: 'Status',
-        filter: false
+        type: 'html',
+        filter: false,
+        editable: false,
+        valuePrepareFunction: (value) => {
+          return this.sanitizer.bypassSecurityTrustHtml(value);
+        }
       }
     }
   };
 
   constructor(private adminPanelService: AdminPanelService, private fb: FormBuilder,
-              private loginService: LoginService, private toastrService: ToastrService) {}
+              private loginService: LoginService, private toastrService: ToastrService,
+              private sanitizer: DomSanitizer, private elementRef: ElementRef, private renderer: Renderer2) {
+
+    this.listenFunc = renderer.listen(elementRef.nativeElement, 'click', (event) => {
+
+      const eventString = event.target.outerHTML;
+
+      if (event.target.outerHTML.includes('btn btn-success') || event.target.outerHTML.includes('btn btn-danger')) {
+        if (eventString.substr(0, 4) === '<but') {
+
+          const orgId = eventString.match(/\[(.*?)\]/)[1];
+
+          if (eventString.includes('Active')) {
+
+            this.adminPanelService.inactivateOrg(orgId)
+              .subscribe(response => {
+                jQuery('#orgId' + orgId).attr('class', 'btn btn-danger').html('Inactive');
+              }, error => {
+                toastrService.error('Something went wrong deactivating the user!', 'Uh oh!')
+              })
+          } else if (eventString.includes ('Inactive')) {
+            this.adminPanelService.activateOrg(orgId)
+              .subscribe(response => {
+                jQuery('#orgId' + orgId).attr('class', 'btn btn-success').html('Active');
+              }, error => {
+                toastrService.error('Something went wrong activating the user!', 'Uh oh!')
+              })
+          }
+        }
+      }
+
+    })
+
+
+  }
 
   ngOnInit() {
 

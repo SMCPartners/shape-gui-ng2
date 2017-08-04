@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, Renderer2} from '@angular/core';
 import {Provider} from "../../shared/provider";
 import {AdminPanelService} from "../admin-panel.service";
 import {LoginService} from "../../login/login.service";
@@ -6,13 +6,16 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Organization} from "../../shared/organization";
 import {ToastrService} from "toastr-ng2";
 import {CustomValidators} from "ng2-validation";
+import {DomSanitizer} from "@angular/platform-browser";
+
+declare var jQuery: any;
 
 @Component({
   selector: 'sh-providers',
   templateUrl: './providers.component.html',
   styleUrls: ['./providers.component.scss']
 })
-export class ProvidersComponent implements OnInit {
+export class ProvidersComponent implements OnInit, OnDestroy {
 
   providers: Provider[] = [];
   data: any[] = [];
@@ -20,6 +23,8 @@ export class ProvidersComponent implements OnInit {
 
   addProviderShown: boolean = false;
   addProviderForm: FormGroup;
+
+  listenFunc: Function;
 
   public settings: {} = {
     edit: {
@@ -44,14 +49,53 @@ export class ProvidersComponent implements OnInit {
       },
       status: {
         title: 'Status',
-        filter: false
+        type: 'html',
+        filter: false,
+        editable: false,
+        valuePrepareFunction: (value) => {
+          return this.sanitizer.bypassSecurityTrustHtml(value);
+        }
       },
     }
   };
 
 
   constructor(private adminPanelService: AdminPanelService, private loginService: LoginService,
-              private fb: FormBuilder, private toastrService: ToastrService) {}
+              private fb: FormBuilder, private toastrService: ToastrService, private sanitizer: DomSanitizer,
+              private renderer: Renderer2, private elementRef: ElementRef) {
+
+    this.listenFunc = renderer.listen(elementRef.nativeElement, 'click', (event) => {
+
+      const eventString = event.target.outerHTML;
+
+      if (event.target.outerHTML.includes('btn btn-success') || event.target.outerHTML.includes('btn btn-danger')) {
+        if (eventString.substr(0, 4) === '<but') {
+
+          const provId = eventString.match(/\[(.*?)\]/)[1];
+
+          if (eventString.includes('Active')) {
+
+            this.adminPanelService.inactivateProvider(provId)
+              .subscribe(response => {
+                jQuery('#providerId' + provId).attr('class', 'btn btn-danger').html('Inactive');
+              }, error => {
+                toastrService.error('Something went wrong deactivating the user!', 'Uh oh!')
+              })
+          } else if (eventString.includes ('Inactive')) {
+            this.adminPanelService.activateProvider(provId)
+              .subscribe(response => {
+                jQuery('#providerId' + provId).attr('class', 'btn btn-success').html('Active');
+              }, error => {
+                toastrService.error('Something went wrong activating the user!', 'Uh oh!')
+              })
+          }
+        }
+      }
+
+    })
+
+
+  }
 
   ngOnInit() {
 
@@ -171,5 +215,9 @@ export class ProvidersComponent implements OnInit {
       'required': 'Organization is required.'
     }
   };
+
+  ngOnDestroy() {
+    this.listenFunc();
+  }
 
 }

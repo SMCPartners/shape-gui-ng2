@@ -68,6 +68,7 @@ export class UserComponent implements OnInit, OnDestroy {
         title: 'Status',
         type: 'html',
         filter: false,
+        editable: false,
         valuePrepareFunction: (value) => {
           return this.sanitizer.bypassSecurityTrustHtml(value);
         }
