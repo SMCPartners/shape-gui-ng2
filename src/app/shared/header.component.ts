@@ -1,15 +1,30 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {LoginService} from '../login/login.service';
 import {Router} from "@angular/router";
+import {GlobalService} from "./global.service";
+import {User} from "./user";
+import {AdminRouteProtect} from "../route-protect/admin-route-protect";
 
 @Component({
   selector: 'sh-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
 
-  constructor(private loginService: LoginService, private router: Router) { }
+  isAdminPanelAllowed: boolean = false;
+
+  constructor(private loginService: LoginService, private router: Router, private globalService: GlobalService) { }
+
+  ngOnInit() {
+
+    const role = this.loginService.getUserRole();
+
+    if (role === 'ADMIN' || role === 'ORG_ADMIN') {
+      this.isAdminPanelAllowed = true;
+    }
+
+  }
 
   logout() {
     this.loginService.logout();

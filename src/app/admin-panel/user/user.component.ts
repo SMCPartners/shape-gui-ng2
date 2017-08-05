@@ -146,7 +146,6 @@ export class UserComponent implements OnInit, OnDestroy {
   }
 
   thisClicked(value) {
-    console.log(value);
   }
 
   addUser(user) {

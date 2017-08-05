@@ -31,7 +31,6 @@ export class ForgotUsernameComponent implements OnInit {
         this.pService.done();
         this.done = true;
       }, (error) => {
-        console.log(error);
         this.error = error.json().errMsg;
         this.loading = false;
         this.pService.done();

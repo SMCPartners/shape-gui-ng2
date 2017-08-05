@@ -26,7 +26,7 @@ export class PastMeasureReportsComponent implements OnInit, OnChanges {
   public listViewSelected = false;
   public aggComSelected = false;
   public measureDemSelected = false;
-  public noYearlyDataForMeasure = true;
+  public noYearlyDataForMeasure = false;
   public analyticId;
   public dataOverTime: any;
   public dataOverTimeSelected: any;
@@ -173,10 +173,12 @@ export class PastMeasureReportsComponent implements OnInit, OnChanges {
 
   onAnalyticChange(analyticId) {
 
-    if (typeof this.years === 'undefined' || this.years.length < 1 || typeof this.year === 'undefined') {
+    if (typeof this.years === 'undefined' || this.years.length < 1 || typeof this.year === 'undefined' || jQuery('#yearSelect').val() === 0) {
       this.noYearlyDataForMeasure = true;
       return;
     }
+
+    jQuery('#yearSelect').val(this.year).attr('selected', 'selected');
 
     this.analyticId = analyticId;
 
@@ -243,6 +245,7 @@ export class PastMeasureReportsComponent implements OnInit, OnChanges {
         this.listViewSelected = false;
         this.measureDemSelected = false;
         this.aggComSelected = false;
+        this.dataOverTimeSelected = false;
         break;
     }
   }

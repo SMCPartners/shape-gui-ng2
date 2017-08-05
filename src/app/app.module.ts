@@ -45,6 +45,8 @@ import {ChartsModule} from "ng2-charts";
 import { ChangeSecurityQuestionsComponent } from './my-account/change-security-questions/change-security-questions.component';
 import {LoginRouteComponent} from "./login/login-route.component";
 import { MeasureDataOverTimeComponent } from './past-measure-reports/measure-data-over-time/measure-data-over-time.component';
+import {AdminRouteProtect} from "./route-protect/admin-route-protect";
+import {GlobalService} from "./shared/global.service";
 
 const appRoutes: Routes = [
 
@@ -58,12 +60,12 @@ const appRoutes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [ RouteProtect ] },
   { path: 'help', component: HelpComponent, canActivate: [ RouteProtect ] },
   { path: 'myAccount', component: MyAccountComponent, canActivate: [ RouteProtect ] },
-  { path: 'admin', component: AdminPanelComponent, canActivate: [ RouteProtect ], children: [
-      {path: '', redirectTo: 'users', pathMatch: 'full'},
-      {path: 'users', component: UserComponent},
-      {path: 'providers', component: ProvidersComponent},
-      {path: 'organizations', component: OrganizationsComponent},
-      {path: 'measures', component: MeasuresComponent},
+  { path: 'admin', component: AdminPanelComponent, canActivate: [ RouteProtect, AdminRouteProtect ], children: [
+      {path: '', redirectTo: 'users', pathMatch: 'full', canActivate: [ AdminRouteProtect ]},
+      {path: 'users', component: UserComponent, canActivate: [ AdminRouteProtect ]},
+      {path: 'providers', component: ProvidersComponent, canActivate: [ AdminRouteProtect ]},
+      {path: 'organizations', component: OrganizationsComponent, canActivate: [ AdminRouteProtect ]},
+      {path: 'measures', component: MeasuresComponent, canActivate: [ AdminRouteProtect ]},
   ]
   },
 
@@ -123,7 +125,9 @@ const appRoutes: Routes = [
     HomeService,
     PastMeasureService,
     AdminPanelService,
-    MyAccountService
+    MyAccountService,
+    AdminRouteProtect,
+    GlobalService
   ],
   bootstrap: [AppComponent]
 })

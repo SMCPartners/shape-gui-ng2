@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable, OnInit} from '@angular/core';
 import {Http, RequestOptions, Response, Headers} from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -6,22 +6,36 @@ import {Router} from '@angular/router';
 import {BASEURL} from "../shared/global-variables";
 import {current} from "codelyzer/util/syntaxKind";
 import {User} from "../shared/user";
+import {GlobalService} from "../shared/global.service";
+import JWT from 'jwt-client';
 
 @Injectable()
 export class LoginService {
   public token: string;
   public username: string;
+  public role: string;
+
   constructor(private http: Http,
-              private router: Router) {
+              private router: Router, private globalService: GlobalService) {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.token = currentUser && currentUser.token;
     this.username = currentUser && currentUser.userName;
+    this.role = currentUser && currentUser.role;
+
   }
 
   getUserID() : string {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     const usernameJSON = JSON.stringify(currentUser.username);
     return usernameJSON.replace(/\"/g, "");
+  }
+
+  getUserRole() : string {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    const roleJSON = JSON.stringify(currentUser.token);
+    const token = roleJSON.replace(/\"/g, "");
+    const readToken = JWT.read(token);
+    return readToken.header.role;
   }
 
   getUserIDBeforeLogin() : string {

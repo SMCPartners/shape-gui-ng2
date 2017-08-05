@@ -1,14 +1,17 @@
 <div class="row" style="margin: 20px 0 15px 40px">
   <div class="col-md-2 col-md-offset-5">
     <form>
-      <div class="form-group">
+      <div class="form-group" *ngIf="organizations.length > 1">
         <select (change)="onOrganizationChange($event.target.value)" name="orgSelect" >
           <option *ngFor="let o of organizations" [value]="o.id"> {{o.name}} </option>
         </select>
       </div>
+      <div *ngIf="organizations.length == 1">
+        <h3 align="center" style="margin-right: 20px">{{organizations[0].name}}</h3>
+      </div>
     </form>
   </div>
-  <div class="col-md-2 col-md-offset-3">
+  <div class="col-md-2 col-md-offset-3" *ngIf="canAddOrganizationMeasureData">
     <button class="btn" (click)="addOrgMeasureScreen()">Add Measure Data</button>
   </div>
 </div>

@@ -3,6 +3,7 @@ import { HomeService } from './home.service';
 import { Organization } from '../shared/organization';
 import {MeasureInfo} from "../shared/measure-info";
 import {OrgMeasureDetail} from "../shared/org-measure-detail";
+import {LoginService} from "../login/login.service";
 
 declare var jQuery: any;
 
@@ -21,8 +22,9 @@ export class HomeComponent implements OnInit {
   years: number[];
   orgSelectedId: number;
   addOrgMeasureShow: boolean = false;
+  canAddOrganizationMeasureData = false;
 
-  constructor(private homeService: HomeService) { }
+  constructor(private homeService: HomeService, private loginService: LoginService) { }
 
   ngOnInit() {
     this.homeService.getAllOrganizations()
@@ -47,6 +49,9 @@ export class HomeComponent implements OnInit {
 
       });
 
+    if (this.loginService.getUserRole() === 'ADMIN') {
+      this.canAddOrganizationMeasureData = true;
+    }
 
   }
 

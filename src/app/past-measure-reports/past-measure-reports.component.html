@@ -8,10 +8,10 @@
         </select>
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4" *ngIf="!dataOverTimeSelected">
       <select (change)="onYearChange($event.target.value)" #yearSelect id="yearSelect" name="yearSelect" >
         <option [value]="0" [selected]="yearSelect.value == 0"  [disabled]="true">Choose a year</option>
-        <option *ngFor="let y of years" [value]="y"> {{y}} </option>
+        <option *ngFor="let y of years" [selected]="y == year" [value]="y"> {{y}} </option>
       </select>
     </div>
     <div class="col-md-4">
