@@ -4,7 +4,6 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import {Router} from '@angular/router';
 import {BASEURL} from "../shared/global-variables";
-import {current} from "codelyzer/util/syntaxKind";
 import {User} from "../shared/user";
 import {GlobalService} from "../shared/global.service";
 import JWT from 'jwt-client';

@@ -32,7 +32,12 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['home']);
           }
         },
-        (error) => this.error = error.json().errMsg
+        (error) => {
+          this.error = error.json().errMsg;
+          if (error.ok === false) {
+            this.error = 'There is a problem connecting to the server';
+          }
+        }
       );
   }
 
