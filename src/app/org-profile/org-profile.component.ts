@@ -22,6 +22,8 @@ export class OrgProfileComponent implements OnChanges {
 
   ngOnChanges() {
 
+    this.typeOfStaffArray.length = 0;
+
     this.organizations.forEach(org => {
       if (org.id === +(this.orgSelectedId)) {
         this.organizationDetail = org

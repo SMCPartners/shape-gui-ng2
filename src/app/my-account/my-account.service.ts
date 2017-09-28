@@ -15,7 +15,7 @@ export class MyAccountService {
 
     const headers = new Headers({ 'Authorization': 'Bearer ' + this.loginService.token });
     let options = new RequestOptions({ headers: headers });
-    const url = `http://${BASEURL}/shape-service/shape/common/password_change`;
+    const url = `${BASEURL}/shape-service/shape/common/password_change`;
 
     return this.http.post(url, { userId: username, oldPassword: oldPassword, newPassword: newPassword, questionAnswer: answer }, options)
       .map((response: Response) => {
@@ -27,7 +27,7 @@ export class MyAccountService {
   editEmail(username: string, organizationId: number, role: string, firstName: string, lastName: string, email: string): Observable<any> {
     const headers = new Headers({ 'Authorization': 'Bearer ' + this.loginService.token });
     let options = new RequestOptions({ headers: headers });
-    const url = `http://${BASEURL}/shape-service/shape/common/account/edit`;
+    const url = `${BASEURL}/shape-service/shape/common/account/edit`;
 
     return this.http.post(url, { id: username, organizationId: organizationId, firstName: firstName, lastName: lastName,
                                   role: role, email: email, active: true }, options)
@@ -43,7 +43,7 @@ export class MyAccountService {
 
     const headers = new Headers({ 'Authorization': 'Bearer ' + this.loginService.token });
     let options = new RequestOptions({ headers: headers });
-    const url = `http://${BASEURL}/shape-service/shape/common/account/edit`;
+    const url = `${BASEURL}/shape-service/shape/common/account/edit`;
 
     return this.http.post(url, { id: username, organizationId: organizationId, firstName: firstName, lastName: lastName,
       role: role, email: email, active: true, answerOne: answerOne, answerTwo: answerTwo, questionOne: questionOne,

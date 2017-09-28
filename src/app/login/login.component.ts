@@ -34,9 +34,9 @@ export class LoginComponent implements OnInit {
         },
         (error) => {
           this.error = error.json().errMsg;
-          if (error.ok === false) {
-            this.error = 'There is a problem connecting to the server';
-          }
+          // if (error.ok === false) {
+          //   this.error = 'There is a problem connecting to the server';
+          // }
         }
       );
   }

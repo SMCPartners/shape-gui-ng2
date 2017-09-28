@@ -20,9 +20,13 @@ export class HeaderComponent implements OnInit {
 
     const role = this.loginService.getUserRole();
 
-    if (role === 'ADMIN' || role === 'ORG_ADMIN') {
-      this.isAdminPanelAllowed = true;
-    }
+    // if (role === 'ADMIN' || role === 'ORG_ADMIN') {
+    //   this.isAdminPanelAllowed = true;
+    // }
+
+    if (role === 'ADMIN') {
+        this.isAdminPanelAllowed = true;
+      }
 
   }
 

@@ -29,7 +29,7 @@ export class HomeService {
     // add authorization header with jwt token
     const headers = new Headers({ 'Authorization': 'Bearer ' + this.loginService.token });
     let options = new RequestOptions({ headers: headers });
-    const url = `http://${BASEURL}/shape-service/shape/admin/organization/findAll`;
+    const url = `${BASEURL}/shape-service/shape/admin/organization/findAll`;
 
     // get user projects from api
     return this.http.get(url, options)
@@ -40,7 +40,7 @@ export class HomeService {
 
     const headers = new Headers({ 'Authorization': 'Bearer ' + this.loginService.token });
     let options = new RequestOptions({ headers: headers });
-    const url = `http://${BASEURL}/shape-service/shape/common/measure/findAll`;
+    const url = `${BASEURL}/shape-service/shape/common/measure/findAll`;
 
     return this.http.get(url, options)
       .map((response: Response) => response.json());
@@ -51,7 +51,7 @@ export class HomeService {
 
     const headers = new Headers({ 'Authorization': 'Bearer ' + this.loginService.token });
     let options = new RequestOptions({ headers: headers });
-    const url = `http://${BASEURL}/shape-service/shape/common/organization_measure_detail/findAllByOrg/${organizationId}`;
+    const url = `${BASEURL}/shape-service/shape/common/organization_measure_detail/findAllByOrg/${organizationId}`;
 
     return this.http.get(url, options)
       .map((response: Response) => response.json());
@@ -61,7 +61,7 @@ export class HomeService {
 
     const headers = new Headers({ 'Authorization': 'Bearer ' + this.loginService.token });
     let options = new RequestOptions({ headers: headers });
-    const url = `http://${BASEURL}/shape-service/shape/common/get/measure_years/${organizationId}/${measureId}`;
+    const url = `${BASEURL}/shape-service/shape/common/get/measure_years/${organizationId}/${measureId}`;
 
     return this.http.get(url, options)
       .map((response: Response) => response.json());
@@ -71,7 +71,7 @@ export class HomeService {
 
     const headers = new Headers({ 'Authorization': 'Bearer ' + this.loginService.token });
     let options = new RequestOptions({ headers: headers });
-    const url = `http://${BASEURL}/shape-service/shape/common/organization_measure/add`;
+    const url = `${BASEURL}/shape-service/shape/common/organization_measure/add`;
 
     return this.http.post(url, orgMeasureData, options)
       .map((response: Response) => {
@@ -82,7 +82,7 @@ export class HomeService {
   getOrganizationStratificationByOrg(orgID: number): Observable<OrganizationStratification> {
     const headers = new Headers({ 'Authorization': 'Bearer ' + this.loginService.token });
     let options = new RequestOptions({ headers: headers });
-    const url = `http://${BASEURL}/shape-service/shape/common/organization_stratification/findAllByOrg/${orgID}`;
+    const url = `${BASEURL}/shape-service/shape/common/organization_stratification/findAllByOrg/${orgID}`;
 
     return this.http.get(url, options)
       .map((response: Response) => {

@@ -11,7 +11,7 @@ import {Router} from '@angular/router';
       <div class="row">
         <div class="col-md-12">
           <div class="banner">
-            <h1 class="headline" style="font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif; font-weight: bold">DPH SHAPE DASHBOARD</h1>
+            <h1 class="headline" style="font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif; font-weight: bold">SHAPE DASHBOARD</h1>
           </div>
         </div>
       </div>

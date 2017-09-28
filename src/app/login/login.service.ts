@@ -43,7 +43,7 @@ export class LoginService {
 
   login(username: string, password: string): Observable<any> {
 
-    const url = `http://${BASEURL}/shape-service/shape/common/authentication`;
+    const url = `${BASEURL}/shape-service/shape/common/authentication`;
     const headers = new Headers({ 'Content-Type' : 'application/json'  });
 
     return this.http.post(url, JSON.stringify({ userId: username, password: password }), { headers: headers })
@@ -71,7 +71,7 @@ export class LoginService {
   }
 
   getSecurityQuestion(username: string, email: string): Observable<any> {
-    const url = `http://${BASEURL}/shape-service/shape/common/forgotpassword`;
+    const url = `${BASEURL}/shape-service/shape/common/forgotpassword`;
     const headers = new Headers({ 'Content-Type' : 'application/json'  });
 
     return this.http.post(url, JSON.stringify({ userId: username, userEmail: email }), { headers: headers })
@@ -82,7 +82,7 @@ export class LoginService {
   }
 
   resetPassword(username: string, question: string, answer: string): Observable<any> {
-    const url = `http://${BASEURL}/shape-service/shape/common/user/reset_password`;
+    const url = `${BASEURL}/shape-service/shape/common/user/reset_password`;
     const headers = new Headers({ 'Content-Type' : 'application/json'  });
 
     return this.http.post(url, JSON.stringify({ userId: username, question: question, answer: answer }), { headers: headers })
@@ -93,7 +93,7 @@ export class LoginService {
   }
 
   forgotUsername(email: string): Observable<any> {
-    const url = `http://${BASEURL}/shape-service/shape/common/forgotusername`;
+    const url = `${BASEURL}/shape-service/shape/common/forgotusername`;
     const headers = new Headers({ 'Content-Type' : 'application/json'  });
 
     return this.http.post(url, JSON.stringify({ val: email }), { headers: headers })
@@ -104,7 +104,7 @@ export class LoginService {
   }
 
   changePassword(username: string, currentPassword: string, newPassword: string): Observable<any> {
-    const url = `http://${BASEURL}/shape-service/shape/common/changepassword`;
+    const url = `${BASEURL}/shape-service/shape/common/changepassword`;
     const headers = new Headers({ 'Content-Type' : 'application/json'  });
 
     return this.http.post(url, JSON.stringify({ id: username, password: currentPassword, newPassword: newPassword }), { headers: headers })
@@ -117,7 +117,7 @@ export class LoginService {
   getUserByID(username: string): Observable<User> {
     const headers = new Headers({ 'Authorization': 'Bearer ' + this.token });
     let options = new RequestOptions({ headers: headers });
-    const url = `http://${BASEURL}/shape-service/shape/admin/user/find/${username}`;
+    const url = `${BASEURL}/shape-service/shape/admin/user/find/${username}`;
 
     return this.http.get(url, options)
       .map((response: Response) => {

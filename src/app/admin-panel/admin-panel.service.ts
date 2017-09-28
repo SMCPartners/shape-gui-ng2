@@ -20,7 +20,7 @@ export class AdminPanelService {
 
   getAllUsers(): Observable<User[]> {
 
-    const url = `http://${BASEURL}/shape-service/shape/admin/user/findAll`;
+    const url = `${BASEURL}/shape-service/shape/admin/user/findAll`;
 
     return this.http.get(url, this.options)
       .map((response: Response) => response.json());
@@ -29,7 +29,7 @@ export class AdminPanelService {
 
   getAllOrganizations(): Observable<Organization[]> {
 
-    const url = `http://${BASEURL}/shape-service/shape/admin/organization/findAll`;
+    const url = `${BASEURL}/shape-service/shape/admin/organization/findAll`;
 
     // get user projects from api
     return this.http.get(url, this.options)
@@ -38,7 +38,7 @@ export class AdminPanelService {
 
   getAllProviders(): Observable<Provider[]> {
 
-    const url = `http://${BASEURL}/shape-service/shape/common/provider/findAll`;
+    const url = `${BASEURL}/shape-service/shape/common/provider/findAll`;
 
     // get user projects from api
     return this.http.get(url, this.options)
@@ -47,7 +47,7 @@ export class AdminPanelService {
 
   getAllMeasures(): Observable<MeasureInfo[]> {
 
-    const url = `http://${BASEURL}/shape-service/shape/common/measure/findAll`;
+    const url = `${BASEURL}/shape-service/shape/common/measure/findAll`;
 
     // get user projects from api
     return this.http.get(url, this.options)
@@ -56,7 +56,7 @@ export class AdminPanelService {
 
   addUser(newUser): Observable<any> {
 
-    const url = `http://${BASEURL}/shape-service/shape/admin/create/user`;
+    const url = `${BASEURL}/shape-service/shape/admin/create/user`;
 
     return this.http.post(url, newUser, this.options)
       .map((response: Response) => {
@@ -66,7 +66,7 @@ export class AdminPanelService {
 
   addOrganization(newOrganization): Observable<any> {
 
-    const url = `http://${BASEURL}/shape-service/shape/common/organization/add`;
+    const url = `${BASEURL}/shape-service/shape/common/organization/add`;
 
     return this.http.post(url, newOrganization, this.options)
       .map((response: Response) => {
@@ -76,7 +76,7 @@ export class AdminPanelService {
 
   addProvider(newProvider): Observable<any> {
 
-    const url = `http://${BASEURL}/shape-service/shape/admin/provider/add`;
+    const url = `${BASEURL}/shape-service/shape/admin/provider/add`;
 
     return this.http.post(url, newProvider, this.options)
       .map((response: Response) => {
@@ -86,7 +86,7 @@ export class AdminPanelService {
 
   editProvider(newData): Observable<any> {
 
-    const url = `http://${BASEURL}/shape-service/shape/admin/provider/edit`;
+    const url = `${BASEURL}/shape-service/shape/admin/provider/edit`;
 
     return this.http.post(url, newData, this.options)
       .map((response: Response) => {
@@ -96,7 +96,7 @@ export class AdminPanelService {
 
   editUser(newData): Observable<any> {
 
-    const url = `http://${BASEURL}/shape-service/shape/admin/user/edit`;
+    const url = `${BASEURL}/shape-service/shape/admin/user/edit`;
 
     return this.http.post(url, newData, this.options)
       .map((response: Response) => {
@@ -106,7 +106,7 @@ export class AdminPanelService {
 
   editOrganization(newData): Observable<any> {
 
-    const url = `http://${BASEURL}/shape-service/shape/admin/organization/edit`;
+    const url = `${BASEURL}/shape-service/shape/admin/organization/edit`;
 
     return this.http.post(url, newData, this.options)
       .map((response: Response) => {
@@ -116,7 +116,7 @@ export class AdminPanelService {
 
   activateUser(username) : Observable<any> {
 
-    const url = `http://${BASEURL}/shape-service/shape/admin/activate/${username}`;
+    const url = `${BASEURL}/shape-service/shape/admin/activate/${username}`;
 
     return this.http.put(url, null, this.options)
       .map((response: Response) => {
@@ -126,7 +126,7 @@ export class AdminPanelService {
 
   inactivateUser(username) : Observable<any> {
 
-    const url = `http://${BASEURL}/shape-service/shape/admin/inactivate/${username}`;
+    const url = `${BASEURL}/shape-service/shape/admin/inactivate/${username}`;
 
     return this.http.put(url, null, this.options)
       .map((response: Response) => {
@@ -136,7 +136,7 @@ export class AdminPanelService {
 
   activateProvider(provId) : Observable<any> {
 
-    const url = `http://${BASEURL}/shape-service/shape/admin/provider/activate`;
+    const url = `${BASEURL}/shape-service/shape/admin/provider/activate`;
 
     return this.http.post(url, {entId: provId}, this.options)
       .map((response: Response) => {
@@ -146,7 +146,7 @@ export class AdminPanelService {
 
   inactivateProvider(provId) : Observable<any> {
 
-    const url = `http://${BASEURL}/shape-service/shape/admin/provider/inactivate`;
+    const url = `${BASEURL}/shape-service/shape/admin/provider/inactivate`;
 
     return this.http.post(url, {entId: provId}, this.options)
       .map((response: Response) => {
@@ -156,7 +156,7 @@ export class AdminPanelService {
 
   activateOrg(orgId) : Observable<any> {
 
-    const url = `http://${BASEURL}/shape-service/shape/admin/organization/activate`;
+    const url = `${BASEURL}/shape-service/shape/admin/organization/activate`;
 
     return this.http.post(url, {entId: orgId}, this.options)
       .map((response: Response) => {
@@ -166,7 +166,7 @@ export class AdminPanelService {
 
   inactivateOrg(orgId) : Observable<any> {
 
-    const url = `http://${BASEURL}/shape-service/shape/admin/organization/inactivate`;
+    const url = `${BASEURL}/shape-service/shape/admin/organization/inactivate`;
 
     return this.http.post(url, {entId: orgId}, this.options)
       .map((response: Response) => {

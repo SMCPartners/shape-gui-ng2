@@ -28,7 +28,7 @@ export class MeasureComponent implements OnInit {
   uploadShow: boolean = false;
 
   public uploader:FileUploader = new FileUploader({
-    url: `http://${BASEURL}/shape-service/shape/admin/measure/add/upload`
+    url: `${BASEURL}/shape-service/shape/admin/measure/add/upload`
 
   });
   public hasBaseDropZoneOver:boolean = false;
